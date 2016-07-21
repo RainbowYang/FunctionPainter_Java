@@ -1,0 +1,76 @@
+package rainbow.frame;
+
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
+
+import rainbow.setting.Setting;
+
+public class LookingFrame {
+
+	public LookingFrame(String function) {
+
+		JFrame lookingFrame = new JFrame("查看函数(你也可以在里面编辑)");
+
+		lookingFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		lookingFrame.setLayout(null);
+		lookingFrame.setResizable(false);
+
+		lookingFrame.setLocation(Setting.xOfLookingFrame, Setting.yOfLookingFrame);
+		lookingFrame.setSize(Setting.LookingFrameWidth, Setting.LookingFrameHeight);
+
+		JTextArea FunctionShower = new JTextArea("");
+		FunctionShower.setBounds(10, 0, Setting.LookingFrameWidth - 75, Setting.LookingFrameWidth);
+		FunctionShower.setLineWrap(true);
+		FunctionShower.setRows(10);
+		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));
+		FunctionShower.setText(function);
+
+		JPanel functionPanle = new JPanel();
+		JScrollPane jsp = new JScrollPane(FunctionShower);
+		functionPanle.add(jsp);
+		functionPanle.setBounds(FunctionShower.getBounds());
+		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		JPanel back = new JPanel();
+		back.setBounds(0, 0, Setting.LookingFrameWidth, Setting.LookingFrameWidth);
+
+		JButton save = new JButton("保 存");
+		JButton cancel = new JButton("取 消");
+
+		Dimension d = new Dimension(100, 50);
+		save.setSize(d);
+		cancel.setSize(d);
+
+		int line = 330;
+		save.setLocation(100, line);
+		cancel.setLocation(320, line);
+
+		Font f = new Font("微软雅黑", Font.BOLD, 30);
+		save.setFont(f);
+		cancel.setFont(f);
+
+		lookingFrame.add(save);
+		lookingFrame.add(cancel);
+		lookingFrame.add(functionPanle);
+		lookingFrame.add(back);
+		lookingFrame.setVisible(true);
+
+		save.addActionListener(e -> {
+			SettingFrame.change(function, FunctionShower.getText());
+			lookingFrame.dispose();
+		});
+
+		cancel.addActionListener(e -> {
+			lookingFrame.dispose();
+		});
+
+	}
+}
