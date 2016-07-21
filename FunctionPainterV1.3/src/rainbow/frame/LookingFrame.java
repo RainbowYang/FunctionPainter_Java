@@ -1,9 +1,7 @@
 package rainbow.frame;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,7 +9,18 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 import rainbow.setting.Setting;
+import rainbow.style.MyStyleJButton;
+import rainbow.tools.ComponentsSetTools;
 
+/**
+ * 
+ * 用于查看函数的界面
+ * 
+ * @author Rainbow_Yang
+ * 
+ * @version V1.3
+ *
+ */
 public class LookingFrame {
 
 	public LookingFrame(String function) {
@@ -42,25 +51,15 @@ public class LookingFrame {
 		JPanel back = new JPanel();
 		back.setBounds(0, 0, Setting.LookingFrameWidth, Setting.LookingFrameWidth);
 
-		JButton save = new JButton("保 存");
-		JButton cancel = new JButton("取 消");
-
-		Dimension d = new Dimension(100, 50);
-		save.setSize(d);
-		cancel.setSize(d);
+		MyStyleJButton save = new MyStyleJButton("保 存");
+		MyStyleJButton cancel = new MyStyleJButton("取 消");
 
 		int line = 330;
 		save.setLocation(100, line);
 		cancel.setLocation(320, line);
 
-		Font f = new Font("微软雅黑", Font.BOLD, 30);
-		save.setFont(f);
-		cancel.setFont(f);
-
-		lookingFrame.add(save);
-		lookingFrame.add(cancel);
-		lookingFrame.add(functionPanle);
-		lookingFrame.add(back);
+		ComponentsSetTools.add(lookingFrame, save, cancel, functionPanle, back);
+		
 		lookingFrame.setVisible(true);
 
 		save.addActionListener(e -> {

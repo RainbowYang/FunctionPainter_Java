@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Set;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +21,18 @@ import javax.swing.text.PlainDocument;
 
 import rainbow.function.Function;
 import rainbow.setting.Setting;
+import rainbow.style.MyStyleJButton;
+import rainbow.tools.ComponentsSetTools;
 
+/**
+ * 
+ * 设置界面
+ * 
+ * @author Rainbow_Yang
+ * 
+ * @version V1.3
+ *
+ */
 public class SettingFrame {
 
 	private static final String name = "SettingFrame  ";
@@ -53,13 +63,12 @@ public class SettingFrame {
 		}
 		JComboBox<String> powerBox = new JComboBox<>(power);
 		JLabel tip2 = new JLabel("^");
-		JButton add = new JButton("添 加");
-		JButton clear = new JButton("清 除");
-		JButton make = new JButton("生 成");
-		JButton look = new JButton("查 看");
+		MyStyleJButton add = new MyStyleJButton("添 加");
+		MyStyleJButton clear = new MyStyleJButton("清 除");
+		MyStyleJButton make = new MyStyleJButton("生 成");
+		MyStyleJButton look = new MyStyleJButton("查 看");
 
 		Component[] components1 = { XiShu, tip1, xOry, tip2, powerBox };
-
 		setBounds(20, 30, 15, 100, 40, components1);
 
 		if (!StrFunction.isEmpty()) {
@@ -67,6 +76,7 @@ public class SettingFrame {
 			functions.add(new Function(StrFunction));
 			MainFrame.repaint();
 		}
+
 		JList<String> FunctionShower = new JList<String>(FunctionElements);
 		FunctionShower.setBounds(450, 10, 800, 200);
 		FunctionShower.setFixedCellHeight(20);
@@ -85,12 +95,12 @@ public class SettingFrame {
 		clear.setLocation(135, line);
 		make.setLocation(250, line);
 		look.setLocation(365, line);
-		setSize(100, 50, add, clear, make, look);
 
 		Font f = new Font("微软雅黑", Font.BOLD, 30);
-		setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look);
-		add(FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look, functionPanle,
-				back);
+
+		ComponentsSetTools.setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look);
+		ComponentsSetTools.add(settingFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
+				clear, make, look, functionPanle, back);
 
 		XiShu.setDocument(new PlainDocument() {
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {
@@ -245,13 +255,6 @@ public class SettingFrame {
 		functionBuilder = sb;
 	}
 
-	private void setSize(int i, int j, Component... components) {
-		for (Component c : components) {
-			c.setSize(i, j);
-		}
-
-	}
-
 	private int[] sort(HashMap<Integer, Integer> Parts) {
 
 		Set<Integer> keySet = Parts.keySet();
@@ -267,14 +270,7 @@ public class SettingFrame {
 		return intKeySet;
 	}
 
-	private void add(Component... components) {
-		for (Component c : components) {
-			settingFrame.add(c);
-		}
-	}
-
-	private void setBounds(int firstPlace, int line, int space, int width, int height, Component[] components) {
-
+	private void setBounds(int firstPlace, int line, int space, int width, int height, Component... components) {
 		for (int x = 0; x < components.length; x++) {
 			Component c = components[x];
 			if (x == 0) {
@@ -285,12 +281,6 @@ public class SettingFrame {
 			} else {
 				c.setBounds(components[x - 1].getX() + components[x - 1].getWidth() + space, line, width, height);
 			}
-		}
-	}
-
-	private void setFont(Font f, Component... components) {
-		for (Component c : components) {
-			c.setFont(f);
 		}
 	}
 }

@@ -5,6 +5,15 @@ import java.util.function.BinaryOperator;
 
 import rainbow.number.FenShu;
 
+/**
+ * 
+ * 函数解析
+ * 
+ * @author Rainbow_Yang
+ * 
+ * @version V1.3
+ *
+ */
 public class FunctionReader {
 
 	private ArrayList<BinaryOperator<FenShu>> functionParts = new ArrayList<>();

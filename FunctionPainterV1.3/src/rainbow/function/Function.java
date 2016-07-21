@@ -3,7 +3,15 @@ package rainbow.function;
 import java.util.function.BinaryOperator;
 
 import rainbow.number.FenShu;
-
+/**
+ * Function类 
+ * 用于存贮函数并提供计算
+ * 
+ * @author Rainbow_Yang
+ * 
+ * @version V1.3
+ *
+ */
 public class Function {
 
 	private String function = null;

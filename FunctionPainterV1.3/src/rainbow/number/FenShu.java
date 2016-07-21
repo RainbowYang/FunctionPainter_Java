@@ -2,6 +2,14 @@ package rainbow.number;
 
 import java.math.BigDecimal;
 
+/**
+ * [数学]分数类
+ * 
+ * @author Rainbow_Yang
+ * 
+ * @version V1.3
+ *
+ */
 public class FenShu extends Number {
 
 	private static final long serialVersionUID = -7974126317286190956L;
@@ -23,10 +31,19 @@ public class FenShu extends Number {
 		}
 	}
 
+	/**
+	 * 创建一个分数 分子为value，分母为1
+	 * 
+	 * @param value
+	 *            分子
+	 */
 	public FenShu(int value) {
 		this.zi = new BigDecimal(value);
 	}
 
+	/**
+	 * @return 一个新的分数，其值与调用方法的分数相同
+	 */
 	public FenShu getFenShu() {
 		return new FenShu(this.zi.intValue(), this.mu.intValue());
 	}
@@ -85,6 +102,9 @@ public class FenShu extends Number {
 		}
 	}
 
+	/**
+	 * @return 一个新的分数，其值与调用方法的分数的值的绝对值相同
+	 */
 	public FenShu abs() {
 		FenShu newFenShu = new FenShu();
 		if (this.isBigerThanZero()) {
@@ -95,12 +115,18 @@ public class FenShu extends Number {
 		return newFenShu;
 	}
 
+	/**
+	 * @return 一个新的分数，其值与调用方法的分数的值的相反數相同
+	 */
 	public FenShu getFuFenShu() {
 		FenShu newFenShu = new FenShu();
 		newFenShu = newFenShu.subtract(this);
 		return newFenShu;
 	}
 
+	/**
+	 * @return 如值大于(包括等于)0，返回true；小于0，则返回false
+	 */
 	public boolean isBigerThanZero() {
 		return this.zi.multiply(this.mu).intValue() >= 0;
 	}

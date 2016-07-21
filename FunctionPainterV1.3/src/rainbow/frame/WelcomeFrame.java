@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,12 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import rainbow.setting.Setting;
+import rainbow.style.MyStyleJButton;
+import rainbow.tools.ComponentsSetTools;
 
 /**
  * 欢迎界面
@@ -33,13 +33,6 @@ import rainbow.setting.Setting;
 public class WelcomeFrame {
 
 	private final JFrame welcomeFrame = new JFrame("欢迎使用FuncitonPainterV1.3 MadeByRainbow_Yang");
-
-	public static void main(String[] args) throws Exception {
-		// 用于直接测试
-		org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-		UIManager.put("RootPane.setupButtonVisible", false);
-		new WelcomeFrame();
-	}
 
 	public WelcomeFrame() {
 
@@ -68,9 +61,9 @@ public class WelcomeFrame {
 		}
 		JComboBox<String> powerBox = new JComboBox<>(power);
 		JLabel tip2 = new JLabel("^");
-		JButton add = new JButton("添 加");
-		JButton clear = new JButton("清 除");
-		JButton make = new JButton("生 成");
+		MyStyleJButton add = new MyStyleJButton("添 加");
+		MyStyleJButton clear = new MyStyleJButton("清 除");
+		MyStyleJButton make = new MyStyleJButton("生 成");
 		JLabel tip3 = new JLabel("当前函数为:(↓可手动编辑删除)");
 		JTextArea FunctionShower = new JTextArea("");
 
@@ -89,9 +82,9 @@ public class WelcomeFrame {
 		// setBounds(int firstPlace, int line, int space, int width,
 		// Component[]components)
 
-		add.setBounds(100, line2, 100, 50);
-		clear.setBounds(220, line2, 100, 50);
-		make.setBounds(frameWidth - 260, line2, 100, 50);
+		add.setLocation(100, line2);
+		clear.setLocation(220, line2);
+		make.setLocation(frameWidth - 260, line2);
 
 		tip3.setBounds(140, line3 - 20, 300, 20);
 
@@ -106,14 +99,14 @@ public class WelcomeFrame {
 		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		Font f = new Font("微软雅黑", Font.BOLD, 30);
-		setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make);
+		ComponentsSetTools.setFont(new Font("微软雅黑", Font.BOLD, 30), FunctionPainterLable, XiShu, tip1, xOry, tip2,
+				powerBox, add, clear, make);
 		authorLable.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));
 		tip3.setFont(new Font("宋体", Font.PLAIN, 20));
 
-		add(FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, tip3, functionPanle,
-				back);
+		ComponentsSetTools.add(welcomeFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
+				clear, make, tip3, functionPanle, back);
 
 		// 设置窗体为不可调整大小
 		welcomeFrame.setResizable(false);
@@ -269,12 +262,10 @@ public class WelcomeFrame {
 	}
 
 	private void addAtFirst(JTextArea jta, String text) {
-
 		String last = jta.getText();
 		jta.setText(text);
 		jta.append("+");
 		jta.append(last);
-
 	}
 
 	private void setBounds(int firstPlace, int line, int space, int width, int height, Component[] components) {
@@ -289,18 +280,6 @@ public class WelcomeFrame {
 			} else {
 				c.setBounds(components[x - 1].getX() + components[x - 1].getWidth() + space, line, width, height);
 			}
-		}
-	}
-
-	private void add(Component... components) {
-		for (Component c : components) {
-			welcomeFrame.add(c);
-		}
-	}
-
-	private void setFont(Font f, Component... components) {
-		for (Component c : components) {
-			c.setFont(f);
 		}
 	}
 }
