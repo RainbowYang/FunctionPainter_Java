@@ -6,8 +6,13 @@ public class FenShu extends Number {
 
 	private static final long serialVersionUID = -7974126317286190956L;
 
+	public static final FenShu ONE = new FenShu(1);
+
 	private BigDecimal zi = new BigDecimal("0");// 分子
 	private BigDecimal mu = new BigDecimal("1");// 分母
+
+	public FenShu() {
+	}
 
 	public FenShu(int zi, int mu) {
 		if (mu != 0) {
@@ -22,48 +27,82 @@ public class FenShu extends Number {
 		this.zi = new BigDecimal(value);
 	}
 
+	public FenShu getFenShu() {
+		return new FenShu(this.zi.intValue(), this.mu.intValue());
+	}
+
 	public FenShu add(FenShu fs) {
-		this.zi = this.zi.multiply(fs.mu).add(fs.zi.multiply(this.mu));
-		this.mu = this.mu.multiply(fs.mu);
-		this.toSimple();
-		return this;
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = this.zi.multiply(fs.mu).add(fs.zi.multiply(this.mu));
+		newFenShu.mu = this.mu.multiply(fs.mu);
+		newFenShu.toSimple();
+		return newFenShu;
 	}
 
 	public FenShu subtract(FenShu fs) {
-		this.zi = this.zi.multiply(fs.mu).subtract(fs.zi.multiply(this.mu));
-		this.mu = this.mu.multiply(fs.mu);
-		this.toSimple();
-		return this;
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = this.zi.multiply(fs.mu).subtract(fs.zi.multiply(this.mu));
+		newFenShu.mu = this.mu.multiply(fs.mu);
+		newFenShu.toSimple();
+		return newFenShu;
 	}
 
 	public FenShu multiply(FenShu fs) {
-		this.zi = this.zi.multiply(fs.zi);
-		this.mu = this.mu.multiply(fs.mu);
-		this.toSimple();
-		return this;
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = this.zi.multiply(fs.zi);
+		newFenShu.mu = this.mu.multiply(fs.mu);
+		newFenShu.toSimple();
+		return newFenShu;
 	}
 
 	public FenShu divide(FenShu fs) {
-		this.zi = this.zi.multiply(fs.mu);
-		this.mu = this.mu.multiply(fs.zi);
-		this.toSimple();
-		return this;
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = this.zi.multiply(fs.mu);
+		newFenShu.mu = this.mu.multiply(fs.zi);
+		newFenShu.toSimple();
+		return newFenShu;
 	}
 
 	public FenShu pow(int times) {
-		this.zi = this.zi.pow(times);
-		this.mu = this.mu.pow(times);
-		return this;
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = this.zi.pow(times);
+		newFenShu.mu = this.mu.pow(times);
+		return newFenShu;
 	}
 
 	public void toSimple() {
-		for (int x = 2; x <= this.zi.intValue() || x <= this.mu.intValue(); x++) {
+		for (int x = 2; x <= this.zi.abs().intValue() || x <= this.mu.abs().intValue(); x++) {
 			if (this.zi.intValue() % x == 0 && this.mu.intValue() % x == 0) {
 				this.zi = new BigDecimal(this.zi.intValue() / x);
 				this.mu = new BigDecimal(this.mu.intValue() / x);
 				x = 2;
 			}
 		}
+		// 把分母取正
+		if (!(this.mu.abs().equals(this.mu))) {
+			this.mu = this.mu.abs();
+			this.zi = new BigDecimal(0).subtract(this.zi);
+		}
+	}
+
+	public FenShu abs() {
+		FenShu newFenShu = new FenShu();
+		if (this.isBigerThanZero()) {
+			newFenShu = this.getFenShu();
+		} else {
+			newFenShu = this.getFuFenShu();
+		}
+		return newFenShu;
+	}
+
+	public FenShu getFuFenShu() {
+		FenShu newFenShu = new FenShu();
+		newFenShu = newFenShu.subtract(this);
+		return newFenShu;
+	}
+
+	public boolean isBigerThanZero() {
+		return this.zi.multiply(this.mu).intValue() >= 0;
 	}
 
 	public BigDecimal getZi() {
@@ -92,7 +131,7 @@ public class FenShu extends Number {
 
 	@Override
 	public String toString() {
-		return "FenShu [" + zi + "/" + mu + "]";
+		return "[" + zi + "/" + mu + "]";
 	}
 
 	@Override

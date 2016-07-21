@@ -13,11 +13,32 @@ public class Function {
 	public Function(String function) {
 		this.function = function;
 		this.usableFunciton = new FunctionReader().read(function);
-		System.out.println("测试：x=1，y=1时的值" + this.getValue(new FenShu(1), new FenShu(1)));
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {
 		return this.usableFunciton.apply(x, y);
+	}
+
+	public FenShu getY(FenShu x) {
+
+		FenShu y = new FenShu(-1000);
+
+		FenShu lastResult = this.getValue(x, y);
+		boolean flag = lastResult.isBigerThanZero();
+		y = y.add(FenShu.ONE);
+		FenShu nowResult = this.getValue(x, y);
+		lastResult = nowResult.getFenShu();
+		while (y.intValue() < 1000) {
+			y = y.add(FenShu.ONE);
+
+			nowResult = this.getValue(x, y);
+
+			if (nowResult.isBigerThanZero() != flag) {
+				return y;
+			}
+		}
+
+		return null;
 	}
 
 	@Override
