@@ -11,11 +11,9 @@ public class Function {
 	private BinaryOperator<FenShu> usableFunciton;
 
 	public Function(String function) {
-		long start = System.currentTimeMillis();
 		this.function = function;
 		this.usableFunciton = new FunctionReader().read(function);
-		System.out.println(this.getValue(new FenShu(1), new FenShu(1)));
-		System.out.println(System.currentTimeMillis() - start);
+		System.out.println("测试：x=1，y=1时的值" + this.getValue(new FenShu(1), new FenShu(1)));
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {

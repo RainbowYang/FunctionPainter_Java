@@ -11,7 +11,6 @@ public class FunctionReader {
 	private BinaryOperator<FenShu> usableFunciton;
 
 	public BinaryOperator<FenShu> read(String strFunction) {
-
 		String[] part;
 		if (!strFunction.contains("+")) {
 			part = new String[1];
