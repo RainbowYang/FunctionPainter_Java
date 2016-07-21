@@ -18,6 +18,10 @@ public class FenShu extends Number {
 		}
 	}
 
+	public FenShu(int value) {
+		this.zi = new BigDecimal(value);
+	}
+
 	public FenShu add(FenShu fs) {
 		this.zi = this.zi.multiply(fs.mu).add(fs.zi.multiply(this.mu));
 		this.mu = this.mu.multiply(fs.mu);

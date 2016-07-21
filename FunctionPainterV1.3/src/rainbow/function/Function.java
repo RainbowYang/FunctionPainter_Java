@@ -1,21 +1,25 @@
 package rainbow.function;
 
+import java.util.function.BinaryOperator;
+
 import rainbow.number.FenShu;
 
 public class Function {
 
 	private String function = null;
 
-	private java.util.function.Function<FenShu[], FenShu> usableFunciton;
+	private BinaryOperator<FenShu> usableFunciton;
 
 	public Function(String function) {
+		long start = System.currentTimeMillis();
 		this.function = function;
 		this.usableFunciton = new FunctionReader().read(function);
+		System.out.println(this.getValue(new FenShu(1), new FenShu(1)));
+		System.out.println(System.currentTimeMillis() - start);
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {
-		FenShu[] d = { x, y };
-		return this.usableFunciton.apply(d);
+		return this.usableFunciton.apply(x, y);
 	}
 
 	@Override
