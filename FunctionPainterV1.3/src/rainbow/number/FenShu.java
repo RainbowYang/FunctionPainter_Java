@@ -57,9 +57,7 @@ public class FenShu extends Number {
 	}
 
 	public void toSimple() {
-		for (int x = 2; x < this.zi.intValue() || x < this.mu.intValue(); x++) {
-			// for (int x = 2; x <= this.zi.intValue() || x <=
-			// this.mu.intValue(); x++) {
+		for (int x = 2; x <= this.zi.intValue() || x <= this.mu.intValue(); x++) {
 			if (this.zi.intValue() % x == 0 && this.mu.intValue() % x == 0) {
 				this.zi = new BigDecimal(this.zi.intValue() / x);
 				this.mu = new BigDecimal(this.mu.intValue() / x);
