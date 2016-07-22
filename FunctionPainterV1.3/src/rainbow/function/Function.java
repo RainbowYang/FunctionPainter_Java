@@ -1,11 +1,15 @@
 package rainbow.function;
 
+import java.awt.Image;
+import java.util.ArrayList;
 import java.util.function.BinaryOperator;
 
 import rainbow.number.FenShu;
+import rainbow.painter.FunctionPainterForFunction;
+import rainbow.setting.Setting;
+
 /**
- * Function类 
- * 用于存贮函数并提供计算
+ * Function类 用于存贮函数并提供计算
  * 
  * @author Rainbow_Yang
  * 
@@ -18,35 +22,50 @@ public class Function {
 
 	private BinaryOperator<FenShu> usableFunciton;
 
+	private Image ImageOfFunction;
+
 	public Function(String function) {
+		System.out.println("函数:" + function + " 正在生成");
 		this.function = function;
 		this.usableFunciton = new FunctionReader().read(function);
+		System.out.println("函数:" + function + " 生成完毕");
+
+		System.out.println("函数图片正在生成");
+		System.out.println("这需要一点时间");
+		//速度过慢，之后用线程改进。
+		this.ImageOfFunction = FunctionPainterForFunction.getFunctionImage(this);
+		System.out.println("函数图片生成完毕");
+	}
+
+	public Image getImageOfFunction() {
+		return ImageOfFunction;
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {
 		return this.usableFunciton.apply(x, y);
 	}
 
-	public FenShu getY(FenShu x) {
+	// 本方法暴力求解 用循环尝试取得零点 日后改进
+	public ArrayList<FenShu> getY(FenShu x) {
 
-		FenShu y = new FenShu(-1000);
-
-		FenShu lastResult = this.getValue(x, y);
-		boolean flag = lastResult.isBigerThanZero();
-		y = y.add(FenShu.ONE);
+		FenShu y = Setting.yMin;
+		FenShu theAdd = new FenShu(1, Setting.blockHeight);
 		FenShu nowResult = this.getValue(x, y);
-		lastResult = nowResult.getFenShu();
-		while (y.intValue() < 1000) {
-			y = y.add(FenShu.ONE);
+		boolean flag = nowResult.isBigerThanZero();
+		boolean thisfalg;
+		int yIntMax = Setting.yIntMax;
 
+		ArrayList<FenShu> ys = new ArrayList<>();
+		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
 			nowResult = this.getValue(x, y);
+			thisfalg = nowResult.isBigerThanZero();
+			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
+				y.toSimple();
 
-			if (nowResult.isBigerThanZero() != flag) {
-				return y;
+				ys.add(y);
 			}
 		}
-
-		return null;
+		return ys;
 	}
 
 	@Override

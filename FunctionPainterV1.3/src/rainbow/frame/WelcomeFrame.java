@@ -119,14 +119,15 @@ public class WelcomeFrame {
 		welcomeFrame.setVisible(true);
 
 		XiShu.setDocument(new PlainDocument() {
-			private static final long serialVersionUID = 9036906758711007032L;
+			private static final long serialVersionUID = 6300775469881706391L;
 
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {
-				if (s.matches("[\\d\\.]*")) {
+				if (s.matches("-?\\d*")) {
 					super.insertString(offset, s, attributeSet);
 				}
 			}
 		});
+
 
 		add.addActionListener(e -> {
 
@@ -172,7 +173,6 @@ public class WelcomeFrame {
 
 			new MainFrame();
 			new SettingFrame(FunctionShower.getText());
-
 			welcomeFrame.dispose();
 		});
 	}

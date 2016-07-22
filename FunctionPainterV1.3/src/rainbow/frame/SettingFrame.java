@@ -44,10 +44,9 @@ public class SettingFrame {
 
 	public static final ArrayList<Function> functions = new ArrayList<>();
 
-	@SuppressWarnings("serial")
 	public SettingFrame(String StrFunction) {
 		settingFrame.setLayout(null);
-		settingFrame.setLocation(Setting.xOfMainFrame, Setting.yOfMainFrame + Setting.MainFrameHeight - 40);
+		settingFrame.setLocation(Setting.xOfMainFrame, Setting.yOfMainFrame + Setting.MainFrameHeight - 10);
 		settingFrame.setSize(Setting.SettingFrameWidth, Setting.SettingFrameHeight);
 		settingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -89,9 +88,8 @@ public class SettingFrame {
 		FuncitonShowerPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		FuncitonShowerPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		functionPanle.add(FuncitonShowerPane);
-		functionPanle.setLocation(500,10);
+		functionPanle.setLocation(500, 10);
 		functionPanle.setSize(720, 200);
-//		functionPanle.setBounds(FunctionShower.getBounds());
 
 		int line = 120;
 		add.setLocation(20, line);
@@ -108,8 +106,11 @@ public class SettingFrame {
 		back.setBackground(ColorGetter.getColor("66ffff"));
 
 		XiShu.setDocument(new PlainDocument() {
+			private static final long serialVersionUID = -7750320796795153332L;
+
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {
-				if (s.matches("[\\d]*")) {
+				System.out.println(s.matches("-?\\d*"));
+				if (s.matches("-?\\d*")) {
 					super.insertString(offset, s, attributeSet);
 				}
 			}
@@ -148,9 +149,9 @@ public class SettingFrame {
 		});
 
 		make.addActionListener(e -> {
-			if (!(functionBuilder.toString().isEmpty()
-					|| functions.contains(new Function(functionBuilder.toString())))) {
+			if (!(functionBuilder.toString().isEmpty() || FunctionElements.contains(functionBuilder.toString()))) {
 				FunctionElements.addElement(functionBuilder.toString());
+
 				functions.add(new Function(functionBuilder.toString()));
 
 				functionBuilder = new StringBuilder();

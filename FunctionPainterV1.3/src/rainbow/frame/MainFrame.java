@@ -1,8 +1,10 @@
 package rainbow.frame;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
+import rainbow.function.Function;
 import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
@@ -15,23 +17,25 @@ import rainbow.setting.Setting;
  */
 public class MainFrame {
 	public final static JFrame mainFrame = new JFrame("FunctionPrinterV1.3");
+	private static ArrayList<Function> lastFuncitons = new ArrayList<>();
 
 	public MainFrame() {
-		mainFrame.setLocation(Setting.xOfMainFrame, Setting.yOfMainFrame);
-		mainFrame.setSize(Setting.MainFrameWidth, Setting.MainFrameHeight);
+		mainFrame.setLocation(Setting.xOfMainFrame - 25, Setting.yOfMainFrame);
+		mainFrame.setSize(Setting.MainFrameTrueWidth, Setting.MainFrameTrueHeight);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
-
-		JPanel back = new JPanel();
-		back.setBounds(0, 0, Setting.MainFrameWidth, Setting.MainFrameHeight);
-		mainFrame.add(back);
-
 		mainFrame.add(new AllPainter());
 		mainFrame.setVisible(true);
 	}
 
 	public static void repaint() {
-		mainFrame.add(new AllPainter());
-		mainFrame.repaint();
+		if (lastFuncitons.isEmpty() || !(lastFuncitons.equals(SettingFrame.functions))) {
+			System.out.println("正在添加函数");
+			mainFrame.add(new AllPainter());
+			mainFrame.repaint();
+			System.out.println("函数添加完毕");
+		}
+		lastFuncitons = new ArrayList<>();
+		lastFuncitons.addAll(SettingFrame.functions);
 	}
 }
