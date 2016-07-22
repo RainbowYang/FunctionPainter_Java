@@ -1,12 +1,10 @@
-package rainbow.painter;
+package rainbow.function;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import rainbow.frame.SettingFrame;
-import rainbow.function.Function;
 import rainbow.number.FenShu;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
@@ -29,8 +27,8 @@ public class FunctionPainterForFunction {
 
 		int xIntMax = Setting.xIntMax;
 		FenShu theAdd = new FenShu(1, Setting.blockWidth);
-		for (FenShu x = Setting.xMin; x.intValue() < xIntMax+1; x = x.add(theAdd)) {
-			ArrayList<FenShu> ys = f.getY(x);
+		for (FenShu x = Setting.xMin; x.intValue() < xIntMax + 1; x = x.add(theAdd)) {
+			ArrayList<FenShu> ys = f.getUpY(x);
 			for (FenShu y : ys) {
 				g.fillRect(LocationChanger.Xto(x), LocationChanger.Yto(y), 2, 2);
 			}

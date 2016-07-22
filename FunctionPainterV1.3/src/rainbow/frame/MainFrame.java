@@ -30,10 +30,8 @@ public class MainFrame {
 
 	public static void repaint() {
 		if (lastFuncitons.isEmpty() || !(lastFuncitons.equals(SettingFrame.functions))) {
-			System.out.println("正在添加函数");
 			mainFrame.add(new AllPainter());
 			mainFrame.repaint();
-			System.out.println("函数添加完毕");
 		}
 		lastFuncitons = new ArrayList<>();
 		lastFuncitons.addAll(SettingFrame.functions);

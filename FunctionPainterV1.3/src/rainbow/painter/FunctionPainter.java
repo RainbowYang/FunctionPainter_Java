@@ -18,6 +18,5 @@ public class FunctionPainter {
 			g.drawImage(f.getImageOfFunction(), 0, 0, null);
 		}
 		return img;
-
 	}
 }

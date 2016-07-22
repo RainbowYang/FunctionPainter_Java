@@ -1,11 +1,11 @@
 package rainbow.function;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.function.BinaryOperator;
 
 import rainbow.number.FenShu;
-import rainbow.painter.FunctionPainterForFunction;
 import rainbow.setting.Setting;
 
 /**
@@ -22,7 +22,9 @@ public class Function {
 
 	private BinaryOperator<FenShu> usableFunciton;
 
-	private Image ImageOfFunction;
+	private BufferedImage ImageOfFunction = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
+			BufferedImage.TYPE_4BYTE_ABGR);
+	protected boolean is1, is2, is3, is4;
 
 	public Function(String function) {
 		System.out.println("函数:" + function + " 正在生成");
@@ -32,9 +34,21 @@ public class Function {
 
 		System.out.println("函数图片正在生成");
 		System.out.println("这需要一点时间");
-		//速度过慢，之后用线程改进。
-		this.ImageOfFunction = FunctionPainterForFunction.getFunctionImage(this);
-		System.out.println("函数图片生成完毕");
+		// 速度过慢，之后用线程改进。
+		// this.ImageOfFunction =
+		// FunctionPainterForFunction.getFunctionImage(this);
+		new FunctionPainterForFunctionThread1(this).start();
+		new FunctionPainterForFunctionThread2(this).start();
+		new FunctionPainterForFunctionThread3(this).start();
+		new FunctionPainterForFunctionThread4(this).start();
+	}
+
+	public boolean isOk() {
+		return is1 && is2 && is3 && is4;
+	}
+
+	public BufferedImage getBufferedImage() {
+		return ImageOfFunction;
 	}
 
 	public Image getImageOfFunction() {
@@ -57,6 +71,52 @@ public class Function {
 
 		ArrayList<FenShu> ys = new ArrayList<>();
 		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
+			nowResult = this.getValue(x, y);
+			thisfalg = nowResult.isBigerThanZero();
+			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
+				y.toSimple();
+
+				ys.add(y);
+			}
+		}
+		return ys;
+	}
+
+	// 获取大于0的
+	public ArrayList<FenShu> getUpY(FenShu x) {
+
+		FenShu y = new FenShu();
+		FenShu theAdd = new FenShu(1, Setting.blockHeight);
+		FenShu nowResult = this.getValue(x, y);
+		boolean flag = nowResult.isBigerThanZero();
+		boolean thisfalg;
+		int yIntMax = Setting.yIntMax;
+
+		ArrayList<FenShu> ys = new ArrayList<>();
+		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
+			nowResult = this.getValue(x, y);
+			thisfalg = nowResult.isBigerThanZero();
+			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
+				y.toSimple();
+
+				ys.add(y);
+			}
+		}
+		return ys;
+	}
+
+	// 获取小于0的
+	public ArrayList<FenShu> getDownY(FenShu x) {
+
+		FenShu y = new FenShu();
+		FenShu theAdd = new FenShu(1, Setting.blockHeight);
+		FenShu nowResult = this.getValue(x, y);
+		boolean flag = nowResult.isBigerThanZero();
+		boolean thisfalg;
+		int yIntMin = Setting.yIntMin;
+
+		ArrayList<FenShu> ys = new ArrayList<>();
+		for (y = y.add(theAdd); y.intValue() > yIntMin - 1; flag = thisfalg, y = y.subtract(theAdd)) {
 			nowResult = this.getValue(x, y);
 			thisfalg = nowResult.isBigerThanZero();
 			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
