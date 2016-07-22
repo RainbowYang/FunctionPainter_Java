@@ -22,6 +22,7 @@ import javax.swing.text.PlainDocument;
 import rainbow.function.Function;
 import rainbow.setting.Setting;
 import rainbow.style.MyStyleJButton;
+import rainbow.tools.ColorGetter;
 import rainbow.tools.ComponentsSetTools;
 
 /**
@@ -78,8 +79,8 @@ public class SettingFrame {
 		}
 
 		JList<String> FunctionShower = new JList<String>(FunctionElements);
-		FunctionShower.setBounds(450, 10, 800, 200);
-		FunctionShower.setFixedCellHeight(20);
+		FunctionShower.setBounds(0, 0, 600, 200);
+		FunctionShower.setFixedCellHeight(22);
 		FunctionShower.setFixedCellWidth(700);
 		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));
 
@@ -88,7 +89,9 @@ public class SettingFrame {
 		FuncitonShowerPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		FuncitonShowerPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		functionPanle.add(FuncitonShowerPane);
-		functionPanle.setBounds(FunctionShower.getBounds());
+		functionPanle.setLocation(500,10);
+		functionPanle.setSize(720, 200);
+//		functionPanle.setBounds(FunctionShower.getBounds());
 
 		int line = 120;
 		add.setLocation(20, line);
@@ -101,6 +104,8 @@ public class SettingFrame {
 		ComponentsSetTools.setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look);
 		ComponentsSetTools.add(settingFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
 				clear, make, look, functionPanle, back);
+
+		back.setBackground(ColorGetter.getColor("66ffff"));
 
 		XiShu.setDocument(new PlainDocument() {
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {

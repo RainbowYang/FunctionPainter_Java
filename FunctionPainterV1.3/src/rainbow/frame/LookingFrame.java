@@ -10,6 +10,7 @@ import javax.swing.WindowConstants;
 
 import rainbow.setting.Setting;
 import rainbow.style.MyStyleJButton;
+import rainbow.tools.ColorGetter;
 import rainbow.tools.ComponentsSetTools;
 
 /**
@@ -35,7 +36,7 @@ public class LookingFrame {
 		lookingFrame.setSize(Setting.LookingFrameWidth, Setting.LookingFrameHeight);
 
 		JTextArea FunctionShower = new JTextArea("");
-		FunctionShower.setBounds(10, 0, Setting.LookingFrameWidth - 75, Setting.LookingFrameWidth);
+		FunctionShower.setBounds(10, 0, Setting.LookingFrameWidth - 75, Setting.LookingFrameHeight-195);
 		FunctionShower.setLineWrap(true);
 		FunctionShower.setRows(10);
 		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));
@@ -44,11 +45,15 @@ public class LookingFrame {
 		JPanel functionPanle = new JPanel();
 		JScrollPane jsp = new JScrollPane(FunctionShower);
 		functionPanle.add(jsp);
-		functionPanle.setBounds(FunctionShower.getBounds());
+		
+		functionPanle.setLocation(10, 10);
+		functionPanle.setSize(FunctionShower.getSize());
+		
 		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		JPanel back = new JPanel();
+		back.setBackground(ColorGetter.getColor("66ffff"));
 		back.setBounds(0, 0, Setting.LookingFrameWidth, Setting.LookingFrameWidth);
 
 		MyStyleJButton save = new MyStyleJButton("保 存");

@@ -1,8 +1,10 @@
 package rainbow.tools;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 
@@ -15,27 +17,29 @@ import javax.swing.JFrame;
  */
 public class ComponentsSetTools {
 
-	public static void add(JFrame jf, Component... components) {
-		for (Component c : components) {
-			jf.add(c);
-		}
+	public static void setBackground(Color color, Component... cs) {
+		forEach(c -> c.setBackground(color), cs);
 	}
 
-	public static void setSize(int width, int height, Component... components) {
-		for (Component c : components) {
-			c.setSize(width, height);
-		}
+	public static void add(JFrame jf, Component... cs) {
+		forEach(c -> jf.add(c), cs);
 	}
 
-	public static void setSize(Dimension d, Component... components) {
-		for (Component c : components) {
-			c.setSize(d);
-		}
+	public static void setSize(int width, int height, Component... cs) {
+		forEach(c -> c.setSize(width, height), cs);
 	}
 
-	public static void setFont(Font f, Component... components) {
-		for (Component c : components) {
-			c.setFont(f);
+	public static void setSize(Dimension d, Component... cs) {
+		forEach(c -> c.setSize(d), cs);
+	}
+
+	public static void setFont(Font f, Component... cs) {
+		forEach(c -> c.setFont(f), cs);
+	}
+
+	private static void forEach(Consumer<Component> con, Component[] cs) {
+		for (Component c : cs) {
+			con.accept(c);
 		}
 	}
 }

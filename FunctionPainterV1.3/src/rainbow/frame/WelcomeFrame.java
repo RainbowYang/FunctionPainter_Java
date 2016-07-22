@@ -21,6 +21,7 @@ import javax.swing.text.PlainDocument;
 
 import rainbow.setting.Setting;
 import rainbow.style.MyStyleJButton;
+import rainbow.tools.ColorGetter;
 import rainbow.tools.ComponentsSetTools;
 
 /**
@@ -73,6 +74,8 @@ public class WelcomeFrame {
 		int line2 = 180;
 		int line3 = 260;
 
+		welcomeFrame.getComponents();
+
 		FunctionPainterLable.setBounds(110, line0, 400, 60);
 		authorLable.setBounds(350, line0 + 30, 400, 60);
 
@@ -95,35 +98,35 @@ public class WelcomeFrame {
 		JPanel functionPanle = new JPanel();
 		JScrollPane jsp = new JScrollPane(FunctionShower);
 		functionPanle.add(jsp);
-		functionPanle.setBounds(FunctionShower.getBounds());
+		functionPanle.setLocation(FunctionShower.getLocation());
+		functionPanle.setSize(FunctionShower.getWidth(), FunctionShower.getHeight() - 56);
 		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
+		ComponentsSetTools.add(welcomeFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
+				clear, make, tip3, functionPanle, back);
+		// ComponentsSetTools.setBackground(ColorGetter.getColor("66ffff"),
+		// back);
+		back.setBackground(ColorGetter.getColor("66ffff"));
 		ComponentsSetTools.setFont(new Font("微软雅黑", Font.BOLD, 30), FunctionPainterLable, XiShu, tip1, xOry, tip2,
 				powerBox, add, clear, make);
 		authorLable.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));
 		tip3.setFont(new Font("宋体", Font.PLAIN, 20));
 
-		ComponentsSetTools.add(welcomeFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
-				clear, make, tip3, functionPanle, back);
-
 		// 设置窗体为不可调整大小
 		welcomeFrame.setResizable(false);
 		welcomeFrame.setVisible(true);
 
-		class IntegerDocument extends PlainDocument {
+		XiShu.setDocument(new PlainDocument() {
 			private static final long serialVersionUID = 9036906758711007032L;
 
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {
-
 				if (s.matches("[\\d\\.]*")) {
 					super.insertString(offset, s, attributeSet);
 				}
 			}
-		}
-
-		XiShu.setDocument(new IntegerDocument());
+		});
 
 		add.addActionListener(e -> {
 
