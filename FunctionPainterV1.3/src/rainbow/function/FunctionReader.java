@@ -19,7 +19,8 @@ public class FunctionReader {
 	private ArrayList<BinaryOperator<FenShu>> functionParts = new ArrayList<>();
 	private BinaryOperator<FenShu> usableFunciton;
 
-	public BinaryOperator<FenShu> read(String strFunction) {
+	public BinaryOperator<FenShu> read(Function f) {
+		String strFunction = f.getFunction();
 		String[] part;
 		if (!strFunction.contains("+")) {
 			part = new String[1];
@@ -35,13 +36,19 @@ public class FunctionReader {
 				intCan[0] = Integer.parseInt(s.substring(0, s.indexOf('*')));
 				intCan[1] = Integer.parseInt(s.substring(s.indexOf('^') + 1));
 				functionParts.add((x, y) -> x.pow(intCan[1]).multiply(new FenShu(intCan[0])));
+				f.xPartCount++;
+				f.partCount++;
 			} else if (s.contains("y")) {
 				int[] intCan = new int[2];
 				intCan[0] = Integer.parseInt(s.substring(0, s.indexOf('*')));
 				intCan[1] = Integer.parseInt(s.substring(s.indexOf('^') + 1));
 				functionParts.add((x, y) -> y.pow(intCan[1]).multiply(new FenShu(intCan[0])));
+				f.yPartCount++;
+				f.partCount++;
 			} else {
 				functionParts.add((x, y) -> new FenShu(Integer.parseInt(s), 1));
+				f.OPartCount++;
+				f.partCount++;
 			}
 		}
 

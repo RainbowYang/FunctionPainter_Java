@@ -4,10 +4,6 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import rainbow.frame.MainFrame;
-import rainbow.frame.SettingFrame;
-import rainbow.function.Function;
-
 /**
  * 
  * @author Rainbow_Yang

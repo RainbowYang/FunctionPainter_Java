@@ -87,6 +87,14 @@ public class FenShu extends Number {
 		return newFenShu;
 	}
 
+	public FenShu pow(double times) {
+		FenShu newFenShu = new FenShu();
+		newFenShu.zi = new BigDecimal(Math.pow(this.zi.doubleValue(), times));
+		newFenShu.mu = new BigDecimal(Math.pow(this.mu.doubleValue(), times));
+		newFenShu.toSimple();
+		return newFenShu;
+	}
+
 	public void toSimple() {
 		for (int x = 2; x <= this.zi.abs().intValue() || x <= this.mu.abs().intValue(); x++) {
 			if (this.zi.intValue() % x == 0 && this.mu.intValue() % x == 0) {

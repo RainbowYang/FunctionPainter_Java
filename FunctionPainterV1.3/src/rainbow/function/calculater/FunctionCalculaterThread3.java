@@ -2,9 +2,11 @@ package rainbow.function.calculater;
 
 import java.util.ArrayList;
 
+import rainbow.frame.MainFrame;
 import rainbow.function.Function;
 import rainbow.number.FenShu;
 import rainbow.number.PointOfFenShu;
+import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
 /**
@@ -16,6 +18,7 @@ import rainbow.setting.Setting;
 public class FunctionCalculaterThread3 extends Thread {
 	private FunctionKeyGettter fkg;
 	private Function f;
+	private ArrayList<PointOfFenShu> ps = new ArrayList<>();
 
 	public FunctionCalculaterThread3(Function f) {
 		this.f = f;
@@ -26,12 +29,14 @@ public class FunctionCalculaterThread3 extends Thread {
 	public void run() {
 		System.out.println("3-start");
 		getPoints();
-		System.out.println("3-finished");
 		f.is3=true;
+		f.points.addAll(ps);
+		MainFrame.mainFrame.add(new AllPainter());
+		MainFrame.mainFrame.repaint();
+		System.out.println("3-finished");
 	}
 
 	public void getPoints() {
-		ArrayList<PointOfFenShu> ps = f.getPoints();
 		int xIntMin = Setting.xIntMin;
 		FenShu theAdd = new FenShu(1, Setting.blockWidth);
 		for (FenShu x = new FenShu(); x.intValue() > xIntMin - 1; x = x.subtract(theAdd)) {
