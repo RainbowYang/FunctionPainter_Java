@@ -22,21 +22,6 @@ public class AllPainter extends JPanel {
 	protected void paintComponent(Graphics g) {
 		// 添加背景
 		g.drawImage(BasePainter.getBaseImage(), 0, 0, null);
-//		synchronized (MainFrame.mainFrame) {
-//			his: while (true) {
-//				for (Function f : SettingFrame.functions) {
-//					if (!f.isOk()) {
-//						try {
-//							Thread.currentThread().wait(1000);
-//						} catch (InterruptedException e) {
-//							e.printStackTrace();
-//						}
-//						continue his;
-//					}
-//				}
-//				break;
-//			}
-//		}
 		// 添加函数
 		g.drawImage(FunctionPainter.getFunctionImage(), 0, 0, null);
 

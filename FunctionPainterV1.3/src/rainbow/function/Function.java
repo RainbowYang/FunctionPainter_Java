@@ -1,12 +1,12 @@
 package rainbow.function;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.function.BinaryOperator;
 
+import rainbow.function.calculater.FunctionCalculater;
+import rainbow.function.calculater.FunctionKeyGettter;
 import rainbow.number.FenShu;
-import rainbow.setting.Setting;
+import rainbow.number.PointOfFenShu;
 
 /**
  * Function类 用于存贮函数并提供计算
@@ -22,9 +22,9 @@ public class Function {
 
 	private BinaryOperator<FenShu> usableFunciton;
 
-	private BufferedImage ImageOfFunction = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
-			BufferedImage.TYPE_4BYTE_ABGR);
-	protected boolean is1, is2, is3, is4;
+	private ArrayList<PointOfFenShu> points;
+
+	public boolean is1, is2, is3, is4;
 
 	public Function(String function) {
 		System.out.println("函数:" + function + " 正在生成");
@@ -32,100 +32,46 @@ public class Function {
 		this.usableFunciton = new FunctionReader().read(function);
 		System.out.println("函数:" + function + " 生成完毕");
 
-		System.out.println("函数图片正在生成");
+		System.out.println("函数正在计算");
 		System.out.println("这需要一点时间");
-		// 速度过慢，之后用线程改进。
-		// this.ImageOfFunction =
-		// FunctionPainterForFunction.getFunctionImage(this);
-		new FunctionPainterForFunctionThread1(this).start();
-		new FunctionPainterForFunctionThread2(this).start();
-		new FunctionPainterForFunctionThread3(this).start();
-		new FunctionPainterForFunctionThread4(this).start();
+		new FunctionCalculater(this);
+
+		// new FunctionPainterForFunctionThread1(this).start();
+		// new FunctionPainterForFunctionThread2(this).start();
+		// new FunctionPainterForFunctionThread3(this).start();
+		// new FunctionPainterForFunctionThread4(this).start();
+	}
+
+	public ArrayList<PointOfFenShu> getPoints() {
+		return points;
+	}
+
+	public void setPoints(ArrayList<PointOfFenShu> points) {
+		this.points = points;
 	}
 
 	public boolean isOk() {
 		return is1 && is2 && is3 && is4;
 	}
 
-	public BufferedImage getBufferedImage() {
-		return ImageOfFunction;
-	}
-
-	public Image getImageOfFunction() {
-		return ImageOfFunction;
+	public BinaryOperator<FenShu> getUsableFunciton() {
+		return this.usableFunciton;
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {
 		return this.usableFunciton.apply(x, y);
 	}
 
-	// 本方法暴力求解 用循环尝试取得零点 日后改进
 	public ArrayList<FenShu> getY(FenShu x) {
-
-		FenShu y = Setting.yMin;
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
-		boolean thisfalg;
-		int yIntMax = Setting.yIntMax;
-
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
-			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
-				ys.add(y);
-			}
-		}
-		return ys;
+		return new FunctionKeyGettter(this.usableFunciton).getY(x);
 	}
 
-	// 获取大于0的
 	public ArrayList<FenShu> getUpY(FenShu x) {
-
-		FenShu y = new FenShu();
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
-		boolean thisfalg;
-		int yIntMax = Setting.yIntMax;
-
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
-			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
-				ys.add(y);
-			}
-		}
-		return ys;
+		return new FunctionKeyGettter(this.usableFunciton).getUpY(x);
 	}
 
-	// 获取小于0的
 	public ArrayList<FenShu> getDownY(FenShu x) {
-
-		FenShu y = new FenShu();
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
-		boolean thisfalg;
-		int yIntMin = Setting.yIntMin;
-
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() > yIntMin - 1; flag = thisfalg, y = y.subtract(theAdd)) {
-			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
-				ys.add(y);
-			}
-		}
-		return ys;
+		return new FunctionKeyGettter(this.usableFunciton).getDownY(x);
 	}
 
 	@Override
@@ -157,5 +103,4 @@ public class Function {
 			return false;
 		return true;
 	}
-
 }

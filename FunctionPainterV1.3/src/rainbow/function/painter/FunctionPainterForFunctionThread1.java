@@ -1,4 +1,4 @@
-package rainbow.function;
+package rainbow.function.painter;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import rainbow.frame.MainFrame;
+import rainbow.function.Function;
 import rainbow.number.FenShu;
 import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;

@@ -1,10 +1,11 @@
-package rainbow.function;
+package rainbow.function.painter;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import rainbow.function.Function;
 import rainbow.number.FenShu;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
@@ -18,7 +19,7 @@ import rainbow.tools.LocationChanger;
  */
 public class FunctionPainterForFunction {
 
-	public static Image getFunctionImage(Function f) {
+	public static Image getFunctionImage(Function f, String mode) {
 
 		BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
 				BufferedImage.TYPE_4BYTE_ABGR);
@@ -26,6 +27,7 @@ public class FunctionPainterForFunction {
 		g.setColor(Setting.colorOfFunciton);
 
 		int xIntMax = Setting.xIntMax;
+		int xIntMin = Setting.xIntMin;
 		FenShu theAdd = new FenShu(1, Setting.blockWidth);
 		for (FenShu x = Setting.xMin; x.intValue() < xIntMax + 1; x = x.add(theAdd)) {
 			ArrayList<FenShu> ys = f.getUpY(x);
