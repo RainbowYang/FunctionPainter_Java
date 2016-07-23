@@ -92,6 +92,6 @@ public class Setting {
 		colorOfXY = ColorGetter.getColor("");
 		colorOfO = ColorGetter.getColor("");
 		colorOfNum = ColorGetter.getColor("");
-		colorOfFunciton = ColorGetter.getColor("");
+		colorOfFunciton = ColorGetter.getColor("ff0000");
 	}
 }

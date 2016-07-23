@@ -73,4 +73,25 @@ public class LocationChanger {
 		return Setting.yOfO - (y * Setting.blockHeight);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 *            相对于原点的横坐标
+	 * @return 实际上距左的像素数
+	 */
+	public static int Xto(double x) {
+
+		return (int) (Setting.xOfO + (x * Setting.blockWidth));
+	}
+
+	/**
+	 * 
+	 * @param y
+	 *            实际上距上的像素数
+	 * @return
+	 */
+	public static int Yto(double y) {
+		return (int) (Setting.yOfO - (y * Setting.blockHeight));
+	}
+
 }

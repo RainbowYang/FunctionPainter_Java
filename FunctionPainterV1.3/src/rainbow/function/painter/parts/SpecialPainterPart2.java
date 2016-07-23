@@ -16,20 +16,24 @@ public class SpecialPainterPart2 extends SpecialPainter {
 
 	@Override
 	public void paintImg(Function f) {
+		String str = f.getFunction();
+		str = str.substring(0, str.length() - 2);
+
+		String[] parts = str.split("[+]");
 		switch (f.getxPartCount()) {
 		case 0:
 			switch (f.getyPartCount()) {
 			case 0:
 				// 0,0
-				new OOSpecialPainter(f);
+				new OOSpecialPainter(f, parts);
 				break;
 			case 1:
 				// y,0
-				new YOSpecialPainter(f);
+				new YOSpecialPainter(f, parts);
 				break;
 			case 2:
 				// y,y
-				new YYSpecialPainter(f);
+				new YYSpecialPainter(f, parts);
 				break;
 			}
 
@@ -38,17 +42,17 @@ public class SpecialPainterPart2 extends SpecialPainter {
 			switch (f.getyPartCount()) {
 			case 1:
 				// x,y
-				new XYSpecialPainter(f);
+				new XYSpecialPainter(f, parts);
 				break;
 			case 0:
 				// x,0
-				new XOSpecialPainter(f);
+				new XOSpecialPainter(f, parts);
 				break;
 			}
 			break;
 		case 2:
 			// x,x
-			new XXSpecialPainter(f);
+			new XXSpecialPainter(f, parts);
 			break;
 		}
 	}

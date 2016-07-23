@@ -1,17 +1,15 @@
 package rainbow.function.painter.part2;
 
 import rainbow.function.Function;
-import rainbow.function.painter.parts.SpecialPainter;
 
 //此参数无图像
-public class OOSpecialPainter extends SpecialPainter {
-	
-	public OOSpecialPainter(Function f) {
-		paintImg(f);
+public class OOSpecialPainter {
+
+	public OOSpecialPainter(Function f, String[] parts) {
+		paintImg(f, parts);
 	}
 
-	@Override
-	public void paintImg(Function f) {
+	public void paintImg(Function f, String[] parts) {
 
 	}
 

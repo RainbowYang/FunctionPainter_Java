@@ -31,6 +31,22 @@ public class FenShu extends Number {
 		}
 	}
 
+	public FenShu(double zi, double mu) {
+		if (mu != 0) {
+			this.zi = new BigDecimal(zi);
+			this.mu = new BigDecimal(mu);
+			this.toInt();
+		} else {
+			System.out.println("分母为0");
+		}
+	}
+
+	public FenShu(double zi) {
+		this.zi = new BigDecimal(zi);
+		this.mu = new BigDecimal(1);
+		this.toInt();
+	}
+
 	/**
 	 * 创建一个分数 分子为value，分母为1
 	 * 
@@ -93,6 +109,17 @@ public class FenShu extends Number {
 		newFenShu.mu = new BigDecimal(Math.pow(this.mu.doubleValue(), times));
 		newFenShu.toSimple();
 		return newFenShu;
+	}
+
+	// 把通过double进行初始化的分子分母变成整数
+	private void toInt() {
+		double douZi = this.zi.doubleValue();
+		double douMu = this.mu.doubleValue();
+		while (douZi % 1 != 0 || douMu % 1 != 0) {
+			douZi *= 10;
+			douMu *= 10;
+		}
+		this.toSimple();
 	}
 
 	public void toSimple() {

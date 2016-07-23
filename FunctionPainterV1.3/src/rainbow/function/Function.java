@@ -26,6 +26,7 @@ public class Function {
 
 	public String getFunction() {
 		return function;
+
 	}
 
 	public void setFunction(String function) {
@@ -39,8 +40,7 @@ public class Function {
 	private BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
 			BufferedImage.TYPE_4BYTE_ABGR);
 
-
-	public boolean is1, is2, is3, is4;
+	public boolean is1, is2, is3, is4, isOk;
 
 	public long start;
 
@@ -114,6 +114,14 @@ public class Function {
 	}
 
 	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk() {
+		isOk = true;
+	}
+
+	public boolean isAllOK() {
 		return is1 && is2 && is3 && is4;
 	}
 

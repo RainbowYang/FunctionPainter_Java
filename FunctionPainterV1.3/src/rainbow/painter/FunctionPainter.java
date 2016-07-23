@@ -25,13 +25,13 @@ public class FunctionPainter {
 				for (PointOfFenShu p : ps) {
 					int x = LocationChanger.Xto(p.getX());
 					int y = LocationChanger.Yto(p.getY());
-					g.fillRect(x, y, 2, 2);
+					g.fillRect(x, y, 1, 1);
 				}
 			} else {
 				g.drawImage(f.getImg(), 0, 0, null);
 			}
 
-			if (f.isOk() && f.isNotShow()) {
+			if ((f.isOk() || f.isAllOK()) && f.isNotShow()) {
 				System.out.println(System.currentTimeMillis() - f.start);
 				// 此方法用于标记已显示
 				f.showed();
