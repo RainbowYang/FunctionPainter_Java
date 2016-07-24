@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import rainbow.frame.MainFrame;
 import rainbow.function.Function;
-import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
 

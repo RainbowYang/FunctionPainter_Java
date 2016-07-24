@@ -1,6 +1,7 @@
 package rainbow.number;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import rainbow.tools.MyMath;
 
@@ -214,7 +215,7 @@ public class FenShu extends Number {
 
 	@Override
 	public double doubleValue() {
-		return this.zi.divide(mu).doubleValue();
+		return this.zi.divide(mu, 10, RoundingMode.HALF_DOWN).doubleValue();
 	}
 
 }

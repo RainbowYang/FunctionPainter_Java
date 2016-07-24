@@ -13,18 +13,14 @@ public class FunctionPainter {
 		BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
 				BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics g = img.getGraphics();
-		System.out.println("开始");
-
 		for (Function f : SettingFrame.functions) {
 			if (f.hasImg()) {
-				System.out.println(12);
 				if (!f.isShowed()) {
 					System.out.println(System.currentTimeMillis() - f.start);
 					f.setShowed();
 				}
 				g.drawImage(f.getImg(), 0, 0, null);
 			}
-			System.out.println("ok");
 		}
 		return img;
 	}
