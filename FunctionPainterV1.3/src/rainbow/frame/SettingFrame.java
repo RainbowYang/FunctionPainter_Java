@@ -109,7 +109,6 @@ public class SettingFrame {
 			private static final long serialVersionUID = -7750320796795153332L;
 
 			public void insertString(int offset, String s, AttributeSet attributeSet) throws BadLocationException {
-				System.out.println(s.matches("-?\\d*"));
 				if (s.matches("-?\\d*")) {
 					super.insertString(offset, s, attributeSet);
 				}

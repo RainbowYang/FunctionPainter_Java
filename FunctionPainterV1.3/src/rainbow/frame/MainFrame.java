@@ -1,10 +1,7 @@
 package rainbow.frame;
 
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
-import rainbow.function.Function;
 import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
@@ -17,7 +14,6 @@ import rainbow.setting.Setting;
  */
 public class MainFrame {
 	public final static JFrame mainFrame = new JFrame("FunctionPrinterV1.3");
-	private static ArrayList<Function> lastFuncitons = new ArrayList<>();
 
 	public MainFrame() {
 		mainFrame.setLocation(Setting.xOfMainFrame - 25, Setting.yOfMainFrame);
@@ -29,11 +25,7 @@ public class MainFrame {
 	}
 
 	public static void repaint() {
-		if (lastFuncitons.isEmpty() || !(lastFuncitons.equals(SettingFrame.functions))) {
-			mainFrame.add(new AllPainter());
-			mainFrame.repaint();
-		}
-		lastFuncitons = new ArrayList<>();
-		lastFuncitons.addAll(SettingFrame.functions);
+		mainFrame.add(new AllPainter());
+		mainFrame.repaint();
 	}
 }

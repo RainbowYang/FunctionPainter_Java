@@ -24,29 +24,16 @@ public class Function {
 
 	private String function = null;
 
-	public String getFunction() {
-		return function;
-
-	}
-
-	public void setFunction(String function) {
-		this.function = function;
-	}
-
 	private BinaryOperator<FenShu> usableFunciton;
 
-	public List<PointOfFenShu> points = Collections.synchronizedList(new ArrayList<>());
+	private List<PointOfFenShu> points = Collections.synchronizedList(new ArrayList<>());
 
 	private BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
 			BufferedImage.TYPE_4BYTE_ABGR);
 
-	public boolean is1, is2, is3, is4, isOk;
+	private boolean hasImg, showed, finishedThread1, finishedThread2, finishedThread3, finishedThread4;
 
 	public long start;
-
-	private boolean showed;
-
-	private boolean calculated;
 
 	protected int partCount;// 用于记录函数的项数
 	protected int xPartCount;// 用于记录函数的x项数
@@ -65,6 +52,58 @@ public class Function {
 		new FunctionImagePainter(this);
 	}
 
+	public void setFinishedThread1() {
+		this.finishedThread1 = true;
+	}
+
+	public void setFinishedThread2() {
+		this.finishedThread2 = true;
+	}
+
+	public void setFinishedThread3() {
+		this.finishedThread3 = true;
+	}
+
+	public void setFinishedThread4() {
+		this.finishedThread4 = true;
+	}
+
+	public void setHasPoints() {
+		setFinishedThread1();
+		setFinishedThread2();
+		setFinishedThread3();
+		setFinishedThread4();
+	}
+
+	public boolean hasPoints() {
+		// 所有都完成了才表示有了完整的点集
+		return finishedThread1 && finishedThread2 && finishedThread3 && finishedThread4;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}
+
+	public BinaryOperator<FenShu> getUsableFunciton() {
+		return usableFunciton;
+	}
+
+	public void setUsableFunciton(BinaryOperator<FenShu> usableFunciton) {
+		this.usableFunciton = usableFunciton;
+	}
+
+	public List<PointOfFenShu> getPoints() {
+		return points;
+	}
+
+	public void setPoints(List<PointOfFenShu> points) {
+		this.points = points;
+	}
+
 	public BufferedImage getImg() {
 		return img;
 	}
@@ -73,12 +112,20 @@ public class Function {
 		this.img = img;
 	}
 
-	public boolean isCalculated() {
-		return calculated;
+	public boolean isShowed() {
+		return showed;
 	}
 
-	public void setCalculated(boolean calculated) {
-		this.calculated = calculated;
+	public void setShowed() {
+		this.showed = true;
+	}
+
+	public boolean hasImg() {
+		return hasImg;
+	}
+
+	public void setHasImg() {
+		this.hasImg = true;
 	}
 
 	public int getPartCount() {
@@ -111,22 +158,6 @@ public class Function {
 
 	public void setOPartCount(int oPartCount) {
 		OPartCount = oPartCount;
-	}
-
-	public boolean isOk() {
-		return isOk;
-	}
-
-	public void setOk() {
-		isOk = true;
-	}
-
-	public boolean isAllOK() {
-		return is1 && is2 && is3 && is4;
-	}
-
-	public BinaryOperator<FenShu> getUsableFunciton() {
-		return this.usableFunciton;
 	}
 
 	public FenShu getValue(FenShu x, FenShu y) {
@@ -173,13 +204,5 @@ public class Function {
 		} else if (!function.equals(other.function))
 			return false;
 		return true;
-	}
-
-	public boolean isNotShow() {
-		return !showed;
-	}
-
-	public void showed() {
-		this.showed = true;
 	}
 }

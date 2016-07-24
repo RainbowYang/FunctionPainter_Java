@@ -1,11 +1,13 @@
 package rainbow.function.painter.part2;
 
-import rainbow.frame.MainFrame;
+import java.util.List;
+
 import rainbow.function.Function;
+import rainbow.function.FunctionPointsPainter;
 import rainbow.number.FenShu;
 import rainbow.number.PointOfFenShu;
-import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
+import rainbow.tools.MyMath;
 
 public class XYSpecialPainter {
 
@@ -21,23 +23,44 @@ public class XYSpecialPainter {
 		int b = Integer.parseInt(parts[1].substring(0, parts[1].indexOf("*")));
 		int n = Integer.parseInt(parts[1].substring(parts[1].indexOf("^") + 1));
 
-		FenShu x = Setting.xMin;
+		FunctionPointsPainter fpp = new FunctionPointsPainter(f);
+		List<PointOfFenShu> points = f.getPoints();
+
 		FenShu theAdd = new FenShu(1, Setting.blockWidth);
-		for (; x.intValue() < Setting.xIntMax + 1; x = x.add(theAdd)) {
-			FenShu y = new FenShu(Math.pow((-a / b) * (x.pow(m).doubleValue()), 1 / n));
-			f.points.add(new PointOfFenShu(x, y));
+		double Fu_a_chu_b = -a / b;
+
+		for (FenShu x = Setting.xMin; x.intValue() < Setting.xIntMax + 1; x = x.add(theAdd)) {
+
+			double g = x.pow(m).doubleValue() * Fu_a_chu_b;
+			if (n % 2 == 0) {
+				if (g >= 0) {
+					FenShu y = new FenShu(MyMath.pow(g, 1.0 / n));
+					points.add(new PointOfFenShu(x, y));
+					points.add(new PointOfFenShu(x, y.getFuFenShu()));
+				}
+			} else {
+				FenShu y = new FenShu(MyMath.pow(g, 1.0 / n));
+				points.add(new PointOfFenShu(x, y));
+			}
+
 		}
 
-		FenShu y = Setting.yMin;
-		for (; y.intValue() < Setting.yIntMax + 1; y = y.add(theAdd)) {
-			x = new FenShu(Math.pow((-a / b) * (y.pow(n).doubleValue()), 1 / m));
-			f.points.add(new PointOfFenShu(x, y));
-			f.points.add(new PointOfFenShu(x.getFuFenShu(), y));
+		double Fu_b_chu_a = -b / a;
+		for (FenShu y = Setting.yMin; y.intValue() < Setting.yIntMax + 1; y = y.add(theAdd)) {
+			double g = y.pow(n).doubleValue() * Fu_b_chu_a;
+			if (m % 2 == 0) {
+				if (g >= 0) {
+					FenShu x = new FenShu(MyMath.pow(g, 1.0 / m));
+					points.add(new PointOfFenShu(x, y));
+					points.add(new PointOfFenShu(x.getFuFenShu(), y));
+				}
+			} else {
+				FenShu x = new FenShu(MyMath.pow(g, 1.0 / m));
+				points.add(new PointOfFenShu(x, y));
+			}
 		}
-		f.setOk();
-		f.setCalculated(true);
-		MainFrame.mainFrame.add(new AllPainter());
-		MainFrame.mainFrame.repaint();
+		f.setHasPoints();
+		fpp.tryToAddImg();
 		System.out.println("函数图像生成");
 	}
 }

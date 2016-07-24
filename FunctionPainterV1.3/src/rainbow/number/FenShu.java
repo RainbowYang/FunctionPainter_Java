@@ -2,6 +2,8 @@ package rainbow.number;
 
 import java.math.BigDecimal;
 
+import rainbow.tools.MyMath;
+
 /**
  * [数学]分数类
  * 
@@ -105,8 +107,8 @@ public class FenShu extends Number {
 
 	public FenShu pow(double times) {
 		FenShu newFenShu = new FenShu();
-		newFenShu.zi = new BigDecimal(Math.pow(this.zi.doubleValue(), times));
-		newFenShu.mu = new BigDecimal(Math.pow(this.mu.doubleValue(), times));
+		newFenShu.zi = new BigDecimal(MyMath.pow(this.zi.doubleValue(), times));
+		newFenShu.mu = new BigDecimal(MyMath.pow(this.mu.doubleValue(), times));
 		newFenShu.toSimple();
 		return newFenShu;
 	}

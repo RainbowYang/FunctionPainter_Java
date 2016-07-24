@@ -35,9 +35,8 @@ public class XXSpecialPainter {
 		} else {
 			g.drawLine(x, 0, x, Setting.MainFrameHeight);
 		}
-		f.setOk();
-		MainFrame.mainFrame.add(new AllPainter());
-		MainFrame.mainFrame.repaint();
+		f.setHasImg();
+		MainFrame.repaint();
 		System.out.println("函数图像生成");
 
 	}

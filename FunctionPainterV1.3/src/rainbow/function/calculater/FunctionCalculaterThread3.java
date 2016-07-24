@@ -2,11 +2,10 @@ package rainbow.function.calculater;
 
 import java.util.ArrayList;
 
-import rainbow.frame.MainFrame;
 import rainbow.function.Function;
+import rainbow.function.FunctionPointsPainter;
 import rainbow.number.FenShu;
 import rainbow.number.PointOfFenShu;
-import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
 /**
@@ -16,31 +15,29 @@ import rainbow.setting.Setting;
  *
  */
 public class FunctionCalculaterThread3 extends Thread {
-	private FunctionKeyGettter fkg;
 	private Function f;
 	private ArrayList<PointOfFenShu> ps = new ArrayList<>();
+	private FunctionPointsPainter fpp;
 
-	public FunctionCalculaterThread3(Function f) {
+	public FunctionCalculaterThread3(Function f, FunctionPointsPainter fpp) {
 		this.f = f;
-		this.fkg = new FunctionKeyGettter(this.f.getUsableFunciton());
+		this.fpp = fpp;
 	}
 
 	@Override
 	public void run() {
 		System.out.println("3-start");
 		getPoints();
-		f.is3=true;
-		f.points.addAll(ps);
-		MainFrame.mainFrame.add(new AllPainter());
-		MainFrame.mainFrame.repaint();
 		System.out.println("3-finished");
+		f.setFinishedThread3();
+		fpp.tryToAddImg();
 	}
 
 	public void getPoints() {
 		int xIntMin = Setting.xIntMin;
 		FenShu theAdd = new FenShu(1, Setting.blockWidth);
 		for (FenShu x = new FenShu(); x.intValue() > xIntMin - 1; x = x.subtract(theAdd)) {
-			ArrayList<FenShu> ys = fkg.getDownY(x);
+			ArrayList<FenShu> ys = f.getDownY(x);
 			for (FenShu y : ys) {
 				ps.add(new PointOfFenShu(x, y));
 			}

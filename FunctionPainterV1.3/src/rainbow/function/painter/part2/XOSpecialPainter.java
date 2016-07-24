@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import rainbow.frame.MainFrame;
 import rainbow.function.Function;
-import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
 
@@ -31,9 +30,8 @@ public class XOSpecialPainter {
 		} else {
 			g.drawLine(x, 0, x, Setting.MainFrameHeight);
 		}
-		f.setOk();
-		MainFrame.mainFrame.add(new AllPainter());
-		MainFrame.mainFrame.repaint();
+		f.setHasImg();
+		MainFrame.repaint();
 		System.out.println("函数图像生成");
 
 	}
