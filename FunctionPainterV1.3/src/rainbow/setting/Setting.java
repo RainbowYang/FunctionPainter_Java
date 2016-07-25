@@ -103,6 +103,14 @@ public class Setting {
 	public static void reset(int add) {
 		if (blockWidth >= 1 || add > 0) {
 			blockWidth += add;
+			if (blockWidth > 60) {
+				for (int x = (blockWidth - 60) / 10; x > 0; x--) {
+					if (add > 0)
+						blockWidth++;
+					else
+						blockWidth--;
+				}
+			}
 			System.out.println(blockWidth);
 			blockHeight = blockWidth;
 			theAdd = new FenShu(Setting.pointSpace, Setting.blockWidth);
