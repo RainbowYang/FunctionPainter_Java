@@ -49,7 +49,7 @@ public class FunctionCalculaterThread extends Thread {
 	}
 
 	public void getPoints() {
-		FenShu theAdd = new FenShu(1, Setting.blockWidth);
+		FenShu theAdd = Setting.theAdd;
 		int xIntMax = Setting.xIntMax;
 		int xIntMin = Setting.xIntMin;
 		switch (mode) {

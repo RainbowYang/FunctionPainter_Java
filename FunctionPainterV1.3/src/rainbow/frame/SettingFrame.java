@@ -142,7 +142,9 @@ public class SettingFrame {
 
 		clear.addActionListener(e -> {
 			if ((!FunctionShower.isSelectionEmpty())) {
-				FunctionElements.remove(FunctionShower.getSelectedIndex());
+				int s = FunctionShower.getSelectedIndex();
+				FunctionElements.remove(s);
+				functions.remove(s);
 				MainFrame.repaint();
 			}
 		});

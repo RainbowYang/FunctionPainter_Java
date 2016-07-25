@@ -2,6 +2,7 @@ package rainbow.frame;
 
 import javax.swing.JFrame;
 
+import rainbow.function.FuncitionRepainter;
 import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
@@ -20,6 +21,10 @@ public class MainFrame {
 		mainFrame.setSize(Setting.MainFrameTrueWidth, Setting.MainFrameTrueHeight);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
+		mainFrame.addMouseWheelListener(e -> {
+			Setting.reset(e.getWheelRotation());
+			FuncitionRepainter.repaint();
+		});
 		mainFrame.add(new AllPainter());
 		mainFrame.setVisible(true);
 	}

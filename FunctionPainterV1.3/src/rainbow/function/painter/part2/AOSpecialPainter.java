@@ -28,7 +28,6 @@ public class AOSpecialPainter {
 		int b = Integer.parseInt(parts[1 - mode]);
 		int key = mode == 0 ? LocationChanger.Xto(Math.pow((-b * 1.0 / a), 1.0 / m))
 				: LocationChanger.Yto(Math.pow((-b * 1.0 / a), 1.0 / m));
-		System.out.println(key);
 		Graphics g = f.getImg().getGraphics();
 		g.setColor(Setting.colorOfFunciton);
 

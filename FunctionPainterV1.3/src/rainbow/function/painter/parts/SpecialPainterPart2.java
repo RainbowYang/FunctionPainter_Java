@@ -7,10 +7,6 @@ import rainbow.function.painter.part2.XYSpecialPainter;
 
 public class SpecialPainterPart2 extends SpecialPainter {
 
-	public static final int X = 0;
-	public static final int Y = 1;
-	public static final int O = 2;
-
 	public SpecialPainterPart2(Function f) {
 		paintImg(f);
 	}

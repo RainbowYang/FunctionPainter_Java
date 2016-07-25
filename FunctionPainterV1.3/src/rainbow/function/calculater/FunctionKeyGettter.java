@@ -21,7 +21,7 @@ public class FunctionKeyGettter {
 	public ArrayList<FenShu> getY(FenShu x) {
 
 		FenShu y = Setting.yMin;
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
+		FenShu theAdd = Setting.theAdd;
 		FenShu nowResult = this.getValue(x, y);
 		boolean flag = nowResult.isBigerThanZero();
 		boolean thisfalg;
@@ -44,7 +44,7 @@ public class FunctionKeyGettter {
 	public ArrayList<FenShu> getUpY(FenShu x) {
 
 		FenShu y = new FenShu();
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
+		FenShu theAdd = Setting.theAdd;
 		FenShu nowResult = this.getValue(x, y);
 		boolean flag = nowResult.isBigerThanZero();
 		boolean thisfalg;
@@ -74,7 +74,7 @@ public class FunctionKeyGettter {
 		int yIntMin = Setting.yIntMin;
 
 		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() > yIntMin - 1; flag = thisfalg, y = y.subtract(theAdd)) {
+		for (y = y.subtract(theAdd); y.intValue() > yIntMin - 1; flag = thisfalg, y = y.subtract(theAdd)) {
 			nowResult = this.getValue(x, y);
 			thisfalg = nowResult.isBigerThanZero();
 			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {

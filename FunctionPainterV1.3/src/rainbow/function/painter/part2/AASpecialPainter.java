@@ -20,9 +20,6 @@ public class AASpecialPainter {
 		// 把AA转换为AO
 		parts[mode] = a + "*" + (mode == 0 ? "x" : "y") + "^" + m;
 		parts[1 - mode] = b + "";
-		System.out.println(parts[mode]);
-		System.out.println(parts[1-mode]);
-
 		new AOSpecialPainter(f, parts, mode);
 	}
 }

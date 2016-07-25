@@ -29,6 +29,7 @@ public class FenShu extends Number {
 		if (mu != 0) {
 			setZi(zi);
 			setMu(mu);
+			// System.out.println(zi/mu);
 		} else {
 			System.out.println("分母为0");
 		}
@@ -130,7 +131,7 @@ public class FenShu extends Number {
 			if (this.zi.intValue() % x == 0 && this.mu.intValue() % x == 0) {
 				this.zi = new BigDecimal(this.zi.intValue() / x);
 				this.mu = new BigDecimal(this.mu.intValue() / x);
-				x = 2;
+				x = 1;
 			}
 		}
 		// 把分母取正
@@ -200,17 +201,17 @@ public class FenShu extends Number {
 
 	@Override
 	public int intValue() {
-		return this.zi.divide(mu).intValue();
+		return this.zi.divide(mu, 10, RoundingMode.HALF_DOWN).intValue();
 	}
 
 	@Override
 	public long longValue() {
-		return this.zi.divide(mu).longValue();
+		return this.zi.divide(mu, 10, RoundingMode.HALF_DOWN).longValue();
 	}
 
 	@Override
 	public float floatValue() {
-		return this.zi.divide(mu).floatValue();
+		return this.zi.divide(mu, 10, RoundingMode.HALF_DOWN).floatValue();
 	}
 
 	@Override

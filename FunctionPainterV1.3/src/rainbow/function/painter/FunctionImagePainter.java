@@ -17,6 +17,7 @@ public class FunctionImagePainter {
 
 		switch (f.getPartCount()) {
 		case 1:
+			//只有一项不处理
 			break;
 		case 2:
 			new SpecialPainterPart2(f);

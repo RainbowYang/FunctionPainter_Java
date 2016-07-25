@@ -2,10 +2,13 @@ package rainbow.function.painter.part3;
 
 import rainbow.function.Function;
 
-public class OYYSpecialPainter {
+public class AAOSpecialPainter {
 
-	public OYYSpecialPainter(Function f, String[] parts) {
+	public AAOSpecialPainter(Function f, String[] parts) {
 		paintImg(f, parts);
+	}
+
+	public AAOSpecialPainter(Function f, String[] parts, int y) {
 	}
 
 	public void paintImg(Function f, String[] parts) {

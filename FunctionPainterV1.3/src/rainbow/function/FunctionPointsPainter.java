@@ -21,8 +21,6 @@ public class FunctionPointsPainter {
 
 			for (PointOfFenShu p : f.getPoints()) {
 				g.fillRect(LocationChanger.Xto(p.getX()), LocationChanger.Yto(p.getY()), 1, 1);
-				// g.fillRect(LocationChanger.Xto(p.getX()) - 1,
-				// LocationChanger.Yto(p.getY()) - 1, 3, 3);
 			}
 			f.setHasImg();
 			System.out.println(f.hasImg());

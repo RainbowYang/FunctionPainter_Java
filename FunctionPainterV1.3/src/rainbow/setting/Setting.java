@@ -33,16 +33,18 @@ public class Setting {
 	public static final int SettingFrameHeight = 300;
 	public static final int PowerMax = 100;
 
-	public static final int xOfLookingFrame;
-	public static final int yOfLookingFrame;
+	public static int xOfLookingFrame;
+	public static int yOfLookingFrame;
 	public static final int LookingFrameWidth = WelcomeFrameWidth;
 	public static final int LookingFrameHeight = WelcomeFrameHeight;
 
 	public static final int xOfO;
 	public static final int yOfO;
 
-	public static final int blockWidth = 40;
-	public static final int blockHeight = blockWidth;
+	public static FenShu theAdd;
+	public static int pointSpace = 1;
+	public static int blockWidth;
+	public static int blockHeight;
 
 	public static final boolean isBlock = true;
 	public static final Color colorOfBack;
@@ -51,23 +53,26 @@ public class Setting {
 	public static final Color colorOfNum;
 	public static final Color colorOfXY;
 	public static final Color colorOfFunciton;
-	
+
 	public static final int widthOfXY = 4;
 
-	public static final FenShu xMax;
-	public static final FenShu xMin;
-	public static final FenShu yMax;
-	public static final FenShu yMin;
+	public static FenShu xMax;
+	public static FenShu xMin;
+	public static FenShu yMax;
+	public static FenShu yMin;
 
-	public static final int xIntMax;
-	public static final int xIntMin;
-	public static final int yIntMax;
-	public static final int yIntMin;
+	public static int xIntMax;
+	public static int xIntMin;
+	public static int yIntMax;
+	public static int yIntMin;
 
 	public static final int ArrowLength = 40;
 	public static final double ArrowAngle = Math.PI / 6;
 
 	static {
+		blockWidth = 40;
+		blockHeight = 40;
+		theAdd = new FenShu(Setting.pointSpace, Setting.blockWidth);
 		// 居中
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) / 2;
@@ -86,12 +91,31 @@ public class Setting {
 		xIntMin = xMin.intValue();
 		yIntMax = yMax.intValue();
 		yIntMin = yMin.intValue();
-		
+
 		colorOfBack = ColorGetter.getColor("");
 		colorOfBlock = ColorGetter.getColor("");
 		colorOfXY = ColorGetter.getColor("");
 		colorOfO = ColorGetter.getColor("");
 		colorOfNum = ColorGetter.getColor("");
 		colorOfFunciton = ColorGetter.getColor("ff0000");
+	}
+
+	public static void reset(int add) {
+		if (blockWidth >= 1 || add > 0) {
+			blockWidth += add;
+			System.out.println(blockWidth);
+			blockHeight = blockWidth;
+			theAdd = new FenShu(Setting.pointSpace, Setting.blockWidth);
+
+			xMax = LocationChanger.toX(MainFrameWidth);
+			xMin = LocationChanger.toX(0);
+			yMax = LocationChanger.toY(0);
+			yMin = LocationChanger.toY(MainFrameHeight);
+
+			xIntMax = xMax.intValue();
+			xIntMin = xMin.intValue();
+			yIntMax = yMax.intValue();
+			yIntMin = yMin.intValue();
+		}
 	}
 }

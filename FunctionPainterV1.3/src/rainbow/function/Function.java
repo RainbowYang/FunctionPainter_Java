@@ -52,6 +52,10 @@ public class Function {
 		new FunctionImagePainter(this);
 	}
 
+	public void cleanImg() {
+		this.img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight, BufferedImage.TYPE_4BYTE_ABGR);
+	}
+
 	public void setFinishedThread1() {
 		this.finishedThread1 = true;
 	}
