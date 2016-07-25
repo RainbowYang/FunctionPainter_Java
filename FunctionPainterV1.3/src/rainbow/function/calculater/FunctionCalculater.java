@@ -14,10 +14,10 @@ public class FunctionCalculater {
 
 	public FunctionCalculater(Function f) {
 		fpp = new FunctionPointsPainter(f);
-		new FunctionCalculaterThread1(f,fpp).start();
-		new FunctionCalculaterThread2(f,fpp).start();
-		new FunctionCalculaterThread3(f,fpp).start();
-		new FunctionCalculaterThread4(f,fpp).start();
+		new FunctionCalculaterThread(f,fpp,1).start();
+		new FunctionCalculaterThread(f,fpp,2).start();
+		new FunctionCalculaterThread(f,fpp,3).start();
+		new FunctionCalculaterThread(f,fpp,4).start();
 	}
 
 }

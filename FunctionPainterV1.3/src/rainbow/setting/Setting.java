@@ -42,7 +42,7 @@ public class Setting {
 	public static final int yOfO;
 
 	public static final int blockWidth = 40;
-	public static final int blockHeight = 40;
+	public static final int blockHeight = blockWidth;
 
 	public static final boolean isBlock = true;
 	public static final Color colorOfBack;
