@@ -38,8 +38,8 @@ public class Setting {
 	public static final int LookingFrameWidth = WelcomeFrameWidth;
 	public static final int LookingFrameHeight = WelcomeFrameHeight;
 
-	public static final int xOfO;
-	public static final int yOfO;
+	public static int xOfO;
+	public static int yOfO;
 
 	public static FenShu theAdd;
 	public static int pointSpace = 1;
@@ -117,5 +117,20 @@ public class Setting {
 			yIntMax = yMax.intValue();
 			yIntMin = yMin.intValue();
 		}
+	}
+
+	public static void resetO(int x, int y) {
+		xOfO = x;
+		yOfO = y;
+
+		xMax = LocationChanger.toX(MainFrameWidth);
+		xMin = LocationChanger.toX(0);
+		yMax = LocationChanger.toY(0);
+		yMin = LocationChanger.toY(MainFrameHeight);
+
+		xIntMax = xMax.intValue();
+		xIntMin = xMin.intValue();
+		yIntMax = yMax.intValue();
+		yIntMin = yMin.intValue();
 	}
 }
