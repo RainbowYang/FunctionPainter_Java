@@ -8,4 +8,8 @@ public class MyMath {
 			return Math.pow(a, b);
 		}
 	}
+
+	public static double sqrt(double a) {
+		return Math.sqrt(a);
+	}
 }

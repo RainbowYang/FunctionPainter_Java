@@ -23,6 +23,7 @@ public class FunctionImagePainter {
 			new SpecialPainterPart2(f);
 			break;
 		case 3:
+			System.out.println(123);
 			new SpecialPainterPart3(f);
 			break;
 		default:

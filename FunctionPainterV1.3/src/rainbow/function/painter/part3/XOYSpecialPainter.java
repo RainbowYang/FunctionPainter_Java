@@ -46,7 +46,7 @@ public class XOYSpecialPainter {
 			FunctionPointsPainter fpp = new FunctionPointsPainter(f);
 			List<PointOfFenShu> points = f.getPoints();
 
-			FenShu theAdd = new FenShu(4, Setting.blockWidth);
+			FenShu theAdd = Setting.theAdd;
 
 			double Fu_a_chu_b = -a * 1.0 / b;
 			double Fu_c_chu_b = -c * 1.0 / b;

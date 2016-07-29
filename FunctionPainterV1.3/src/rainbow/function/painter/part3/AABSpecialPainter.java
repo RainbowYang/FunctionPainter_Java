@@ -4,8 +4,11 @@ import rainbow.function.Function;
 
 public class AABSpecialPainter {
 
-	public AABSpecialPainter(Function f, String[] parts, int y) {
-		// TODO Auto-generated constructor stub
+	public AABSpecialPainter(Function f, String[] parts, int mode) {
+		paintImg(f, parts, mode);
+	}
+
+	public void paintImg(Function f, String[] parts, int mode) {
 	}
 
 }
