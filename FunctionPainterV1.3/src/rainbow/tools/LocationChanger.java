@@ -1,7 +1,6 @@
 
 package rainbow.tools;
 
-import rainbow.number.FenShu;
 import rainbow.setting.Setting;
 
 /**
@@ -17,8 +16,8 @@ public class LocationChanger {
 	 *            实际上距左的像素数
 	 * @return 相对于原点的横坐标
 	 */
-	public static FenShu toX(int m) {
-		return new FenShu(m - Setting.xOfO, Setting.blockWidth);
+	public static double toX(int m) {
+		return (m - Setting.xOfO) * 1.0 / Setting.blockWidth;
 	}
 
 	/**
@@ -27,29 +26,8 @@ public class LocationChanger {
 	 *            实际上距上的像素数
 	 * @return 相对于原点的纵坐标
 	 */
-	public static FenShu toY(int n) {
-		return new FenShu(Setting.yOfO - n, Setting.blockHeight);
-	}
-
-	/**
-	 * 
-	 * @param x
-	 *            相对于原点的横坐标
-	 * @return 实际上距左的像素数
-	 */
-	public static int Xto(FenShu x) {
-
-		return x.multiply(new FenShu(Setting.blockWidth)).intValue() + Setting.xOfO;
-	}
-
-	/**
-	 * 
-	 * @param y
-	 *            实际上距上的像素数
-	 * @return
-	 */
-	public static int Yto(FenShu y) {
-		return -(y.multiply(new FenShu(Setting.blockHeight)).intValue()) + Setting.yOfO;
+	public static double toY(int n) {
+		return (Setting.yOfO - n) * 1.0 / Setting.blockHeight;
 	}
 
 	/**

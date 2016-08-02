@@ -1,16 +1,25 @@
 package rainbow.dome;
 
-import java.math.BigDecimal;
+import rainbow.function.Function;
+import rainbow.function.FunctionReader;
+import rainbow.function.calculater.FunctionKeyGettter;
 
 /*
- * 函数测试类
+ * 测试类
  */
 public class Dome {
 	public static void main(String[] args) {
-
-		int a = 8;
-		int b = 3;
-		double c_chu_a = new BigDecimal(a).divide(new BigDecimal(b)).doubleValue();
-		System.out.println(Math.sqrt(c_chu_a));
+		Sweep();
 	}
+
+	private static void Sweep() {
+
+		Function f = new Function();
+		f.setFunction("1*x^1+1*y^1=0");
+		f.setUsableFunciton(new FunctionReader().read(f));
+
+		FunctionKeyGettter fkg = new FunctionKeyGettter(f.getUsableFunciton());
+		fkg.getValue(1.0, 1.0);
+	}
+
 }

@@ -1,39 +1,35 @@
 package rainbow.function.calculater;
 
 import java.util.ArrayList;
-import java.util.function.BinaryOperator;
+import java.util.function.DoubleBinaryOperator;
 
-import rainbow.number.FenShu;
 import rainbow.setting.Setting;
 
 public class FunctionKeyGettter {
-	private BinaryOperator<FenShu> usableFunciton;
+	private DoubleBinaryOperator usableFunciton;
 
-	public FunctionKeyGettter(BinaryOperator<FenShu> usableFunciton) {
+	public FunctionKeyGettter(DoubleBinaryOperator usableFunciton) {
 		this.usableFunciton = usableFunciton;
 	}
 
-	public FenShu getValue(FenShu x, FenShu y) {
-		return this.usableFunciton.apply(x, y);
+	public double getValue(double x, double y) {
+		return this.usableFunciton.applyAsDouble(x, y);
 	}
 
 	// 本方法暴力求解 用循环尝试取得零点 日后改进
-	public ArrayList<FenShu> getY(FenShu x) {
+	public ArrayList<Double> getY(double x) {
 
-		FenShu y = Setting.yMin;
-		FenShu theAdd = Setting.theAdd;
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
+		double y = Setting.yMin;
+		double theAdd = Setting.theAdd;
+		double nowResult = this.getValue(x, y);
+		boolean flag = nowResult >= 0;
 		boolean thisfalg;
-		int yIntMax = Setting.yIntMax;
-
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
+		double yMax = Setting.yMax;
+		ArrayList<Double> ys = new ArrayList<>();
+		for (y += theAdd; y < yMax; flag = thisfalg, y += theAdd) {
 			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
+			thisfalg = nowResult >= 0;
+			if (nowResult == 0 || (thisfalg != flag)) {
 				ys.add(y);
 			}
 		}
@@ -41,22 +37,20 @@ public class FunctionKeyGettter {
 	}
 
 	// 获取大于0的
-	public ArrayList<FenShu> getUpY(FenShu x) {
+	public ArrayList<Double> getUpY(double x) {
 
-		FenShu y = new FenShu();
-		FenShu theAdd = Setting.theAdd;
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
+		double y = 0;
+		double theAdd = Setting.theAdd;
+		double nowResult = this.getValue(x, y);
+		boolean flag = nowResult >= 0;
 		boolean thisfalg;
-		int yIntMax = Setting.yIntMax;
+		double yMax = Setting.yMax;
 
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.add(theAdd); y.intValue() < yIntMax + 1; flag = thisfalg, y = y.add(theAdd)) {
+		ArrayList<Double> ys = new ArrayList<>();
+		for (y += theAdd; y < yMax; flag = thisfalg, y += theAdd) {
 			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
+			thisfalg = nowResult >= 0;
+			if (nowResult == 0 || (thisfalg != flag)) {
 				ys.add(y);
 			}
 		}
@@ -64,22 +58,20 @@ public class FunctionKeyGettter {
 	}
 
 	// 获取小于0的
-	public ArrayList<FenShu> getDownY(FenShu x) {
+	public ArrayList<Double> getDownY(double x) {
 
-		FenShu y = new FenShu();
-		FenShu theAdd = new FenShu(1, Setting.blockHeight);
-		FenShu nowResult = this.getValue(x, y);
-		boolean flag = nowResult.isBigerThanZero();
+		double y = 0;
+		double theAdd = Setting.theAdd;
+		double nowResult = this.getValue(x, y);
+		boolean flag = nowResult >= 0;
 		boolean thisfalg;
-		int yIntMin = Setting.yIntMin;
+		double yMin = Setting.yMin;
 
-		ArrayList<FenShu> ys = new ArrayList<>();
-		for (y = y.subtract(theAdd); y.intValue() > yIntMin - 1; flag = thisfalg, y = y.subtract(theAdd)) {
+		ArrayList<Double> ys = new ArrayList<>();
+		for (y -= theAdd; y > yMin; flag = thisfalg, y -= theAdd) {
 			nowResult = this.getValue(x, y);
-			thisfalg = nowResult.isBigerThanZero();
-			if (nowResult.getZi().intValue() == 0 || (thisfalg != flag)) {
-				y.toSimple();
-
+			thisfalg = nowResult >= 0;
+			if (nowResult == 0 || (thisfalg != flag)) {
 				ys.add(y);
 			}
 		}

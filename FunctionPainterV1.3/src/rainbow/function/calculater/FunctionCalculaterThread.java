@@ -1,11 +1,11 @@
 package rainbow.function.calculater;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
-import rainbow.number.FenShu;
-import rainbow.number.PointOfFenShu;
 import rainbow.setting.Setting;
 
 /**
@@ -16,11 +16,12 @@ import rainbow.setting.Setting;
  */
 public class FunctionCalculaterThread extends Thread {
 	private Function f;
-	private ArrayList<PointOfFenShu> ps = new ArrayList<>();
+	private List<Point2D.Double> ps;
 	private FunctionPointsPainter fpp;
 	private int mode;
 
 	public FunctionCalculaterThread(Function f, FunctionPointsPainter fpp, int mode) {
+		this.ps = f.getPoints();
 		this.f = f;
 		this.fpp = fpp;
 		this.mode = mode;
@@ -45,43 +46,45 @@ public class FunctionCalculaterThread extends Thread {
 			f.setFinishedThread4();
 			break;
 		}
+		System.out.println(f.getPoints());
 		fpp.tryToAddImg();
 	}
 
 	public void getPoints() {
-		FenShu theAdd = Setting.theAdd;
-		int xIntMax = Setting.xIntMax;
-		int xIntMin = Setting.xIntMin;
+		double theAdd = Setting.theAdd;
+		double xMax = Setting.xMax;
+		double xMin = Setting.xMin;
+		double x = 0;
 		switch (mode) {
 		case 1:
-			for (FenShu x = new FenShu(); x.intValue() < xIntMax + 1; x = x.add(theAdd)) {
-				ArrayList<FenShu> ys = f.getUpY(x);
-				for (FenShu y : ys) {
-					ps.add(new PointOfFenShu(x, y));
+			for (; x < xMax + 1; x += theAdd) {
+				ArrayList<Double> ys = f.getUpY(x);
+				for (Double y : ys) {
+					ps.add(new Point2D.Double(x, y));
 				}
 			}
 			break;
 		case 2:
-			for (FenShu x = new FenShu(); x.intValue() > xIntMin - 1; x = x.subtract(theAdd)) {
-				ArrayList<FenShu> ys = f.getUpY(x);
-				for (FenShu y : ys) {
-					ps.add(new PointOfFenShu(x, y));
+			for (; x > xMin - 1; x -= theAdd) {
+				ArrayList<Double> ys = f.getUpY(x);
+				for (Double y : ys) {
+					ps.add(new Point2D.Double(x, y));
 				}
 			}
 			break;
 		case 3:
-			for (FenShu x = new FenShu(); x.intValue() > xIntMin - 1; x = x.subtract(theAdd)) {
-				ArrayList<FenShu> ys = f.getDownY(x);
-				for (FenShu y : ys) {
-					ps.add(new PointOfFenShu(x, y));
+			for (; x > xMin - 1; x -= theAdd) {
+				ArrayList<Double> ys = f.getDownY(x);
+				for (Double y : ys) {
+					ps.add(new Point2D.Double(x, y));
 				}
 			}
 			break;
 		case 4:
-			for (FenShu x = new FenShu(); x.intValue() < xIntMax + 1; x = x.add(theAdd)) {
-				ArrayList<FenShu> ys = f.getDownY(x);
-				for (FenShu y : ys) {
-					ps.add(new PointOfFenShu(x, y));
+			for (; x < xMax + 1; x += theAdd) {
+				ArrayList<Double> ys = f.getDownY(x);
+				for (Double y : ys) {
+					ps.add(new Point2D.Double(x, y));
 				}
 			}
 			break;

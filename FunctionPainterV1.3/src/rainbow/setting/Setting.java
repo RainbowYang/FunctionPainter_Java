@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import rainbow.number.FenShu;
 import rainbow.tools.ColorGetter;
 import rainbow.tools.LocationChanger;
 
@@ -41,8 +40,8 @@ public class Setting {
 	public static int xOfO;
 	public static int yOfO;
 
-	public static FenShu theAdd;
-	public static int pointSpace = 1;
+	public static double theAdd;
+	public static double pointSpace = 1.0;
 	public static int blockWidth;
 	public static int blockHeight;
 
@@ -56,10 +55,10 @@ public class Setting {
 
 	public static final int widthOfXY = 4;
 
-	public static FenShu xMax;
-	public static FenShu xMin;
-	public static FenShu yMax;
-	public static FenShu yMin;
+	public static double xMax;
+	public static double xMin;
+	public static double yMax;
+	public static double yMin;
 
 	public static int xIntMax;
 	public static int xIntMin;
@@ -72,7 +71,7 @@ public class Setting {
 	static {
 		blockWidth = 40;
 		blockHeight = 40;
-		theAdd = new FenShu(Setting.pointSpace, Setting.blockWidth);
+		theAdd = Setting.pointSpace / Setting.blockWidth;
 		// 居中
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) / 2;
@@ -87,10 +86,10 @@ public class Setting {
 		yMax = LocationChanger.toY(0);
 		yMin = LocationChanger.toY(MainFrameHeight);
 
-		xIntMax = xMax.intValue();
-		xIntMin = xMin.intValue();
-		yIntMax = yMax.intValue();
-		yIntMin = yMin.intValue();
+		xIntMax = (int) xMax;
+		xIntMin = (int) xMin;
+		yIntMax = (int) yMax;
+		yIntMin = (int) yMin;
 
 		colorOfBack = ColorGetter.getColor("");
 		colorOfBlock = ColorGetter.getColor("");
@@ -113,17 +112,17 @@ public class Setting {
 			}
 			System.out.println(blockWidth);
 			blockHeight = blockWidth;
-			theAdd = new FenShu(Setting.pointSpace, Setting.blockWidth);
+			theAdd = Setting.pointSpace / Setting.blockWidth;
 
 			xMax = LocationChanger.toX(MainFrameWidth);
 			xMin = LocationChanger.toX(0);
 			yMax = LocationChanger.toY(0);
 			yMin = LocationChanger.toY(MainFrameHeight);
 
-			xIntMax = xMax.intValue();
-			xIntMin = xMin.intValue();
-			yIntMax = yMax.intValue();
-			yIntMin = yMin.intValue();
+			xIntMax = (int) xMax;
+			xIntMin = (int) xMin;
+			yIntMax = (int) yMax;
+			yIntMin = (int) yMin;
 		}
 	}
 
@@ -136,9 +135,9 @@ public class Setting {
 		yMax = LocationChanger.toY(0);
 		yMin = LocationChanger.toY(MainFrameHeight);
 
-		xIntMax = xMax.intValue();
-		xIntMin = xMin.intValue();
-		yIntMax = yMax.intValue();
-		yIntMin = yMin.intValue();
+		xIntMax = (int) xMax;
+		xIntMin = (int) xMin;
+		yIntMax = (int) yMax;
+		yIntMin = (int) yMin;
 	}
 }

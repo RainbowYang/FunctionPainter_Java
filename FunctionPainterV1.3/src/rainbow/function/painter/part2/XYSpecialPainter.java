@@ -1,13 +1,12 @@
 package rainbow.function.painter.part2;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import rainbow.frame.MainFrame;
 import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
-import rainbow.number.FenShu;
-import rainbow.number.PointOfFenShu;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
 import rainbow.tools.MyMath;
@@ -33,44 +32,50 @@ public class XYSpecialPainter {
 		if (m == n) {
 			Graphics g = f.getImg().getGraphics();
 			g.setColor(Setting.colorOfFunciton);
-			g.drawLine(LocationChanger.Xto(MyMath.pow(-b * 1.0 / a, 1.0 / m) * Setting.yMax.doubleValue()),
-					LocationChanger.Yto(Setting.yMax.doubleValue()),
-					LocationChanger.Xto(MyMath.pow(-b * 1.0 / a, 1.0 / m) * Setting.yMin.doubleValue()),
-					LocationChanger.Yto(Setting.yMin.doubleValue()));
+			g.drawLine(LocationChanger.Xto(MyMath.pow(-b * 1.0 / a, 1.0 / m) * Setting.yMax),
+					LocationChanger.Yto(Setting.yMax),
+					LocationChanger.Xto(MyMath.pow(-b * 1.0 / a, 1.0 / m) * Setting.yMin),
+					LocationChanger.Yto(Setting.yMin));
 			f.setHasImg();
 			MainFrame.repaint();
 			return;
 
 		}
+
 		FunctionPointsPainter fpp = new FunctionPointsPainter(f);
-		List<PointOfFenShu> points = f.getPoints();
+		List<Point2D.Double> points = f.getPoints();
+
+		double theAdd = Setting.theAdd;
 
 		double Fu_a_chu_b = -a * 1.0 / b;
-		for (FenShu x = Setting.xMin; x.intValue() < Setting.xIntMax + 1; x = x.add(Setting.theAdd)) {
-			double g = x.pow(m).doubleValue() * Fu_a_chu_b;
+		double xMax = Setting.xMax;
+		for (double x = Setting.xMin; x < xMax; x += theAdd) {
+			double g = MyMath.pow(x, m) * Fu_a_chu_b;
 			if (n % 2 == 0) {
 				if (g >= 0) {
-					FenShu y = new FenShu(MyMath.pow(g, 1.0 / n));
-					points.add(new PointOfFenShu(x, y));
-					points.add(new PointOfFenShu(x, y.getFuFenShu()));
+					double y = MyMath.pow(g, 1.0 / n);
+					points.add(new Point2D.Double(x, y));
+					points.add(new Point2D.Double(x, -y));
 				}
 			} else {
-				FenShu y = new FenShu(MyMath.pow(g, 1.0 / n));
-				points.add(new PointOfFenShu(x, y));
+				double y = MyMath.pow(g, 1.0 / n);
+				points.add(new Point2D.Double(x, y));
 			}
 		}
+
 		double Fu_b_chu_a = -b * 1.0 / a;
-		for (FenShu y = Setting.yMin; y.intValue() < Setting.yIntMax + 1; y = y.add(Setting.theAdd)) {
-			double g = y.pow(n).doubleValue() * Fu_b_chu_a;
+		double yMax = Setting.yMax;
+		for (double y = Setting.yMin; y < yMax; y += theAdd) {
+			double g = MyMath.pow(y, n) * Fu_b_chu_a;
 			if (m % 2 == 0) {
 				if (g >= 0) {
-					FenShu x = new FenShu(MyMath.pow(g, 1.0 / m));
-					points.add(new PointOfFenShu(x, y));
-					points.add(new PointOfFenShu(x.getFuFenShu(), y));
+					double x = MyMath.pow(g, 1.0 / m);
+					points.add(new Point2D.Double(x, y));
+					points.add(new Point2D.Double(-x, y));
 				}
 			} else {
-				FenShu x = new FenShu(MyMath.pow(g, 1.0 / m));
-				points.add(new PointOfFenShu(x, y));
+				double x = MyMath.pow(g, 1.0 / m);
+				points.add(new Point2D.Double(x, y));
 			}
 		}
 

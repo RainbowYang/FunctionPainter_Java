@@ -1,9 +1,9 @@
 package rainbow.function;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 
 import rainbow.frame.MainFrame;
-import rainbow.number.PointOfFenShu;
 import rainbow.setting.Setting;
 import rainbow.tools.LocationChanger;
 
@@ -19,7 +19,7 @@ public class FunctionPointsPainter {
 			Graphics g = f.getImg().getGraphics();
 			g.setColor(Setting.colorOfFunciton);
 
-			for (PointOfFenShu p : f.getPoints()) {
+			for (Point2D.Double p : f.getPoints()) {
 				g.fillRect(LocationChanger.Xto(p.getX()), LocationChanger.Yto(p.getY()), 1, 1);
 			}
 			f.setHasImg();

@@ -1,15 +1,14 @@
 package rainbow.function;
 
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BinaryOperator;
+import java.util.function.DoubleBinaryOperator;
 
 import rainbow.function.calculater.FunctionKeyGettter;
 import rainbow.function.painter.FunctionImagePainter;
-import rainbow.number.FenShu;
-import rainbow.number.PointOfFenShu;
 import rainbow.setting.Setting;
 
 /**
@@ -24,9 +23,11 @@ public class Function {
 
 	private String function = null;
 
-	private BinaryOperator<FenShu> usableFunciton;
+	private DoubleBinaryOperator usableFunciton;
 
-	private List<PointOfFenShu> points = Collections.synchronizedList(new ArrayList<>());
+	private List<Point2D.Double> points = Collections.synchronizedList(new ArrayList<>());
+
+	private List<Point2D.Double> calculatedPoints = Collections.synchronizedList(new ArrayList<>());
 
 	private BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
 			BufferedImage.TYPE_4BYTE_ABGR);
@@ -39,6 +40,10 @@ public class Function {
 	protected int xPartCount;// 用于记录函数的x项数
 	protected int yPartCount;// 用于记录函数的y项数
 	protected int OPartCount;// 用于记录函数的0项数
+
+	public Function() {
+		
+	}
 
 	public Function(String function) {
 		System.out.println("函数:" + function + " 正在生成");
@@ -92,19 +97,19 @@ public class Function {
 		this.function = function;
 	}
 
-	public BinaryOperator<FenShu> getUsableFunciton() {
+	public DoubleBinaryOperator getUsableFunciton() {
 		return usableFunciton;
 	}
 
-	public void setUsableFunciton(BinaryOperator<FenShu> usableFunciton) {
+	public void setUsableFunciton(DoubleBinaryOperator usableFunciton) {
 		this.usableFunciton = usableFunciton;
 	}
 
-	public List<PointOfFenShu> getPoints() {
+	public List<Point2D.Double> getPoints() {
 		return points;
 	}
 
-	public void setPoints(List<PointOfFenShu> points) {
+	public void setPoints(List<Point2D.Double> points) {
 		this.points = points;
 	}
 
@@ -164,19 +169,19 @@ public class Function {
 		OPartCount = oPartCount;
 	}
 
-	public FenShu getValue(FenShu x, FenShu y) {
-		return this.usableFunciton.apply(x, y);
+	public double getValue(double x, double y) {
+		return this.usableFunciton.applyAsDouble(x, y);
 	}
 
-	public ArrayList<FenShu> getY(FenShu x) {
+	public ArrayList<Double> getY(double x) {
 		return new FunctionKeyGettter(this.usableFunciton).getY(x);
 	}
 
-	public ArrayList<FenShu> getUpY(FenShu x) {
+	public ArrayList<Double> getUpY(double x) {
 		return new FunctionKeyGettter(this.usableFunciton).getUpY(x);
 	}
 
-	public ArrayList<FenShu> getDownY(FenShu x) {
+	public ArrayList<Double> getDownY(double x) {
 		return new FunctionKeyGettter(this.usableFunciton).getDownY(x);
 	}
 
@@ -208,5 +213,13 @@ public class Function {
 		} else if (!function.equals(other.function))
 			return false;
 		return true;
+	}
+
+	public List<Point2D.Double> getCalculatedPoints() {
+		return calculatedPoints;
+	}
+
+	public void setCalculatedPoints(List<Point2D.Double> calculatedPoints) {
+		this.calculatedPoints = calculatedPoints;
 	}
 }

@@ -1,9 +1,9 @@
 package rainbow.function;
 
 import java.util.ArrayList;
-import java.util.function.BinaryOperator;
+import java.util.function.DoubleBinaryOperator;
 
-import rainbow.number.FenShu;
+import rainbow.tools.MyMath;
 
 /**
  * 
@@ -16,10 +16,10 @@ import rainbow.number.FenShu;
  */
 public class FunctionReader {
 
-	private ArrayList<BinaryOperator<FenShu>> functionParts = new ArrayList<>();
-	private BinaryOperator<FenShu> usableFunciton;
+	private ArrayList<DoubleBinaryOperator> functionParts = new ArrayList<>();
+	private DoubleBinaryOperator usableFunciton;
 
-	public BinaryOperator<FenShu> read(Function f) {
+	public DoubleBinaryOperator read(Function f) {
 		String strFunction = f.getFunction();
 		String[] part;
 		if (!strFunction.contains("+")) {
@@ -35,27 +35,28 @@ public class FunctionReader {
 				int[] intCan = new int[2];
 				intCan[0] = Integer.parseInt(s.substring(0, s.indexOf('*')));
 				intCan[1] = Integer.parseInt(s.substring(s.indexOf('^') + 1));
-				functionParts.add((x, y) -> x.pow(intCan[1]).multiply(new FenShu(intCan[0])));
+
+				functionParts.add((x, y) -> MyMath.pow(x, intCan[1]) * intCan[0]);
 				f.xPartCount++;
 				f.partCount++;
 			} else if (s.contains("y")) {
 				int[] intCan = new int[2];
 				intCan[0] = Integer.parseInt(s.substring(0, s.indexOf('*')));
 				intCan[1] = Integer.parseInt(s.substring(s.indexOf('^') + 1));
-				functionParts.add((x, y) -> y.pow(intCan[1]).multiply(new FenShu(intCan[0])));
+				functionParts.add((x, y) -> MyMath.pow(x, intCan[1]) * intCan[0]);
 				f.yPartCount++;
 				f.partCount++;
 			} else {
-				functionParts.add((x, y) -> new FenShu(Integer.parseInt(s), 1));
+				functionParts.add((x, y) -> Integer.parseInt(s));
 				f.OPartCount++;
 				f.partCount++;
 			}
 		}
 
 		usableFunciton = (x, y) -> {
-			FenShu sum = new FenShu(0);
-			for (BinaryOperator<FenShu> functionPart : functionParts) {
-				sum = sum.add(functionPart.apply(x, y));
+			double sum = 0;
+			for (DoubleBinaryOperator functionPart : functionParts) {
+				sum += functionPart.applyAsDouble(x, y);
 			}
 			return sum;
 		};
