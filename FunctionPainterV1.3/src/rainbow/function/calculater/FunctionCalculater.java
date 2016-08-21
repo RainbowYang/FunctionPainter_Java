@@ -20,13 +20,13 @@ public class FunctionCalculater {
 	public FunctionCalculater(Function f) {
 		this.f = f;
 		fpp = new FunctionPointsPainter(f);
-		// new FunctionCalculaterThread(f, fpp, 1).start();
-		// new FunctionCalculaterThread(f, fpp, 2).start();
-		// new FunctionCalculaterThread(f, fpp, 3).start();
-		// new FunctionCalculaterThread(f, fpp, 4).start();
-		getFirstPoints();
-		f.setHasPoints();
-		fpp.tryToAddImg();
+		 new FunctionCalculaterThread(f, fpp, 1).start();
+		 new FunctionCalculaterThread(f, fpp, 2).start();
+		 new FunctionCalculaterThread(f, fpp, 3).start();
+		 new FunctionCalculaterThread(f, fpp, 4).start();
+//		getFirstPoints();
+//		f.setHasPoints();
+//		fpp.tryToAddImg();
 	}
 
 	private void getFirstPoints() {
