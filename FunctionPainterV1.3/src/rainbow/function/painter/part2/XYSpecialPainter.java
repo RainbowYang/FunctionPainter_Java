@@ -8,7 +8,7 @@ import rainbow.frame.MainFrame;
 import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
 import rainbow.setting.Setting;
-import rainbow.tools.LocationChanger;
+import rainbow.system.tools.LocationChanger;
 import rainbow.tools.MyMath;
 
 public class XYSpecialPainter {

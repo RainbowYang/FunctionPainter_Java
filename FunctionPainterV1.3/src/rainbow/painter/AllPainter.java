@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import rainbow.setting.Setting;
+import rainbow.system.SystemImage;
 
 /**
+ * 主界面总图
  * 
  * @author Rainbow_Yang
  * 
@@ -20,7 +22,7 @@ public class AllPainter extends JPanel {
 	protected void paintComponent(Graphics g) {
 		g.fillRect(0, 0, Setting.MainFrameWidth, Setting.MainFrameHeight);
 		// 添加背景
-		g.drawImage(BasePainter.getBaseImage(), 0, 0, null);
+		g.drawImage(SystemImage.getImage(), 0, 0, null);
 		// 添加函数
 		g.drawImage(FunctionPainter.getFunctionImage(), 0, 0, null);
 

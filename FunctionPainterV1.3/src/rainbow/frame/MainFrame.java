@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import rainbow.function.FunctionRepainter;
 import rainbow.painter.AllPainter;
-import rainbow.setting.Setting;
+import rainbow.system.System;
 
 /**
  * 这是主界面
@@ -20,29 +20,36 @@ import rainbow.setting.Setting;
 public class MainFrame {
 	public final static JFrame mainFrame = new JFrame("FunctionPrinterV1.3");
 
-	private int x;
-	private int y;
+	private int x = 20;
+	private int y = 30;
+
+	private int width = 1300;
+	private int height = 700;
+
+	// 用于鼠标拖动
+	private int xOfMouse;
+	private int yOfMouse;
 
 	public MainFrame() {
-		mainFrame.setLocation(Setting.xOfMainFrame - 25, Setting.yOfMainFrame);
-		mainFrame.setSize(Setting.MainFrameTrueWidth, Setting.MainFrameTrueHeight);
+		mainFrame.setLocation(x - 25, y);
+		mainFrame.setSize(width + 52, height + 80);// 消除皮肤造成的窗体缩小
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
 		mainFrame.addMouseWheelListener(e -> {
-			Setting.reset(-e.getWheelRotation());
+			System.getSystem().reset(-e.getWheelRotation());
 			FunctionRepainter.repaint();
 		});
 		mainFrame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				x = Setting.xOfO - e.getX();
-				y = Setting.yOfO - e.getY();
+				xOfMouse = System.getSystem().getX() - e.getX();
+				yOfMouse = System.getSystem().getY() - e.getY();
 			}
 		});
 		mainFrame.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Setting.resetO(e.getX() + x, e.getY() + y);
+				System.getSystem().resetO(e.getX() + xOfMouse, e.getY() + yOfMouse);
 				FunctionRepainter.repaint();
 			}
 		});
@@ -53,5 +60,13 @@ public class MainFrame {
 	public static void repaint() {
 		mainFrame.add(new AllPainter());
 		mainFrame.repaint();
+	}
+
+	public static int getWidth() {
+		return mainFrame.getWidth() - 52;
+	}
+
+	public static int getHeight() {
+		return mainFrame.getHeight() - 80;
 	}
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import rainbow.frame.MainFrame;
 import rainbow.function.Function;
 import rainbow.setting.Setting;
-import rainbow.tools.LocationChanger;
+import rainbow.system.tools.LocationChanger;
 
 //包括XO和YO
 public class AOSpecialPainter {

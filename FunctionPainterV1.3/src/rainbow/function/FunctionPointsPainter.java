@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 
 import rainbow.frame.MainFrame;
 import rainbow.setting.Setting;
-import rainbow.tools.LocationChanger;
+import rainbow.system.tools.LocationChanger;
 
 public class FunctionPointsPainter {
 	private Function f;

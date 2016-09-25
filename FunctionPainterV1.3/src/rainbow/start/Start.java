@@ -2,7 +2,7 @@ package rainbow.start;
 
 import javax.swing.UIManager;
 
-import rainbow.frame.WelcomeFrame;
+import rainbow.frame.MainFrame;
 
 /**
  * 这是FunctionPainter的第三个小版本
@@ -20,6 +20,6 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		new WelcomeFrame();
+		new MainFrame();
 	}
 }

@@ -1,11 +1,9 @@
 package rainbow.setting;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
+import rainbow.system.tools.LocationChanger;
 import rainbow.tools.ColorGetter;
-import rainbow.tools.LocationChanger;
 
 /**
  * 用于输出各种参数
@@ -73,10 +71,11 @@ public class Setting {
 		blockHeight = 40;
 		theAdd = Setting.pointSpace / Setting.blockWidth;
 		// 居中
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) / 2;
-		xOfLookingFrame = ((int) screenSize.getWidth() - LookingFrameWidth) / 2;
-		yOfLookingFrame = ((int) screenSize.getHeight() - LookingFrameHeight) / 2;
+//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//		xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) / 2;
+//		xOfLookingFrame = ((int) screenSize.getWidth() - LookingFrameWidth) / 2;
+//		yOfLookingFrame = ((int) screenSize.getHeight() - LookingFrameHeight) / 2;
+		xOfMainFrame=10;
 
 		xOfO = MainFrameWidth / 2;
 		yOfO = MainFrameHeight / 2;

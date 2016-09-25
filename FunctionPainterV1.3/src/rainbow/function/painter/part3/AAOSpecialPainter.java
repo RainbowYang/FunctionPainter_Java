@@ -6,7 +6,7 @@ import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
 import rainbow.function.calculater.FunctionCalculater;
 import rainbow.setting.Setting;
-import rainbow.tools.LocationChanger;
+import rainbow.system.tools.LocationChanger;
 import rainbow.tools.MyMath;
 
 public class AAOSpecialPainter {

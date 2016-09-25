@@ -1,5 +1,5 @@
 
-package rainbow.tools;
+package rainbow.system.tools;
 
 import rainbow.setting.Setting;
 

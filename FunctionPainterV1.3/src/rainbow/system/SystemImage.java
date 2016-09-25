@@ -1,12 +1,13 @@
-package rainbow.painter;
+package rainbow.system;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import rainbow.frame.MainFrame;
 import rainbow.setting.Setting;
-import rainbow.tools.LocationChanger;;
+import rainbow.system.tools.LocationChanger;;
 
 /**
  * 
@@ -15,53 +16,101 @@ import rainbow.tools.LocationChanger;;
  * @author Rainbow_Yang
  * @version 1.3
  */
-public class BasePainter {
+public class SystemImage {
 
-	public static Image getBaseImage() {
-		BufferedImage img = new BufferedImage(Setting.MainFrameWidth, Setting.MainFrameHeight,
-				BufferedImage.TYPE_4BYTE_ABGR);
+	private static SystemImage systemImage = new SystemImage();
+
+	private Color colorOfBlock;
+	private Color colorOfO;
+	private Color colorOfNum;
+	private Color colorOfXY;
+
+	private int xOfO;
+	private int yOfO;
+
+	private double xMax;
+	private double xMin;
+	private double yMax;
+	private double yMin;
+	private int xIntMax;
+	private int xIntMin;
+	private int yIntMax;
+	private int yIntMin;
+
+	public static Image getImage() {
+		return systemImage.getBaseImage();
+	}
+
+	// 重新加载数据
+	private void reset() {
+		SystemColors sc = SystemColors.getColors();
+		this.colorOfBlock = sc.getColorOfBlock();
+		this.colorOfO = sc.getColorOfO();
+		this.colorOfNum = sc.getColorOfNum();
+		this.colorOfXY = sc.getColorOfXY();
+
+		System s = System.getSystem();
+		xOfO = s.getX();
+		yOfO = s.getY();
+
+		xMax = s.getxMax();
+		xMin = s.getxMin();
+		yMax = s.getyMax();
+		yMin = s.getyMin();
+
+		xIntMax = s.getxIntMax();
+		xIntMin = s.getxIntMin();
+		yIntMax = s.getyIntMax();
+		yIntMin = s.getyIntMin();
+	}
+
+	public Image getBaseImage() {
+		reset();
+		int MainFrameWidth = MainFrame.getWidth();
+		int MainFrameHeight = MainFrame.getHeight();
+		BufferedImage img = new BufferedImage(MainFrameWidth, MainFrameHeight, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics g = img.getGraphics();
-		g.setColor(Color.WHITE);
 
-		//画空白背景
-		g.fillRect(0, 0, Setting.MainFrameWidth, Setting.MainFrameHeight);
+		// 画空白背景
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, MainFrameWidth, MainFrameHeight);
 
 		// 判断是否画网格
-		if (Setting.isBlock) {
-			// 画网格
+		if (System.getSystem().hasBlock()) {
 			网格初始化(g);
-		} else
+		} else {
 			坐标格点化(g);
-		// 画坐标轴
+		}
 		坐标轴初始化(g);
-		// 画原点
 		画原点(g);
-		// 画单位数字
 		画数字(g);
+
 		return img;
 	}
 
-	private static void 坐标格点化(Graphics g) {
+	private void 坐标格点化(Graphics g) {
 
 		// 设置网格颜色
-		g.setColor(Setting.colorOfBlock);
+		g.setColor(colorOfBlock);
 
 		// 画网格
 		// 画与x轴垂直的线
-		for (int x = Setting.xIntMin - 1; x < Setting.xIntMax + 1; x++) {
-			g.drawLine(LocationChanger.Xto(x), Setting.yOfO + 5, LocationChanger.Xto(x), Setting.yOfO - 5);
+		for (int x = xIntMin - 1; x < xIntMax + 1; x++) {
+			int Xto = LocationChanger.Xto(x);
+			g.drawLine(Xto, yOfO + 5, Xto, yOfO - 5);
 		}
 
 		// 画与y轴垂直的线
-		for (int y = Setting.yIntMin - 1; y < Setting.yIntMax + 1; y++) {
-			g.drawLine(Setting.xOfO + 5, LocationChanger.Yto(y), Setting.xOfO - 5, LocationChanger.Yto(y));
+		for (int y = yIntMin - 1; y <yIntMax + 1; y++) {
+			int Yto = LocationChanger.Yto(y);
+			g.drawLine(xOfO + 5, Yto, xOfO - 5, Yto);
 		}
 	}
 
-	private static void 网格初始化(Graphics g) {
+	private void 网格初始化(Graphics g) {
 
 		// 设置网格颜色
-		g.setColor(Setting.colorOfBlock);
+		g.setColor(colorOfBlock);
 
 		// 画网格
 		// 画与x轴垂直的线
@@ -75,10 +124,10 @@ public class BasePainter {
 		}
 	}
 
-	private static void 坐标轴初始化(Graphics g) {
+	private void 坐标轴初始化(Graphics g) {
 
 		// 设置坐标轴颜色
-		g.setColor(Setting.colorOfXY);
+		g.setColor(colorOfXY);
 		// x轴
 		g.fillRect(0, Setting.yOfO - Setting.widthOfXY / 2, Setting.MainFrameWidth, Setting.widthOfXY);
 		// y轴
@@ -101,14 +150,14 @@ public class BasePainter {
 
 	}
 
-	private static void 画原点(Graphics g) {
-		g.setColor(Setting.colorOfO);
+	private void 画原点(Graphics g) {
+		g.setColor(colorOfO);
 		g.drawString("O", Setting.xOfO - 15, Setting.yOfO + 15);
 
 	}
 
-	private static void 画数字(Graphics g) {
-		g.setColor(Setting.colorOfNum);
+	private void 画数字(Graphics g) {
+		g.setColor(colorOfNum);
 		int xMax = Setting.xIntMax;
 		int xMin = Setting.xIntMin;
 		int yMax = Setting.yIntMax;

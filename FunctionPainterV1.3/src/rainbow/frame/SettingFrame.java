@@ -46,7 +46,9 @@ public class SettingFrame {
 
 	public SettingFrame(String StrFunction) {
 		settingFrame.setLayout(null);
-		settingFrame.setLocation(Setting.xOfMainFrame, Setting.yOfMainFrame + Setting.MainFrameHeight - 10);
+		// settingFrame.setLocation(Setting.xOfMainFrame, Setting.yOfMainFrame +
+		// Setting.MainFrameHeight - 10);
+		settingFrame.setLocation(Setting.xOfMainFrame + Setting.MainFrameWidth, Setting.yOfMainFrame);
 		settingFrame.setSize(Setting.SettingFrameWidth, Setting.SettingFrameHeight);
 		settingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
