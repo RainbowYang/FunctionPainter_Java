@@ -6,7 +6,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 
-import rainbow.function.FuncitionRepainter;
+import rainbow.function.FunctionRepainter;
 import rainbow.painter.AllPainter;
 import rainbow.setting.Setting;
 
@@ -30,7 +30,7 @@ public class MainFrame {
 		mainFrame.setResizable(false);
 		mainFrame.addMouseWheelListener(e -> {
 			Setting.reset(-e.getWheelRotation());
-			FuncitionRepainter.repaint();
+			FunctionRepainter.repaint();
 		});
 		mainFrame.addMouseListener(new MouseAdapter() {
 			@Override
@@ -43,7 +43,7 @@ public class MainFrame {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				Setting.resetO(e.getX() + x, e.getY() + y);
-				FuncitionRepainter.repaint();
+				FunctionRepainter.repaint();
 			}
 		});
 		mainFrame.add(new AllPainter());

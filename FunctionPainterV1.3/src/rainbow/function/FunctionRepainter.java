@@ -4,7 +4,7 @@ import rainbow.frame.MainFrame;
 import rainbow.frame.SettingFrame;
 import rainbow.function.painter.FunctionImagePainter;
 
-public class FuncitionRepainter {
+public class FunctionRepainter {
 
 	public static void repaint() {
 		for (Function f : SettingFrame.functions) {
