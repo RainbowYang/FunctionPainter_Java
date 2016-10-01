@@ -3,9 +3,9 @@ package rainbow.system;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
-import rainbow.frame.MainFrame;
 import rainbow.system.tools.LocationChanger;;
 
 /**
@@ -38,20 +38,18 @@ public class SystemImage {
 		}
 
 		{
-			
-			int MainFrameWidth = MainFrame.getWidth();
-			int MainFrameHeight = MainFrame.getHeight();
-			BufferedImage img = new BufferedImage(MainFrameWidth, MainFrameHeight, BufferedImage.TYPE_4BYTE_ABGR);
+
+			int Width =s.getWidth();
+			int Height = s.getHeight();
+			BufferedImage img = new BufferedImage(Width, Height, BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics g = img.getGraphics();
 
 			// 画空白背景
 			g.setColor(Color.WHITE);
-			g.fillRect(0, 0, MainFrameWidth, MainFrameHeight);
-
-			System.out.println(123);
+			g.fillRect(0, 0, Width, Height);
 
 			// 判断是否画网格
-			if (System.getSystem().hasBlock()) {
+			if (s.hasBlock()) {
 				网格初始化(g);
 			} else {
 				坐标格点化(g);
@@ -97,14 +95,13 @@ public class SystemImage {
 		for (int x = s.getxIntMin() - 1; x < s.getxIntMax() + 1; x++) {
 			int xto = LocationChanger.Xto(x);
 			// System.out.println(xto+"------");
-			System.out.println();
-			g.drawLine(xto, 0, xto, MainFrame.getHeight());
+			g.drawLine(xto, 0, xto, s.getHeight());
 		}
 
 		// 画与y轴垂直的线
 		for (int y = s.getyIntMin() - 1; y < s.getyIntMax() + 1; y++) {
 			int yto = LocationChanger.Yto(y);
-			g.drawLine(0, yto, MainFrame.getWidth(), yto);
+			g.drawLine(0, yto, s.getWidth(), yto);
 		}
 	}
 
@@ -135,11 +132,9 @@ public class SystemImage {
 
 		int x = s.getX();
 		int y = s.getY();
-		System.out.println(x);
-		System.out.println(y);
 
-		int width = MainFrame.getWidth();
-		int height = MainFrame.getHeight();
+		int width = s.getWidth();
+		int height = s.getHeight();
 
 		int widthOfXY = s.getXYWidth();
 
@@ -148,22 +143,31 @@ public class SystemImage {
 
 		// 设置坐标轴颜色
 		g.setColor(s.getColorOfXY());
-		// x轴
-		g.fillRect(0, y - widthOfXY / 2, width, widthOfXY);
-		// y轴
-		g.fillRect(x - widthOfXY / 2, 0, widthOfXY, height);
 
 		// 画箭头
 		int cosLength = (int) (arrowLength * Math.cos(arrowAngle));
 		int sinLength = (int) (arrowLength * Math.sin(arrowAngle));
+
 		// x轴箭头
-		g.drawLine(width, y, width - cosLength, (y + sinLength));
-		g.drawLine(width, y, width - cosLength, (y - sinLength));
+		Polygon xp = new Polygon();
+		xp.addPoint(width, y);
+		xp.addPoint(width - cosLength, y + sinLength);
+		xp.addPoint(width - cosLength / 2, y);
+		xp.addPoint(width - cosLength, y - sinLength);
+		g.fillPolygon(xp);
 
 		// y轴箭头
-		g.drawLine(x, 0, x + sinLength, cosLength);
-		g.drawLine(x, 0, x - sinLength, cosLength);
+		Polygon yp = new Polygon();
+		yp.addPoint(x, 0);
+		yp.addPoint(x + sinLength, cosLength);
+		yp.addPoint(x, cosLength / 2);
+		yp.addPoint(x - sinLength, cosLength);
+		g.fillPolygon(yp);
 
+		// x轴
+		g.fillRect(0, y - widthOfXY / 2, width - cosLength / 3, widthOfXY);
+		// y轴
+		g.fillRect(x - widthOfXY / 2, cosLength / 3, widthOfXY, height);
 	}
 
 	private void 画原点(Graphics g) {

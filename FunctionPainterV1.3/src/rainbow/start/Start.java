@@ -14,7 +14,11 @@ import rainbow.system.System;
  *
  */
 public class Start {
+	// 开始时间
+	public static long start;
+
 	public static void main(String[] args) {
+		start = System.currentTimeMillis();
 		try {
 			org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 			UIManager.put("RootPane.setupButtonVisible", false);

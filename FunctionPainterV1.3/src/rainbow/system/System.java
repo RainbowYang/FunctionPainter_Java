@@ -15,13 +15,19 @@ import rainbow.system.tools.LocationChanger;
  */
 public class System {
 
-	// 由于类名冲突 引用java.lang.System.out
-	// 保证外部正常输出 无需加前缀
+	// 由于类名冲突 引用java.lang.System
+	// 保证外部无需加前缀
 	public static final PrintStream out = java.lang.System.out;
 
+	public static long currentTimeMillis() {
+		return java.lang.System.currentTimeMillis();
+	}
+
+	private int width = MainFrame.getWidth();
+	private int height = MainFrame.getHeight();
 	// 表示原点在MainFrame中的坐标
-	private int x = MainFrame.getWidth() / 2;
-	private int y = MainFrame.getHeight() / 2;
+	private int x = width / 2;
+	private int y = height / 2;
 
 	// 是否显示网格
 	private boolean hasBlock = true;
@@ -66,13 +72,14 @@ public class System {
 	}
 
 	private System() {
+		System.out.println(width + "...." + height);
 	}
 
 	private void reXY() {
-		xMax = LocationChanger.toX(MainFrame.getWidth());
+		xMax = LocationChanger.toX(width);
 		xMin = LocationChanger.toX(0);
 		yMax = LocationChanger.toY(0);
-		yMin = LocationChanger.toY(MainFrame.getHeight());
+		yMin = LocationChanger.toY(height);
 
 		xIntMax = (int) xMax;
 		xIntMin = (int) xMin;
@@ -106,6 +113,11 @@ public class System {
 		this.y = y;
 
 		reXY();
+	}
+
+	public void reO() {
+		this.x = width / 2;
+		this.y = height / 2;
 	}
 
 	public int getX() {
@@ -244,6 +256,24 @@ public class System {
 
 	public void setXYWidth(int xYWidth) {
 		XYWidth = xYWidth;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+		reO();
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+		reO();
 	}
 
 }

@@ -4,10 +4,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import rainbow.frame.bottom.JButtonsBox;
+import rainbow.frame.bottom.MyStyleJButton;
 import rainbow.frame.painter.AllPainter;
 import rainbow.function.FunctionRepainter;
+import rainbow.start.Start;
 import rainbow.system.System;
 
 /**
@@ -20,7 +24,7 @@ import rainbow.system.System;
 public class MainFrame {
 	public final static JFrame mainFrame = new JFrame("FunctionPrinterV1.3");
 
-	private int x = 20;
+	private int x = 100;
 	private int y = 30;
 
 	private static int width = 1300;
@@ -32,12 +36,15 @@ public class MainFrame {
 
 	private System s;
 
+	private JButtonsBox box;
+
 	public MainFrame() {
 		s = System.getSystem();
+		// mainFrame.setLayout(null);
 		mainFrame.setLocation(x - 25, y);
 		mainFrame.setSize(width + 52, height + 80);// 消除皮肤造成的窗体缩小
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setResizable(false);
+		// mainFrame.setResizable(false);
 		mainFrame.addMouseWheelListener(e -> {
 			System.getSystem().reset(-e.getWheelRotation());
 			FunctionRepainter.repaint();
@@ -56,13 +63,31 @@ public class MainFrame {
 				FunctionRepainter.repaint();
 			}
 		});
+
+		addJButtons();
+
 		mainFrame.add(new AllPainter());
 		mainFrame.setVisible(true);
+		System.out.println("窗体加载用时：" + (System.currentTimeMillis() - Start.start));
+	}
+
+	private void addJButtons() {
+		MyStyleJButton button1 = new MyStyleJButton("123");
+		MyStyleJButton button2 = new MyStyleJButton("123");
+		MyStyleJButton button3 = new MyStyleJButton("123");
+		MyStyleJButton button4 = new MyStyleJButton("123");
+		box = new JButtonsBox(mainFrame, button1, button2, button3, button4);
+	}
+
+	public void addJButton(JButton jb) {
+		box.add(jb);
 	}
 
 	public static void repaint() {
+		long start = System.currentTimeMillis();
 		mainFrame.add(new AllPainter());
 		mainFrame.repaint();
+		System.out.println(System.currentTimeMillis() - start);
 	}
 
 	public static int getWidth() {
