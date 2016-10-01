@@ -1,7 +1,7 @@
 
 package rainbow.system.tools;
 
-import rainbow.setting.Setting;
+import rainbow.system.System;
 
 /**
  * 坐标转换类
@@ -10,6 +10,9 @@ import rainbow.setting.Setting;
  *
  */
 public class LocationChanger {
+
+	private static final System s = System.getSystem();
+
 	/**
 	 * 
 	 * @param m
@@ -17,7 +20,7 @@ public class LocationChanger {
 	 * @return 相对于原点的横坐标
 	 */
 	public static double toX(int m) {
-		return (m - Setting.xOfO) * 1.0 / Setting.blockWidth;
+		return (m - s.getX()) * 1.0 / s.getBlockWidth();
 	}
 
 	/**
@@ -27,7 +30,7 @@ public class LocationChanger {
 	 * @return 相对于原点的纵坐标
 	 */
 	public static double toY(int n) {
-		return (Setting.yOfO - n) * 1.0 / Setting.blockHeight;
+		return (s.getY()- n) * 1.0 / s.getBlockHeight();
 	}
 
 	/**
@@ -38,7 +41,7 @@ public class LocationChanger {
 	 */
 	public static int Xto(int x) {
 
-		return Setting.xOfO + (x * Setting.blockWidth);
+		return s.getX()+ (x * s.getBlockWidth());
 	}
 
 	/**
@@ -48,7 +51,7 @@ public class LocationChanger {
 	 * @return
 	 */
 	public static int Yto(int y) {
-		return Setting.yOfO - (y * Setting.blockHeight);
+		return s.getY()- (y * s.getBlockHeight());
 	}
 
 	/**
@@ -59,7 +62,7 @@ public class LocationChanger {
 	 */
 	public static int Xto(double x) {
 
-		return (int) (Setting.xOfO + (x * Setting.blockWidth));
+		return (int) (s.getX()+ (x * s.getBlockWidth()));
 	}
 
 	/**
@@ -69,7 +72,7 @@ public class LocationChanger {
 	 * @return
 	 */
 	public static int Yto(double y) {
-		return (int) (Setting.yOfO - (y * Setting.blockHeight));
+		return (int) (s.getY()- (y * s.getBlockHeight()));
 	}
 
 }

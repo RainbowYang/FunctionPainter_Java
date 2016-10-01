@@ -12,4 +12,8 @@ public class ColorGetter {
 			return new Color((i >> 16) & 0xFF, (i >> 8) & 0xFF, i & 0xFF);
 		}
 	}
+
+	public static Color getColor() {
+		return Color.BLACK;
+	}
 }

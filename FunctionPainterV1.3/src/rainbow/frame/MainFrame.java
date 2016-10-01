@@ -23,8 +23,8 @@ public class MainFrame {
 	private int x = 20;
 	private int y = 30;
 
-	private int width = 1300;
-	private int height = 700;
+	private static int width = 1300;
+	private static int height = 700;
 
 	// 用于鼠标拖动
 	private int xOfMouse;
@@ -63,10 +63,10 @@ public class MainFrame {
 	}
 
 	public static int getWidth() {
-		return mainFrame.getWidth() - 52;
+		return mainFrame.getWidth() == 0 ? width : mainFrame.getWidth() - 52;
 	}
 
 	public static int getHeight() {
-		return mainFrame.getHeight() - 80;
+		return mainFrame.getHeight() == 0 ? height : mainFrame.getHeight() - 80;
 	}
 }
