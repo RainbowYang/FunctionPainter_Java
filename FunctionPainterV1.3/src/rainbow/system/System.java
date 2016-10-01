@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.io.PrintStream;
 
 import rainbow.frame.MainFrame;
+import rainbow.function.tools.ColorGetter;
 import rainbow.system.tools.LocationChanger;
-import rainbow.tools.ColorGetter;
 
 /**
  * 坐标系

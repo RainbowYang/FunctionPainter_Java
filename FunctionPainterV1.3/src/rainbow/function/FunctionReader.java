@@ -3,7 +3,7 @@ package rainbow.function;
 import java.util.ArrayList;
 import java.util.function.DoubleBinaryOperator;
 
-import rainbow.tools.MyMath;
+import rainbow.function.tools.MyMath;
 
 /**
  * 

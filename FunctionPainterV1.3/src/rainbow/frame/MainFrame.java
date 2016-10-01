@@ -6,8 +6,8 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 
+import rainbow.frame.painter.AllPainter;
 import rainbow.function.FunctionRepainter;
-import rainbow.painter.AllPainter;
 import rainbow.system.System;
 
 /**
@@ -30,7 +30,10 @@ public class MainFrame {
 	private int xOfMouse;
 	private int yOfMouse;
 
+	private System s;
+
 	public MainFrame() {
+		s = System.getSystem();
 		mainFrame.setLocation(x - 25, y);
 		mainFrame.setSize(width + 52, height + 80);// 消除皮肤造成的窗体缩小
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,14 +45,14 @@ public class MainFrame {
 		mainFrame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				xOfMouse = System.getSystem().getX() - e.getX();
-				yOfMouse = System.getSystem().getY() - e.getY();
+				xOfMouse = s.getX() - e.getX();
+				yOfMouse = s.getY() - e.getY();
 			}
 		});
 		mainFrame.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				System.getSystem().resetO(e.getX() + xOfMouse, e.getY() + yOfMouse);
+				s.resetO(e.getX() + xOfMouse, e.getY() + yOfMouse);
 				FunctionRepainter.repaint();
 			}
 		});

@@ -1,4 +1,4 @@
-package rainbow.tools;
+package rainbow.function.tools;
 
 public class MyMath {
 	public static double pow(double a, double b) {

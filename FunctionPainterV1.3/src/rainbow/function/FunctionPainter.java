@@ -1,11 +1,10 @@
-package rainbow.painter;
+package rainbow.function;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import rainbow.frame.SettingFrame;
-import rainbow.function.Function;
 import rainbow.setting.Setting;
 
 public class FunctionPainter {

@@ -1,4 +1,4 @@
-package rainbow.painter;
+package rainbow.frame.painter;
 
 import java.awt.Graphics;
 

@@ -2,8 +2,8 @@ package rainbow.setting;
 
 import java.awt.Color;
 
+import rainbow.function.tools.ColorGetter;
 import rainbow.system.tools.LocationChanger;
-import rainbow.tools.ColorGetter;
 
 /**
  * 用于输出各种参数

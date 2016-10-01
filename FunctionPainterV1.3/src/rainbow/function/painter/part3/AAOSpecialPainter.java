@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
 import rainbow.function.calculater.FunctionCalculater;
+import rainbow.function.tools.MyMath;
 import rainbow.setting.Setting;
 import rainbow.system.tools.LocationChanger;
-import rainbow.tools.MyMath;
 
 public class AAOSpecialPainter {
 	private int mode;

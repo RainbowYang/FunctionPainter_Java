@@ -7,9 +7,9 @@ import java.util.List;
 import rainbow.frame.MainFrame;
 import rainbow.function.Function;
 import rainbow.function.FunctionPointsPainter;
+import rainbow.function.tools.CirclePainter;
+import rainbow.function.tools.MyMath;
 import rainbow.setting.Setting;
-import rainbow.tools.CirclePainter;
-import rainbow.tools.MyMath;
 
 public class XOYSpecialPainter {
 
