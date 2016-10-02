@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import rainbow.frame.bottom.MyStyleJButton;
+import rainbow.frame.botton.MyStyleJButton;
 import rainbow.function.tools.ColorGetter;
 import rainbow.function.tools.ComponentsSetTools;
 import rainbow.setting.Setting;

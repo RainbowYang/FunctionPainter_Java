@@ -1,6 +1,5 @@
 package rainbow.system;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Polygon;
@@ -28,40 +27,41 @@ public class SystemImage {
 	 * @return 所需要的图片
 	 */
 	public static Image getImage() {
-		return systemImage.getBaseImage();
+		return systemImage.cacheImg;
 	}
 
-	public Image getBaseImage() {
-		if (!s.isChanged() && cacheImg != null) {
-			s.setChanged(false);
-			return cacheImg;
+	/**
+	 * 重新绘制图片
+	 */
+	public static void repaint() {
+		systemImage.repaint0();
+	}
+
+	private SystemImage() {
+	}
+
+	public void repaint0() {
+
+		int Width = s.getWidth();
+		int Height = s.getHeight();
+		BufferedImage img = new BufferedImage(Width, Height, BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics g = img.getGraphics();
+
+		// 画空白背景
+		g.setColor(s.getColorOfBack());
+		g.fillRect(0, 0, Width, Height);
+
+		// 判断是否画网格
+		if (s.hasBlock()) {
+			网格初始化(g);
+		} else {
+			坐标格点化(g);
 		}
+		坐标轴初始化(g);
+		画原点(g);
+		画数字(g);
 
-		{
-
-			int Width =s.getWidth();
-			int Height = s.getHeight();
-			BufferedImage img = new BufferedImage(Width, Height, BufferedImage.TYPE_4BYTE_ABGR);
-			Graphics g = img.getGraphics();
-
-			// 画空白背景
-			g.setColor(Color.WHITE);
-			g.fillRect(0, 0, Width, Height);
-
-			// 判断是否画网格
-			if (s.hasBlock()) {
-				网格初始化(g);
-			} else {
-				坐标格点化(g);
-			}
-			坐标轴初始化(g);
-			画原点(g);
-			画数字(g);
-
-			cacheImg = img;
-
-			return img;
-		}
+		cacheImg = img;
 	}
 
 	private void 坐标格点化(Graphics g) {

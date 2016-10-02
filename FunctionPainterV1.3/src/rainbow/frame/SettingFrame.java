@@ -19,7 +19,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-import rainbow.frame.bottom.MyStyleJButton;
+import rainbow.frame.botton.MyStyleJButton;
 import rainbow.function.Function;
 import rainbow.function.tools.ColorGetter;
 import rainbow.function.tools.ComponentsSetTools;

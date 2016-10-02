@@ -37,6 +37,7 @@ public class System {
 	// x轴y轴宽度
 	private int XYWidth = 4;
 
+	private Color colorOfBack = ColorGetter.getColor("dcedc8");
 	private Color colorOfBlock = ColorGetter.getColor();
 	private Color colorOfO = ColorGetter.getColor();
 	private Color colorOfNum = ColorGetter.getColor();
@@ -57,13 +58,12 @@ public class System {
 	private int yIntMax;
 	private int yIntMin;
 
-	private boolean isChanged = false;
-
 	// 单例
 	private static System system;
 
 	public static void createSystem() {
-		system = new System();
+		if (system == null)
+			system = new System();
 		system.reXY();
 	}
 
@@ -75,6 +75,28 @@ public class System {
 		System.out.println(width + "...." + height);
 	}
 
+	/**
+	 * 使原点回到SystemImage中心
+	 */
+	public void reO() {
+		this.x = width / 2;
+		this.y = height / 2;
+	}
+
+	/**
+	 * 调整System的Width和Height
+	 */
+	public void reWidthAndHeight() {
+		width = MainFrame.getWidth() - MainFrame.box.getMaxWidth();
+		height = MainFrame.getHeight() - MainFrame.box.getMaxHeight();
+
+		reO();
+
+	}
+
+	/**
+	 * 调整xy的最值
+	 */
 	private void reXY() {
 		xMax = LocationChanger.toX(width);
 		xMin = LocationChanger.toX(0);
@@ -87,9 +109,14 @@ public class System {
 		yIntMin = (int) yMin;
 	}
 
+	/**
+	 * 用于滚轮调整大小
+	 * 
+	 * @param add
+	 *            来自滚轮
+	 */
 	public void reset(int add) {
 
-		setChanged(true);
 		if (blockWidth >= 1 || add > 0) {
 			blockWidth += add;
 			if (blockWidth > 60) {
@@ -107,17 +134,18 @@ public class System {
 		}
 	}
 
+	/**
+	 * 调整圆心位置
+	 * 
+	 * @param x
+	 *            来自鼠标
+	 * @param y
+	 *            来自鼠标
+	 */
 	public void resetO(int x, int y) {
-		setChanged(true);
 		this.x = x;
 		this.y = y;
-
 		reXY();
-	}
-
-	public void reO() {
-		this.x = width / 2;
-		this.y = height / 2;
 	}
 
 	public int getX() {
@@ -194,14 +222,6 @@ public class System {
 		this.hasBlock = hasBlock;
 	}
 
-	public boolean isChanged() {
-		return isChanged;
-	}
-
-	public void setChanged(boolean changed) {
-		this.isChanged = changed;
-	}
-
 	public Color getColorOfBlock() {
 		return colorOfBlock;
 	}
@@ -262,18 +282,16 @@ public class System {
 		return width;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
-		reO();
-	}
-
 	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
-		reO();
+	public Color getColorOfBack() {
+		return colorOfBack;
+	}
+
+	public void setColorOfBack(Color colorOfBack) {
+		this.colorOfBack = colorOfBack;
 	}
 
 }

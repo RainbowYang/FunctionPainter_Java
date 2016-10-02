@@ -71,11 +71,14 @@ public class Setting {
 		blockHeight = 40;
 		theAdd = Setting.pointSpace / Setting.blockWidth;
 		// 居中
-//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//		xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) / 2;
-//		xOfLookingFrame = ((int) screenSize.getWidth() - LookingFrameWidth) / 2;
-//		yOfLookingFrame = ((int) screenSize.getHeight() - LookingFrameHeight) / 2;
-		xOfMainFrame=10;
+		// Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		// xOfMainFrame = ((int) screenSize.getWidth() - MainFrameTrueWidth) /
+		// 2;
+		// xOfLookingFrame = ((int) screenSize.getWidth() - LookingFrameWidth) /
+		// 2;
+		// yOfLookingFrame = ((int) screenSize.getHeight() - LookingFrameHeight)
+		// / 2;
+		xOfMainFrame = 10;
 
 		xOfO = MainFrameWidth / 2;
 		yOfO = MainFrameHeight / 2;

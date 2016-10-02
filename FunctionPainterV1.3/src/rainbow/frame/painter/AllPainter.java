@@ -21,9 +21,10 @@ public class AllPainter extends JPanel {
 	private static final long serialVersionUID = -6464238758502442112L;
 
 	protected void paintComponent(Graphics g) {
-		g.setColor(ColorGetter.getColor("66ffff"));
-		g.fillRect(0, 0, MainFrame.getWidth(), MainFrame.getHeight());
+		g.setColor(ColorGetter.getColor("4caf50"));
+		g.fillRect(0, 0, MainFrame.mainFrame.getWidth(), MainFrame.mainFrame.getHeight());
 		// 添加背景
+		SystemImage.repaint();
 		g.drawImage(SystemImage.getImage(), 0, 0, null);
 		// 添加函数
 		// g.drawImage(FunctionPainter.getFunctionImage(), 0, 0, null);

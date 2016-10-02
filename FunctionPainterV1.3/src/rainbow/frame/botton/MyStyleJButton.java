@@ -1,4 +1,4 @@
-package rainbow.frame.bottom;
+package rainbow.frame.botton;
 
 import java.awt.Font;
 
