@@ -14,10 +14,12 @@ import javax.swing.JButton;
 public class MyStyleJButton extends JButton {
 	private static final long serialVersionUID = 5091141873842870259L;
 
+	private static Font f = new Font("微软雅黑", Font.BOLD, 30);
+
 	public MyStyleJButton(String title) {
 		super(title);
-		this.setFont(new Font("微软雅黑", Font.BOLD, 30));
-		this.setSize(100, 50);
+		this.setFont(f);
+		this.setSize(140, 50);
 	}
 
 }

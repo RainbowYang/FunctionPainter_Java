@@ -23,8 +23,8 @@ public class System {
 		return java.lang.System.currentTimeMillis();
 	}
 
-	private int width = MainFrame.getWidth();
-	private int height = MainFrame.getHeight();
+	private int width = MainFrame.width;
+	private int height = MainFrame.height;
 	// 表示原点在MainFrame中的坐标
 	private int x = width / 2;
 	private int y = height / 2;
@@ -72,7 +72,6 @@ public class System {
 	}
 
 	private System() {
-		System.out.println(width + "...." + height);
 	}
 
 	/**

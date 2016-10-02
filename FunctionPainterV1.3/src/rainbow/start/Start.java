@@ -26,6 +26,8 @@ public class Start {
 			e.printStackTrace();
 		}
 		System.createSystem();
-		new MainFrame();
+		// new MainFrame();
+		MainFrame.createMainFrame().init();
+		;
 	}
 }

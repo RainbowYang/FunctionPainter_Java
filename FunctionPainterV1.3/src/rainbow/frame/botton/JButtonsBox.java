@@ -1,8 +1,10 @@
 package rainbow.frame.botton;
 
+import java.awt.Component;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JButton;
 
@@ -15,7 +17,7 @@ public class JButtonsBox {
 	public static final String BOTTOM = "bottom";
 	public static final String HIDE = "hide";
 
-	private String location = LEFT;
+	private String location = BOTTOM;
 	private int padding = 50;
 	private int space = 20;
 
@@ -28,10 +30,7 @@ public class JButtonsBox {
 
 	private Frame frame;
 
-	public JButtonsBox(Frame frame, JButton... bs) {
-		this.frame = frame;
-		add(bs);
-		changeBoxWidthAndHeight();
+	public JButtonsBox() {
 
 	}
 
@@ -47,7 +46,7 @@ public class JButtonsBox {
 		locate();
 	}
 
-	private void changeBoxWidthAndHeight() {
+	public void changeBoxWidthAndHeight() {
 		switch (location) {
 		case LEFT:
 			maxWidth = buttons.get(0).getWidth() + 2 * padding;
@@ -58,6 +57,8 @@ public class JButtonsBox {
 			maxHeight = buttons.get(0).getHeight() + 2 * padding;
 			break;
 		default:
+			maxWidth = 0;
+			maxHeight = 0;
 			break;
 		}
 		MainFrame.repaint();
@@ -81,7 +82,15 @@ public class JButtonsBox {
 			}
 			break;
 		default:
+			forEach(b -> b.setVisible(false));
 			break;
+		}
+	}
+
+	private void forEach(Consumer<Component> con) {
+		for (int x = 0; x < buttons.size(); x++) {
+			JButton jb = buttons.get(x);
+			con.accept(jb);
 		}
 	}
 
@@ -125,5 +134,13 @@ public class JButtonsBox {
 
 	public void setSpace(int space) {
 		this.space = space;
+	}
+
+	public Frame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(Frame frame) {
+		this.frame = frame;
 	}
 }
