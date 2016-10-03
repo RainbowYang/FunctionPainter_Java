@@ -46,8 +46,7 @@ public class System {
 	private int ArrowLength = 40;
 	private double ArrowAngle = Math.PI / 6;
 
-	@SuppressWarnings("unused")
-	private double theAdd;
+	private double theAdd = 1.0 / blockWidth * 10;
 
 	private double xMax;
 	private double xMin;
@@ -267,6 +266,14 @@ public class System {
 
 	public void setArrowAngle(double arrowAngle) {
 		ArrowAngle = arrowAngle;
+	}
+
+	public double getTheAdd() {
+		return theAdd;
+	}
+
+	public void setTheAdd(double theAdd) {
+		this.theAdd = theAdd;
 	}
 
 	public int getXYWidth() {

@@ -106,6 +106,7 @@ public class MainFrame {
 		SystemImage.repaint();
 
 		add.addActionListener(e -> {
+
 		});
 		list.addActionListener(e -> {
 		});
@@ -125,10 +126,8 @@ public class MainFrame {
 	}
 
 	public static void repaint() {
-		long start = System.currentTimeMillis();
 		mainFrame.add(new AllPainter());
 		mainFrame.repaint();
-		System.out.println(System.currentTimeMillis() - start);
 	}
 
 	public static int getWidth() {

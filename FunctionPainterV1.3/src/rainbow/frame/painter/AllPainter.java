@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import rainbow.frame.MainFrame;
+import rainbow.function.FunctionImages;
 import rainbow.function.tools.ColorGetter;
 import rainbow.system.SystemImage;
 
@@ -27,7 +28,7 @@ public class AllPainter extends JPanel {
 		SystemImage.repaint();
 		g.drawImage(SystemImage.getImage(), 0, 0, null);
 		// 添加函数
-		// g.drawImage(FunctionPainter.getFunctionImage(), 0, 0, null);
+		g.drawImage(FunctionImages.getFunctionImage(), 0, 0, null);
 
 	}
 }
