@@ -128,7 +128,6 @@ public class WelcomeFrame {
 			}
 		});
 
-
 		add.addActionListener(e -> {
 
 			if (FunctionShower.getText().trim().isEmpty()) {
@@ -171,7 +170,6 @@ public class WelcomeFrame {
 
 		make.addActionListener(e -> {
 
-			new MainFrame();
 			new SettingFrame(FunctionShower.getText());
 			welcomeFrame.dispose();
 		});

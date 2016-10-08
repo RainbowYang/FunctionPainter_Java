@@ -1,8 +1,10 @@
-package rainbow.function.functions;
+package rainbow.function.myFunctions;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.function.Function;
 
+import rainbow.function.tools.FoldLineForMyFunction;
 import rainbow.system.System;
 
 public abstract class MyFunction {
@@ -10,6 +12,9 @@ public abstract class MyFunction {
 	protected String commonExpression;
 	protected String specialExpression;
 	protected String type;
+
+	protected FoldLineForMyFunction fold;
+	protected Function<Double, Double> function;
 
 	protected boolean isShow = true;
 
@@ -30,6 +35,14 @@ public abstract class MyFunction {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public boolean isShow() {
+		return isShow;
+	}
+
+	public void setShow(boolean isShow) {
+		this.isShow = isShow;
 	}
 
 }

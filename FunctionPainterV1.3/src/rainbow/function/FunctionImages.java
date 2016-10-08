@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import rainbow.function.functions.Functions;
-import rainbow.function.functions.MyFunction;
+import rainbow.function.myFunctions.MyFunction;
 import rainbow.system.System;
 
 public class FunctionImages {
@@ -15,7 +15,8 @@ public class FunctionImages {
 		BufferedImage img = new BufferedImage(s.getWidth(), s.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics g = img.getGraphics();
 		for (MyFunction f : Functions.functions) {
-			f.paintImage(g);
+			if (f.isShow())
+				f.paintImage(g);
 		}
 		return img;
 	}

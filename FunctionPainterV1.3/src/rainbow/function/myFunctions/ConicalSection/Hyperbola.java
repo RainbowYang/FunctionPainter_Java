@@ -1,4 +1,4 @@
-package rainbow.function.functions.ConicalSection;
+package rainbow.function.myFunctions.ConicalSection;
 
 import java.awt.Graphics;
 
@@ -23,6 +23,9 @@ public class Hyperbola extends ConicalSection {
 	public static final int toY = 0;
 	public static final int toX = 1;
 
+	public Hyperbola() {
+	}
+
 	@Override
 	public void paintImage(Graphics g) {
 		g.setColor(color);
@@ -45,38 +48,39 @@ public class Hyperbola extends ConicalSection {
 
 			if (a > 0) {
 				if (yAtXMin > yMax) {
-					min = -(MyMath.sqrt(yMax / a));
+					min = -(MyMath.sqrt(b * b * (-1 + ((xMin - 1) * (xMin - 1)) / (a * a))));
 				}
 
 				if (yAtXMax > yMax) {
-					max = MyMath.sqrt(yMax / a);
+					max = MyMath.sqrt(b * b * (-1 + ((xMin - 1) * (xMin - 1)) / (a * a)));
 				}
 			} else {
 				if (yAtXMin < yMin) {
-					min = -(MyMath.sqrt(yMin / a));
+					min = -(MyMath.sqrt(b * b * (-1 + ((xMin - 1) * (xMin - 1)) / (a * a))));
 				}
 
 				if (yAtXMax < yMin) {
-					max = MyMath.sqrt(yMin / a);
+					max = MyMath.sqrt(b * b * (-1 + ((xMin - 1) * (xMin - 1)) / (a * a)));
 				}
 
 			}
 			lastX = LocationChanger.Xto(min - 1);
-			lastY = LocationChanger.Yto(MyMath.sqrt(a * a * (1 + ((min - 1) * (min - 1)) / (b * b))));
-			lastY1 = LocationChanger.Yto(-MyMath.sqrt(a * a * (1 + ((min - 1) * (min - 1)) / (b * b))));
+			lastY = LocationChanger.Yto(MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
+			lastY1 = LocationChanger.Yto(-MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
+			System.out.println(lastX + "..." + lastY + "..." + (a * a * (1 + (min * min) / (b * b))));
 
 			// 得到最值
 			for (x0 = min; x0 <= max + 1; x0 += s.getTheAdd()) {
 				y0 = MyMath.sqrt(a * a * (1 + (x0 * x0) / (b * b)));
 
 				// System.out.println(lastX + "..." + lastY);
-
+				int reLastX = lastX;
 				g.drawLine(lastX, lastY, lastX = LocationChanger.Xto(x0 + x), lastY = LocationChanger.Yto(y0 + y));
-				// g.drawLine(lastX, lastY1, lastX, lastY1 =
-				// LocationChanger.Yto(-y0 + y));
+				g.drawLine(reLastX, lastY1, lastX, lastY1 = LocationChanger.Yto(-y0 + y));
+				// System.out.println(lastX + ".0.0." + lastY1);
 			}
 
-			// System.out.println(min + "..." + max);
+			System.out.println(min + "..." + max);
 			break;
 		case toX:
 			min = yMin - 1;
@@ -110,11 +114,12 @@ public class Hyperbola extends ConicalSection {
 			// 得到最值
 			for (y0 = min; y0 <= max + 1; y0 += s.getTheAdd()) {
 				x0 = MyMath.sqrt(a * a * (1 + (y0 * y0) / (b * b)));
+				int reLastY = lastY;
 				g.drawLine(lastX, lastY, lastX = LocationChanger.Xto(x0 + x), lastY = LocationChanger.Yto(y0 + y));
-				g.drawLine(lastX1, lastY, lastX1 = LocationChanger.Xto(-x0 + x), lastY);
+				g.drawLine(lastX1, reLastY, lastX1 = LocationChanger.Xto(-x0 + x), lastY);
 			}
 
-//			System.out.println(min + "..." + max);
+			// System.out.println(min + "..." + max);
 			break;
 		}
 	}

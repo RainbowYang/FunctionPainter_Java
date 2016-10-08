@@ -1,4 +1,4 @@
-package rainbow.function.functions;
+package rainbow.function.myFunctions;
 
 import java.awt.Graphics;
 

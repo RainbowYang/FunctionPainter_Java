@@ -1,8 +1,8 @@
-package rainbow.function.functions.ConicalSection;
+package rainbow.function.myFunctions.ConicalSection;
 
 import java.awt.Graphics;
 
-import rainbow.function.functions.MyFunction;
+import rainbow.function.myFunctions.MyFunction;
 import rainbow.function.tools.MyMath;
 import rainbow.system.tools.LocationChanger;
 
@@ -44,6 +44,20 @@ public class Parabola extends MyFunction {
 	@Override
 	public void paintImage(Graphics g) {
 		g.setColor(color);
+//		RangeControl rc = new RangeControl(e -> a * e * e, e -> MyMath.sqrt(y / a), s.getxMax() - x,
+//				s.getxMin() - x, s.getyMax() - y, s.getyMin() - y);
+//		System.out.println(rc.getMax() + "..." + rc.getMin());
+//		double x0 = rc.getMin(), y0;
+//		int lastX, lastY;
+//		lastX = LocationChanger.Xto(x0 - 1);
+//		lastY = LocationChanger.Yto(a * (x0 - 1) * (x0 - 1));
+//
+//		for (x0 = rc.getMin(); x0 <= rc.getMax(); x0 += s.getTheAdd()) {
+//			y0 = a * x0 * x0;
+//			g.drawLine(lastX, lastY, //
+//					lastX = LocationChanger.Xto(x0 + x), //
+//					lastY = LocationChanger.Yto(y0 + y));
+//		}
 
 		double x0, y0;
 		int lastX, lastY;
@@ -129,73 +143,6 @@ public class Parabola extends MyFunction {
 
 			System.out.println(min + "..." + max);
 			break;
-
-		}
+		 }
 	}
-
 }
-
-// if (x > xMax) {
-// if (!(yAtXMax < yMax && yAtXMax > yMin)) {
-// return;
-// } else if (yAtXMin > yMax || yAtXMin < yMin) {
-// min = -(MyMath.sqrt(s.getyMax() / a));
-// }
-//
-// } else if (x > xMin) {
-// if ((y > yMax && a > 0) || (y < yMin && a < 0)) {
-// return;
-// }
-// if (yAtXMin > yMax || yAtXMin < yMin) {
-// min = -(MyMath.sqrt(s.getyMax() / a));
-// }
-// if (yAtXMax > yMax || yAtXMax < yMin) {
-// min = (MyMath.sqrt(s.getyMax() / a));
-// }
-// }
-
-// min = yMin - 1;
-// max = yMax + 1;
-//
-// double xAtYMax = a * (s.getxMin() + y) * (s.getyMin() + y);
-// double xAtYMin = a * (s.getxMin() + y) * (s.getyMin() + y);
-// if (a > 0) {
-// if (yAtXMin > s.getyMax()) {
-// min = -(MyMath.sqrt(s.getyMax() / a));
-// }
-//
-// if (yAtXMax > s.getyMax()) {
-// max = MyMath.sqrt(s.getyMax() / a);
-// }
-// } else {
-// if (yAtXMin > s.getyMax()) {
-// min = -(MyMath.sqrt(s.getyMax() / a));
-// }
-//
-// if (yAtXMax > s.getyMax()) {
-// max = MyMath.sqrt(s.getyMax() / a);
-// }
-//
-// }
-//
-// if (xAtYMax > s.getxMax()) {
-// min = -(MyMath.sqrt(s.getxMax() / a));
-// }
-//
-// if (xAtYMax > s.getxMax()) {
-// min = MyMath.sqrt(s.getxMax() / a);
-// }
-//
-// lastY = LocationChanger.Yto(min + y - 1);
-// lastX = LocationChanger.Xto(a * (min + y - 1) * (min + y - 1));
-//
-// // 得到最值
-// for (y0 = min; y0 <= max; y0 += s.getTheAdd()) {
-// x0 = a * y0 * y0;
-// g.drawLine(lastX, lastY, //
-// lastX = LocationChanger.Xto(x0 + x), //
-// lastY = LocationChanger.Yto(y0 + y));
-// }
-// System.out.println(min + "..." + max);
-//
-// break;

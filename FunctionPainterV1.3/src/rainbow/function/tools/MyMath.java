@@ -10,6 +10,6 @@ public class MyMath {
 	}
 
 	public static double sqrt(double a) {
-		return Math.sqrt(a);
+		return Math.sqrt(a < 0 ? -a : a);
 	}
 }

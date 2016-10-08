@@ -1,4 +1,4 @@
-package rainbow.function.functions.ConicalSection;
+package rainbow.function.myFunctions.ConicalSection;
 
 import java.awt.Graphics;
 
