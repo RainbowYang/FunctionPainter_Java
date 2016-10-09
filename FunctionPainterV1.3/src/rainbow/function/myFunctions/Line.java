@@ -34,15 +34,10 @@ public class Line extends MyFunction {
 			y2 = -c / b;
 			x1 = s.getxMin();
 			x2 = s.getxMax();
-			System.out.println(x1);
-			System.out.println(x2);
-			System.out.println(y1);
-			System.out.println(y2);
 		}
 
 		g.drawLine(LocationChanger.Xto(x1), LocationChanger.Yto(y1), LocationChanger.Xto(x2), LocationChanger.Yto(y2));
 
-	
 	}
 
 	public double getA() {

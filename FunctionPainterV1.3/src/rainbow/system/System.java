@@ -140,12 +140,15 @@ public class System {
 	 */
 	public void reset(MouseWheelEvent e) {
 
-		double x = LocationChanger.toX(e.getX() - 26);
-		double y = LocationChanger.toY(e.getY() - 40);
-		moveTo(-x, -y);
-
 		int add = -e.getWheelRotation();
+
 		if (blockWidth >= 1 || add > 0) {
+
+			// 控制缩放中心为鼠标所在位置
+			double x = LocationChanger.toX(e.getX() - 26);// 皮肤导致的
+			double y = LocationChanger.toY(e.getY() - 40);// 同上
+			moveTo(-x, -y);
+
 			blockWidth += add;
 			if (blockWidth > 60) {
 				for (int i = (blockWidth - 60) / 10; i > 0; i--) {

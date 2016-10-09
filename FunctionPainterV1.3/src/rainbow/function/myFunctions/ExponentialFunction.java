@@ -34,7 +34,7 @@ public class ExponentialFunction extends MyFunction {
 
 	@Override
 	public void paintImage(Graphics g) {
-		if (a == 0)
+		if (a == 0 || s.getxMax() <= 0)
 			return;
 		g.setColor(color);
 		double min = s.getxMin();
@@ -45,6 +45,8 @@ public class ExponentialFunction extends MyFunction {
 		fold = new FoldLineForMyFunction();
 		for (double x = min; x <= max; x += s.getTheAdd()) {
 			double y = function.apply(x);
+			if (y > s.getyMax())
+				break;
 			fold.add(x, y);
 			// System.out.println(x + "." + function.apply(x));
 		}

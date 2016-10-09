@@ -16,7 +16,6 @@ import rainbow.function.FunctionRepainter;
 import rainbow.start.Start;
 import rainbow.system.System;
 import rainbow.system.SystemImage;
-import rainbow.system.tools.LocationChanger;
 
 /**
  * 这是主界面
