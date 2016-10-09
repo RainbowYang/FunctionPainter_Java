@@ -51,7 +51,6 @@ public class FoldLineForMyFunction {
 		for (int x = 1; x < points.size(); x++) {
 			FunctionPoint point = points.get(x);
 			g.drawLine(lastX, lastY, lastX = point.getRealX(), lastY = point.getRealY());
-			System.out.println(lastX+"."+lastY);
 		}
 	}
 

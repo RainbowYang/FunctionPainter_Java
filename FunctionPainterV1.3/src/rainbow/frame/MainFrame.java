@@ -16,6 +16,7 @@ import rainbow.function.FunctionRepainter;
 import rainbow.start.Start;
 import rainbow.system.System;
 import rainbow.system.SystemImage;
+import rainbow.system.tools.LocationChanger;
 
 /**
  * 这是主界面
@@ -63,7 +64,7 @@ public class MainFrame {
 		System.out.println("窗体加载用时：" + (System.currentTimeMillis() - Start.start));
 
 		mainFrame.addMouseWheelListener(e -> {
-			s.reset(-e.getWheelRotation());
+			s.reset(e);
 			FunctionRepainter.repaint();
 		});
 		mainFrame.addMouseListener(new MouseAdapter() {
@@ -115,6 +116,8 @@ public class MainFrame {
 		change.addActionListener(e -> {
 			box.setLocation(box.getLocation() == JButtonsBox.BOTTOM ? JButtonsBox.LEFT : JButtonsBox.BOTTOM);
 			s.reWidthAndHeight();
+			repaint();
+			System.out.println(s.getWidth() + "..." + s.getHeight());
 		});
 		exit.addActionListener(e -> {
 			java.lang.System.exit(0);

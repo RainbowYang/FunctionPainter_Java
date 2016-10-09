@@ -1,6 +1,7 @@
 package rainbow.system;
 
 import java.awt.Color;
+import java.awt.event.MouseWheelEvent;
 import java.io.PrintStream;
 
 import rainbow.frame.MainFrame;
@@ -82,6 +83,30 @@ public class System {
 	}
 
 	/**
+	 * 用于缩放时调整原点位置
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void setO(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	/**
+	 * 移动坐标系
+	 * 
+	 * @param x
+	 *            中心位于坐标系的x位置
+	 * @param y
+	 *            中心位于坐标系的y位置
+	 */
+	public void moveTo(double x, double y) {
+		this.x = LocationChanger.Xto(-x);
+		this.y = LocationChanger.Yto(-y);
+	}
+
+	/**
 	 * 调整System的Width和Height
 	 */
 	public void reWidthAndHeight() {
@@ -89,7 +114,7 @@ public class System {
 		height = MainFrame.getHeight() - MainFrame.box.getMaxHeight();
 
 		reO();
-
+		reXY();
 	}
 
 	/**
@@ -113,12 +138,17 @@ public class System {
 	 * @param add
 	 *            来自滚轮
 	 */
-	public void reset(int add) {
+	public void reset(MouseWheelEvent e) {
 
+		double x = LocationChanger.toX(e.getX() - 26);
+		double y = LocationChanger.toY(e.getY() - 40);
+		moveTo(-x, -y);
+
+		int add = -e.getWheelRotation();
 		if (blockWidth >= 1 || add > 0) {
 			blockWidth += add;
 			if (blockWidth > 60) {
-				for (int x = (blockWidth - 60) / 10; x > 0; x--) {
+				for (int i = (blockWidth - 60) / 10; i > 0; i--) {
 					if (add > 0)
 						blockWidth++;
 					else
@@ -127,6 +157,8 @@ public class System {
 			}
 			setBlockHeight(blockWidth);
 			theAdd = 1.0 / blockWidth;
+
+			moveTo(x, y);
 
 			reXY();
 		}
