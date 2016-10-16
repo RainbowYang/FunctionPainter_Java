@@ -3,7 +3,7 @@ package rainbow.function.myFunctions;
 import java.awt.Graphics;
 import java.util.function.Function;
 
-import rainbow.function.tools.FoldLineForMyFunction;
+import rainbow.function.tools.FoldLine;
 
 /**
  * 指数函数 as y=ax^n
@@ -42,7 +42,7 @@ public class ExponentialFunction extends MyFunction {
 		if (a > 0) {
 		} else if (a < 0) {
 		}
-		fold = new FoldLineForMyFunction();
+		fold = new FoldLine();
 		for (double x = min; x <= max; x += s.getTheAdd()) {
 			double y = function.apply(x);
 			if (y > s.getyMax())

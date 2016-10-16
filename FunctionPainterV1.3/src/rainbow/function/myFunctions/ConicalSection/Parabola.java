@@ -3,6 +3,7 @@ package rainbow.function.myFunctions.ConicalSection;
 import java.awt.Graphics;
 
 import rainbow.function.myFunctions.MyFunction;
+import rainbow.function.tools.FoldLine;
 import rainbow.function.tools.MyMath;
 import rainbow.system.tools.LocationChanger;
 
@@ -44,20 +45,23 @@ public class Parabola extends MyFunction {
 	@Override
 	public void paintImage(Graphics g) {
 		g.setColor(color);
-//		RangeControl rc = new RangeControl(e -> a * e * e, e -> MyMath.sqrt(y / a), s.getxMax() - x,
-//				s.getxMin() - x, s.getyMax() - y, s.getyMin() - y);
-//		System.out.println(rc.getMax() + "..." + rc.getMin());
-//		double x0 = rc.getMin(), y0;
-//		int lastX, lastY;
-//		lastX = LocationChanger.Xto(x0 - 1);
-//		lastY = LocationChanger.Yto(a * (x0 - 1) * (x0 - 1));
-//
-//		for (x0 = rc.getMin(); x0 <= rc.getMax(); x0 += s.getTheAdd()) {
-//			y0 = a * x0 * x0;
-//			g.drawLine(lastX, lastY, //
-//					lastX = LocationChanger.Xto(x0 + x), //
-//					lastY = LocationChanger.Yto(y0 + y));
-//		}
+		// RangeControl rc = new RangeControl(e -> a * e * e, e -> MyMath.sqrt(y
+		// / a), s.getxMax() - x,
+		// s.getxMin() - x, s.getyMax() - y, s.getyMin() - y);
+		// System.out.println(rc.getMax() + "..." + rc.getMin());
+		// double x0 = rc.getMin(), y0;
+		// int lastX, lastY;
+		// lastX = LocationChanger.Xto(x0 - 1);
+		// lastY = LocationChanger.Yto(a * (x0 - 1) * (x0 - 1));
+		//
+		// for (x0 = rc.getMin(); x0 <= rc.getMax(); x0 += s.getTheAdd()) {
+		// y0 = a * x0 * x0;
+		// g.drawLine(lastX, lastY, //
+		// lastX = LocationChanger.Xto(x0 + x), //
+		// lastY = LocationChanger.Yto(y0 + y));
+		// }
+
+		fold = new FoldLine();
 
 		double x0, y0;
 		int lastX, lastY;
@@ -92,15 +96,11 @@ public class Parabola extends MyFunction {
 				}
 
 			}
-			lastX = LocationChanger.Xto(min - 1);
-			lastY = LocationChanger.Yto(a * (min - 1) * (min - 1));
 
 			// 得到最值
 			for (x0 = min; x0 <= max + 1; x0 += s.getTheAdd()) {
 				y0 = a * x0 * x0;
-				g.drawLine(lastX, lastY, //
-						lastX = LocationChanger.Xto(x0 + x), //
-						lastY = LocationChanger.Yto(y0 + y));
+				fold.add(x0 + x, y0 + y);
 			}
 
 			System.out.println(min + "..." + max);
@@ -139,10 +139,11 @@ public class Parabola extends MyFunction {
 				g.drawLine(lastX, lastY, //
 						lastX = LocationChanger.Xto(x0 + x), //
 						lastY = LocationChanger.Yto(y0 + y));
+				fold.add(x0 + x, y0 + y);
 			}
 
 			System.out.println(min + "..." + max);
 			break;
-		 }
+		}
 	}
 }

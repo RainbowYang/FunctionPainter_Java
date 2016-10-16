@@ -30,7 +30,6 @@ public class Oval extends ConicalSection {
 	 *            纵向轴
 	 */
 	public Oval(double x, double y, double a, double b) {
-		type = "Oval";
 		this.x = x;
 		this.y = y;
 		this.a = a;

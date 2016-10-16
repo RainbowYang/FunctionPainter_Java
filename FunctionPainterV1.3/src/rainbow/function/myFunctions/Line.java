@@ -12,7 +12,6 @@ public class Line extends MyFunction {
 
 	// ax+by+c=0
 	public Line(double a, double b, double c) {
-		type = "Line";
 		this.a = a;
 		this.b = b;
 		this.c = c;

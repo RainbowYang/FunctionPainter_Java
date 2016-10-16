@@ -4,27 +4,26 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.function.Function;
 
-import rainbow.function.tools.FoldLineForMyFunction;
+import rainbow.function.tools.FoldLine;
 import rainbow.system.System;
 
 public abstract class MyFunction {
 
 	protected String commonExpression;
 	protected String specialExpression;
-	protected String type;
 
-	protected FoldLineForMyFunction fold;
+	protected FoldLine fold;
 	protected Function<Double, Double> function;
 
 	protected boolean isShow = true;
 
-	protected Color color = Color.BLACK;
+	protected Color color = Color.red;
 
 	protected System s = System.getSystem();
 
 	@Override
 	public String toString() {
-		return type + ":" + commonExpression;
+		return getClass().getName() + ":" + commonExpression;
 	}
 
 	public abstract void paintImage(Graphics g);

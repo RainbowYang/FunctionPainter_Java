@@ -26,6 +26,24 @@ public class FunctionPoint {
 		return LocationChanger.Yto(y);
 	}
 
+	/**
+	 * @param x
+	 *            需要偏移的横坐标
+	 * @return 偏移之后的位置
+	 */
+	public int getRealX(double x) {
+		return LocationChanger.Xto(this.x + x);
+	}
+
+	/**
+	 * @param y
+	 *            需要偏移的纵坐标
+	 * @return 偏移之后的位置
+	 */
+	public int getRealY(double y) {
+		return LocationChanger.Yto(this.y + y);
+	}
+
 	public double getX() {
 		return x;
 	}

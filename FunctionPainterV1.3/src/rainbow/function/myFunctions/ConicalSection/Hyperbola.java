@@ -2,8 +2,8 @@ package rainbow.function.myFunctions.ConicalSection;
 
 import java.awt.Graphics;
 
+import rainbow.function.tools.FoldLine;
 import rainbow.function.tools.MyMath;
-import rainbow.system.tools.LocationChanger;
 
 /**
  * 双曲线
@@ -18,6 +18,8 @@ public class Hyperbola extends ConicalSection {
 	private double a;
 	private double b;
 
+	private FoldLine fold2;
+
 	private int faceTo = toX;
 
 	public static final int toY = 0;
@@ -30,8 +32,11 @@ public class Hyperbola extends ConicalSection {
 	public void paintImage(Graphics g) {
 		g.setColor(color);
 
+		fold = new FoldLine();
+		fold2 = new FoldLine();
+
 		double x0, y0;
-		int lastX, lastY, lastX1, lastY1;
+		// int lastX, lastY, lastX1, lastY1;
 
 		double min, max, xMax, xMin, yMax, yMin;
 		xMax = s.getxMax() - x;
@@ -64,23 +69,18 @@ public class Hyperbola extends ConicalSection {
 				}
 
 			}
-			lastX = LocationChanger.Xto(min - 1);
-			lastY = LocationChanger.Yto(MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
-			lastY1 = LocationChanger.Yto(-MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
-			System.out.println(lastX + "..." + lastY + "..." + (a * a * (1 + (min * min) / (b * b))));
 
 			// 得到最值
-			for (x0 = min; x0 <= max + 1; x0 += s.getTheAdd()) {
+			for (x0 = min - 1; x0 <= max + 1; x0 += s.getTheAdd()) {
 				y0 = MyMath.sqrt(a * a * (1 + (x0 * x0) / (b * b)));
-
-				// System.out.println(lastX + "..." + lastY);
-				int reLastX = lastX;
-				g.drawLine(lastX, lastY, lastX = LocationChanger.Xto(x0 + x), lastY = LocationChanger.Yto(y0 + y));
-				g.drawLine(reLastX, lastY1, lastX, lastY1 = LocationChanger.Yto(-y0 + y));
-				// System.out.println(lastX + ".0.0." + lastY1);
+				fold.add(x0 + x, y0 + y);
+				fold2.add(x0 + x, -y0 + y);
 			}
 
-			System.out.println(min + "..." + max);
+			fold.paintLine(g);
+			fold2.paintLine(g);
+
+			// System.out.println(min + "..." + max);
 			break;
 		case toX:
 			min = yMin - 1;
@@ -107,17 +107,15 @@ public class Hyperbola extends ConicalSection {
 				}
 
 			}
-			lastY = LocationChanger.Yto(min);
-			lastX = LocationChanger.Xto(MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
-			lastX1 = LocationChanger.Xto(-MyMath.sqrt(a * a * (1 + (min * min) / (b * b))));
-
 			// 得到最值
 			for (y0 = min; y0 <= max + 1; y0 += s.getTheAdd()) {
 				x0 = MyMath.sqrt(a * a * (1 + (y0 * y0) / (b * b)));
-				int reLastY = lastY;
-				g.drawLine(lastX, lastY, lastX = LocationChanger.Xto(x0 + x), lastY = LocationChanger.Yto(y0 + y));
-				g.drawLine(lastX1, reLastY, lastX1 = LocationChanger.Xto(-x0 + x), lastY);
+				fold.add(x0 + x, y0 + y);
+				fold2.add(-x0 + x, y0 + y);
 			}
+
+			fold.paintLine(g);
+			fold2.paintLine(g);
 
 			// System.out.println(min + "..." + max);
 			break;

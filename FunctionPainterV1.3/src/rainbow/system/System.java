@@ -38,7 +38,8 @@ public class System {
 	// x轴y轴宽度
 	private int XYWidth = 4;
 
-	private Color colorOfBack = ColorGetter.getColor("dcedc8");
+//	private Color colorOfBack = ColorGetter.getColor("ffffff");
+	private Color colorOfBack = ColorGetter.getColor("c1c1c1");
 	private Color colorOfBlock = ColorGetter.getColor();
 	private Color colorOfO = ColorGetter.getColor();
 	private Color colorOfNum = ColorGetter.getColor();
