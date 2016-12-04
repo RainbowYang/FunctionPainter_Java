@@ -1,4 +1,4 @@
-package rainbow.frame;
+package rainbow.frame.unused;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -21,7 +21,7 @@ import javax.swing.text.PlainDocument;
 
 import rainbow.frame.botton.MyStyleJButton;
 import rainbow.function.tools.ColorGetter;
-import rainbow.function.tools.ComponentsSetTools;
+import rainbow.function.tools.SetTools;
 import rainbow.setting.Setting;
 
 /**
@@ -103,12 +103,12 @@ public class WelcomeFrame {
 		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		ComponentsSetTools.add(welcomeFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
+		SetTools.add(welcomeFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
 				clear, make, tip3, functionPanle, back);
 		// ComponentsSetTools.setBackground(ColorGetter.getColor("66ffff"),
 		// back);
 		back.setBackground(ColorGetter.getColor("66ffff"));
-		ComponentsSetTools.setFont(new Font("微软雅黑", Font.BOLD, 30), FunctionPainterLable, XiShu, tip1, xOry, tip2,
+		SetTools.setFont(new Font("微软雅黑", Font.BOLD, 30), FunctionPainterLable, XiShu, tip1, xOry, tip2,
 				powerBox, add, clear, make);
 		authorLable.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		FunctionShower.setFont(new Font("微软雅黑", Font.BOLD, 20));

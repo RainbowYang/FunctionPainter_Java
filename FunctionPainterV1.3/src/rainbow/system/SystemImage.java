@@ -133,7 +133,7 @@ public class SystemImage {
 		int x = s.getX();
 		int y = s.getY();
 
-		int width = s.getWidth();
+		int width = s.getWidth()-16;
 		int height = s.getHeight();
 
 		int widthOfXY = s.getXYWidth();

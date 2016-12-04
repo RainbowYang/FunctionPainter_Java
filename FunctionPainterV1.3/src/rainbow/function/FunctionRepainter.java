@@ -1,7 +1,7 @@
 package rainbow.function;
 
 import rainbow.frame.MainFrame;
-import rainbow.frame.SettingFrame;
+import rainbow.frame.unused.SettingFrame;
 import rainbow.function.painter.FunctionImagePainter;
 
 public class FunctionRepainter {

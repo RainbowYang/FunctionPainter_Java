@@ -21,11 +21,8 @@ public class ExponentialFunction extends MyFunction {
 		super();
 		this.a = a;
 		this.n = n;
-		function = new Function<Double, Double>() {
-			@Override
-			public Double apply(Double x) {
-				return a * Math.pow(n, x);
-			}
+		function = x -> {
+			return a * Math.pow(n, x);
 		};
 	}
 
@@ -42,7 +39,7 @@ public class ExponentialFunction extends MyFunction {
 		if (a > 0) {
 		} else if (a < 0) {
 		}
-		fold = new FoldLine();
+
 		for (double x = min; x <= max; x += s.getTheAdd()) {
 			double y = function.apply(x);
 			if (y > s.getyMax())

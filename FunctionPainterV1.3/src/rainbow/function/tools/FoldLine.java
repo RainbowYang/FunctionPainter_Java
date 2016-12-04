@@ -2,7 +2,6 @@ package rainbow.function.tools;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,12 +76,10 @@ public class FoldLine {
 		}
 		double x = 0;
 
-		for (; x > s.getxMin() - period && x < s.getxMax() + period; x -= period) {
+		for (x = (int) (s.getxMin() / period) * period - period; x < s.getxMax(); x += period) {
 			paintLine(g, x, 0);
 		}
-		for (x = 0; x < s.getxMax() + period && x > s.getxMin() - period; x += period) {
-			paintLine(g, x, 0);
-		}
+		clear();
 
 	}
 
@@ -112,23 +109,34 @@ public class FoldLine {
 			return;
 		}
 
-		FunctionPoint lastPoint = points.get(0);
-		int lastX = lastPoint.getRealX(x);
-		int lastY = lastPoint.getRealY(y);
+		// FunctionPoint lastPoint = points.get(0);
+		// int lastX = lastPoint.getRealX(x);
+		// int lastY = lastPoint.getRealY(y);
+		//
+		// BufferedImage img = new BufferedImage(s.getWidth(), s.getHeight(),
+		// BufferedImage.TYPE_4BYTE_ABGR);
+		// Graphics gg = img.getGraphics();
 
-		BufferedImage img = new BufferedImage(s.getWidth(), s.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics gg = img.getGraphics();
+		// for (int i = 1; i < points.size(); i++) {
+		// FunctionPoint point = points.get(i);
+		// g.drawLine(lastX, lastY, lastX = point.getRealX(x), lastY =
+		// point.getRealY(y));
+		// }
+		int[] xPoints = new int[points.size()];
+		int[] yPoints = new int[points.size()];
+		points.forEach(p -> {
+			int i = points.indexOf(p);
+			xPoints[i] = p.getRealX(x);
+			yPoints[i] = p.getRealY(y);
+		});
+		g.drawPolyline(xPoints, yPoints, points.size());
 
-		for (int i = 1; i < points.size(); i++) {
-			FunctionPoint point = points.get(i);
-			g.drawLine(lastX, lastY, lastX = point.getRealX(x), lastY = point.getRealY(y));
-		}
-
-		paintBiger(gg, img);
+		// paintBiger(gg, img);
 
 	}
 
 	// 以width(默认为1)进行上下左右的移动
+	@SuppressWarnings("unused")
 	private void paintBiger(Graphics g, Image img) {
 
 		for (int x = -width; x <= width; x++) {

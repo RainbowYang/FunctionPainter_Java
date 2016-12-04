@@ -14,7 +14,7 @@ public class FunctionImages {
 	public static Image getFunctionImage() {
 		BufferedImage img = new BufferedImage(s.getWidth(), s.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics g = img.getGraphics();
-		for (MyFunction f : Functions.functions) {
+		for (MyFunction f : Functions.getFunctions().get()) {
 			if (f.isShow())
 				f.paintImage(g);
 		}

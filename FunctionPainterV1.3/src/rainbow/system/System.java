@@ -38,7 +38,7 @@ public class System {
 	// x轴y轴宽度
 	private int XYWidth = 4;
 
-//	private Color colorOfBack = ColorGetter.getColor("ffffff");
+	// private Color colorOfBack = ColorGetter.getColor("ffffff");
 	private Color colorOfBack = ColorGetter.getColor("c1c1c1");
 	private Color colorOfBlock = ColorGetter.getColor();
 	private Color colorOfO = ColorGetter.getColor();
@@ -48,7 +48,9 @@ public class System {
 	private int ArrowLength = 40;
 	private double ArrowAngle = Math.PI / 6;
 
-	private double theAdd = 1.0 / blockWidth * 10;
+	// 画函数时每隔多少的像素进行计算
+	private double fineness = 2.0;
+	private double theAdd = fineness / blockWidth;
 
 	private double xMax;
 	private double xMin;
@@ -111,8 +113,8 @@ public class System {
 	 * 调整System的Width和Height
 	 */
 	public void reWidthAndHeight() {
-		width = MainFrame.getWidth() - MainFrame.box.getMaxWidth();
-		height = MainFrame.getHeight() - MainFrame.box.getMaxHeight();
+		width = MainFrame.getWidth() ;
+		height = MainFrame.getHeight() ;
 
 		reO();
 		reXY();
@@ -146,8 +148,8 @@ public class System {
 		if (blockWidth >= 1 || add > 0) {
 
 			// 控制缩放中心为鼠标所在位置
-			double x = LocationChanger.toX(e.getX() - 26);// 皮肤导致的
-			double y = LocationChanger.toY(e.getY() - 40);// 同上
+			double x = LocationChanger.toX(e.getX());// 皮肤导致的
+			double y = LocationChanger.toY(e.getY());// 同上
 			moveTo(-x, -y);
 
 			blockWidth += add;
@@ -165,6 +167,7 @@ public class System {
 			moveTo(x, y);
 
 			reXY();
+
 		}
 	}
 
@@ -336,4 +339,11 @@ public class System {
 		this.colorOfBack = colorOfBack;
 	}
 
+	public double getFineness() {
+		return fineness;
+	}
+
+	public void setFineness(double fineness) {
+		this.fineness = fineness;
+	}
 }

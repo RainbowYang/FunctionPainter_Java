@@ -11,7 +11,6 @@ public class Sine extends TrigonometricFunction {
 	 */
 	public Sine(double a, double w) {
 		super(a, w);
-		init(Math::sin);
 	}
 
 	/**
@@ -24,6 +23,9 @@ public class Sine extends TrigonometricFunction {
 	 */
 	public Sine(double a, double w, double f) {
 		super(a, w, f);
+	}
+
+	{
 		init(Math::sin);
 	}
 }

@@ -4,6 +4,12 @@ import java.awt.Graphics;
 
 import rainbow.system.tools.LocationChanger;
 
+/**
+ * 用来描述一次函数
+ * 
+ * @author Rainbow Yang
+ *
+ */
 public class Line extends MyFunction {
 
 	private double a;
@@ -19,8 +25,7 @@ public class Line extends MyFunction {
 
 	@Override
 	public void paintImage(Graphics g) {
-		g.setColor(color);
-
+		fold = null;
 		// x=(-by-c)/a
 		double y1, y2, x1, x2;
 		if (a != 0) {
@@ -34,8 +39,8 @@ public class Line extends MyFunction {
 			x1 = s.getxMin();
 			x2 = s.getxMax();
 		}
-
-		g.drawLine(LocationChanger.Xto(x1), LocationChanger.Yto(y1), LocationChanger.Xto(x2), LocationChanger.Yto(y2));
+		fold.add(LocationChanger.Xto(x1), LocationChanger.Yto(y1));
+		fold.add(LocationChanger.Xto(x2), LocationChanger.Yto(y2));
 
 	}
 

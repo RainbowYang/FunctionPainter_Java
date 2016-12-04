@@ -6,16 +6,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
-import rainbow.frame.botton.JButtonsBox;
-import rainbow.frame.botton.MyStyleJButton;
+import rainbow.frame.menu.MainFrameMenuController;
 import rainbow.frame.painter.AllPainter;
 import rainbow.function.FunctionRepainter;
 import rainbow.start.Start;
 import rainbow.system.System;
-import rainbow.system.SystemImage;
 
 /**
  * 这是主界面
@@ -39,7 +38,7 @@ public class MainFrame {
 
 	private System s;
 
-	public static JButtonsBox box = new JButtonsBox();
+	// public static JButtonsBox box = new JButtonsBox();
 
 	public static MainFrame createMainFrame() {
 		mainFrame = new JFrame("FunctionPrinterV1.3");
@@ -51,20 +50,21 @@ public class MainFrame {
 
 	public void init() {
 		s = System.getSystem();
+
+		addMenus();// 添加目录
+
 		mainFrame.setVisible(true);
-		mainFrame.setLocation(x - 25, y);
-		mainFrame.setSize(width + 52, height + 80);// 消除皮肤造成的窗体缩小
+		mainFrame.setLocation(x, y);
+		mainFrame.setSize(width, height);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// mainFrame.setResizable(false);
 
-		addJButtons();
-
-		mainFrame.add(new AllPainter());
-		System.out.println("窗体加载用时：" + (System.currentTimeMillis() - Start.start));
+		// addJButtons();
 
 		mainFrame.addMouseWheelListener(e -> {
 			s.reset(e);
-			FunctionRepainter.repaint();
+			// FunctionRepainter.repaint();
+			repaint();
 		});
 		mainFrame.addMouseListener(new MouseAdapter() {
 			@Override
@@ -77,66 +77,77 @@ public class MainFrame {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				s.resetO(e.getX() + xOfMouse, e.getY() + yOfMouse);
-				FunctionRepainter.repaint();
+				// FunctionRepainter.repaint();
+				repaint();
 			}
 		});
 		mainFrame.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				s.reWidthAndHeight();
-				box.relocate();
+				// box.relocate();
 				repaint();
 			}
 		});
+		repaint();
+		System.out.println("窗体加载用时：" + (System.currentTimeMillis() - Start.start));
 	}
 
-	private void addJButtons() {
-		MyStyleJButton add = new MyStyleJButton("Add");
-		MyStyleJButton list = new MyStyleJButton("List");
-		MyStyleJButton clear = new MyStyleJButton("Clear");
-		MyStyleJButton exit = new MyStyleJButton("Exit");
-		// 用于改变按钮位置
-		MyStyleJButton change = new MyStyleJButton("Change");
+	private void addMenus() {
+		
+		MainFrameMenuController.menuInit(mainFrame);
 
-		box.setFrame(mainFrame);
-		box.add(add, clear, list, change, exit);
-		box.changeBoxWidthAndHeight();
-
-		System.getSystem().reWidthAndHeight();
-		SystemImage.repaint();
-
-		add.addActionListener(e -> {
-
-		});
-		list.addActionListener(e -> {
-		});
-		clear.addActionListener(e -> {
-		});
-		change.addActionListener(e -> {
-			box.setLocation(box.getLocation() == JButtonsBox.BOTTOM ? JButtonsBox.LEFT : JButtonsBox.BOTTOM);
-			s.reWidthAndHeight();
-			repaint();
-			System.out.println(s.getWidth() + "..." + s.getHeight());
-		});
-		exit.addActionListener(e -> {
-			java.lang.System.exit(0);
-		});
 	}
 
-	public void addJButton(JButton jb) {
-		box.add(jb);
-	}
+	// private void addJButtons() {
+	// MyStyleJButton add = new MyStyleJButton("Add");
+	// MyStyleJButton list = new MyStyleJButton("List");
+	// MyStyleJButton clear = new MyStyleJButton("Clear");
+	// MyStyleJButton exit = new MyStyleJButton("Exit");
+	// // 用于改变按钮位置
+	// MyStyleJButton change = new MyStyleJButton("Change");
+	//
+	// box.setFrame(mainFrame);
+	// box.add(add, clear, list, change, exit);
+	// box.changeBoxWidthAndHeight();
+	//
+	// System.getSystem().reWidthAndHeight();
+	// SystemImage.repaint();
+	//
+	// add.addActionListener(e -> {
+	// new MySmallFrame();
+	// });
+	// list.addActionListener(e -> {
+	// });
+	// clear.addActionListener(e -> {
+	// Functions.getFunctions().clear();
+	// });
+	// change.addActionListener(e -> {
+	// box.setLocation(box.getLocation() == JButtonsBox.BOTTOM ?
+	// JButtonsBox.LEFT : JButtonsBox.BOTTOM);
+	// s.reWidthAndHeight();
+	// repaint();
+	// System.out.println(s.getWidth() + "..." + s.getHeight());
+	// });
+	// exit.addActionListener(e -> {
+	// java.lang.System.exit(0);
+	// });
+	// }
+	//
+	// public void addJButton(JButton jb) {
+	// box.add(jb);
+	// }
 
 	public static void repaint() {
-		mainFrame.add(new AllPainter());
+		AllPainter.allPainter.addTo(mainFrame);
 		mainFrame.repaint();
 	}
 
 	public static int getWidth() {
-		return mainFrame == null ? width : mainFrame.getWidth() - 52;
+		return mainFrame == null ? width : mainFrame.getWidth();
 	}
 
 	public static int getHeight() {
-		return mainFrame == null ? height : mainFrame.getHeight() - 80;
+		return mainFrame == null ? height : mainFrame.getHeight();
 	}
 }

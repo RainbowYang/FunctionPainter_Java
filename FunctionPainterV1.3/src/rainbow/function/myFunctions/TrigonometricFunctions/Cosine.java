@@ -11,7 +11,6 @@ public class Cosine extends TrigonometricFunction {
 	 */
 	public Cosine(double a, double w) {
 		super(a, w);
-		init(Math::cos);
 	}
 
 	/**
@@ -24,7 +23,9 @@ public class Cosine extends TrigonometricFunction {
 	 */
 	public Cosine(double a, double w, double f) {
 		super(a, w, f);
-		init(Math::cos);
 	}
 
+	{
+		init(Math::cos);
+	}
 }

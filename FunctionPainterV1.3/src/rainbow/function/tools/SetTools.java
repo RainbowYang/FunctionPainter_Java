@@ -1,6 +1,5 @@
 package rainbow.function.tools;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,7 +15,7 @@ import javax.swing.JFrame;
  * @version V1.3
  *
  */
-public class ComponentsSetTools {
+public class SetTools {
 
 	public static void setBackground(Color color, Component... cs) {
 		forEach(c -> c.setBackground(color), cs);

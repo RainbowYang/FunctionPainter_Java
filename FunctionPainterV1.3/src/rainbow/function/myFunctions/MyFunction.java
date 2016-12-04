@@ -12,7 +12,7 @@ public abstract class MyFunction {
 	protected String commonExpression;
 	protected String specialExpression;
 
-	protected FoldLine fold;
+	protected FoldLine fold = new FoldLine();
 	protected Function<Double, Double> function;
 
 	protected boolean isShow = true;
@@ -26,7 +26,22 @@ public abstract class MyFunction {
 		return getClass().getName() + ":" + commonExpression;
 	}
 
-	public abstract void paintImage(Graphics g);
+	/**
+	 * 计算数据
+	 */
+	public void init() {
+	}
+
+	/**
+	 * 绘画
+	 * 
+	 * @param g
+	 *            画笔
+	 */
+	public void paintImage(Graphics g) {
+		g.setColor(color);
+		fold.paintLine(g);
+	}
 
 	public Color getColor() {
 		return color;

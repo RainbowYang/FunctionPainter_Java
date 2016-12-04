@@ -1,4 +1,4 @@
-package rainbow.frame;
+package rainbow.frame.unused;
 
 import java.awt.Font;
 
@@ -10,7 +10,7 @@ import javax.swing.WindowConstants;
 
 import rainbow.frame.botton.MyStyleJButton;
 import rainbow.function.tools.ColorGetter;
-import rainbow.function.tools.ComponentsSetTools;
+import rainbow.function.tools.SetTools;
 import rainbow.setting.Setting;
 
 /**
@@ -63,7 +63,7 @@ public class LookingFrame {
 		save.setLocation(100, line);
 		cancel.setLocation(320, line);
 
-		ComponentsSetTools.add(lookingFrame, save, cancel, functionPanle, back);
+		SetTools.add(lookingFrame, save, cancel, functionPanle, back);
 		
 		lookingFrame.setVisible(true);
 

@@ -1,4 +1,4 @@
-package rainbow.frame;
+package rainbow.frame.unused;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -19,10 +19,11 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import rainbow.frame.MainFrame;
 import rainbow.frame.botton.MyStyleJButton;
 import rainbow.function.Function;
 import rainbow.function.tools.ColorGetter;
-import rainbow.function.tools.ComponentsSetTools;
+import rainbow.function.tools.SetTools;
 import rainbow.setting.Setting;
 
 /**
@@ -101,8 +102,8 @@ public class SettingFrame {
 
 		Font f = new Font("微软雅黑", Font.BOLD, 30);
 
-		ComponentsSetTools.setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look);
-		ComponentsSetTools.add(settingFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
+		SetTools.setFont(f, FunctionPainterLable, XiShu, tip1, xOry, tip2, powerBox, add, clear, make, look);
+		SetTools.add(settingFrame, FunctionPainterLable, authorLable, XiShu, tip1, xOry, tip2, powerBox, add,
 				clear, make, look, functionPanle, back);
 
 		back.setBackground(ColorGetter.getColor("66ffff"));
