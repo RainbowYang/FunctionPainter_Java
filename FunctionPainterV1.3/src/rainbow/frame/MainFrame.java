@@ -7,12 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 
 import rainbow.frame.menu.MainFrameMenuController;
 import rainbow.frame.painter.AllPainter;
-import rainbow.function.FunctionRepainter;
 import rainbow.start.Start;
 import rainbow.system.System;
 
@@ -94,8 +91,8 @@ public class MainFrame {
 	}
 
 	private void addMenus() {
-		
-		MainFrameMenuController.menuInit(mainFrame);
+
+		new MainFrameMenuController().menuInit(mainFrame);
 
 	}
 

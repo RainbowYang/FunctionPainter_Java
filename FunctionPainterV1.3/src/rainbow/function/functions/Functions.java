@@ -7,7 +7,7 @@ import rainbow.frame.MainFrame;
 import rainbow.function.myFunctions.MyFunction;
 
 public class Functions {
-	private List<MyFunction> functions = new ArrayList<>();
+	private static List<MyFunction> functions = new ArrayList<>();
 
 	public static final List<String> typeOfFunction = new ArrayList<>();
 

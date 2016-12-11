@@ -23,7 +23,7 @@ public abstract class MyFunction {
 
 	@Override
 	public String toString() {
-		return getClass().getName() + ":" + commonExpression;
+		return getClass().getSimpleName() + ":" + commonExpression;
 	}
 
 	/**

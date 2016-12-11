@@ -45,6 +45,19 @@ public abstract class TrigonometricFunction extends MyFunction {
 				return a * fun.apply(w * x + f);
 			};
 			inited = true;
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("y=");
+			if (a != 1) {
+				sb.append(a).append("*");
+			}
+			sb.append(getClass().getSimpleName().substring(0, 3)).append("(").append(w).append("x");
+			if (f != 0) {
+				sb.append("+").append(f).append(")");
+			} else {
+				sb.append(")");
+			}
+			commonExpression = sb.toString();
 		}
 	}
 
@@ -54,9 +67,8 @@ public abstract class TrigonometricFunction extends MyFunction {
 
 		double add = s.getTheAdd();
 		double period = 2 * PI / w;
-		
 
-		//TODO
+		// TODO
 		switch (getClass().getSimpleName()) {
 		case "Sine":
 		case "SinePowTwo":
