@@ -27,9 +27,10 @@ public abstract class MyFunction {
 	}
 
 	/**
-	 * 计算数据
+	 * 计算所有的点并添加至fold中，由paintImage()使用 <br>
+	 * 也可以不实现,直接重写paintImage()
 	 */
-	public void init() {
+	public void calcPoints() {
 	}
 
 	/**

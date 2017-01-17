@@ -36,7 +36,7 @@ public class XOYSpecialPainter {
 			// y
 			double yR = Math.sqrt(-c * 1.0 / b);
 
-			new CirclePainter(g, xR, yR);
+			CirclePainter.paint(g, xR, yR);
 			f.setHasImg();
 			MainFrame.repaint();
 			System.out.println("函数图像生成");
@@ -69,7 +69,7 @@ public class XOYSpecialPainter {
 			double Fu_c_chu_a = -c * 1.0 / a;
 
 			double yMax = Setting.yMax;
-			for (double y = Setting.yMin; y< yMax ; y += theAdd) {
+			for (double y = Setting.yMin; y < yMax; y += theAdd) {
 				double g = MyMath.pow(y, n) * Fu_b_chu_a + Fu_c_chu_a;
 				if (m % 2 == 0) {
 					if (g >= 0) {

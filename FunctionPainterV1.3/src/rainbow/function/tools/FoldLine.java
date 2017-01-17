@@ -7,6 +7,7 @@ import java.util.List;
 
 import rainbow.function.FunctionPoint;
 import rainbow.system.System;
+import rainbow.system.tools.LocationChanger;
 
 /**
  * 用于MyFunction通过一些点来描绘一些折线
@@ -17,6 +18,9 @@ import rainbow.system.System;
 public class FoldLine {
 
 	private List<FunctionPoint> points = new ArrayList<>();
+
+	private List<Double> xList = new ArrayList<>();
+	private List<Double> yList = new ArrayList<>();
 
 	private System s = System.getSystem();
 
@@ -43,6 +47,8 @@ public class FoldLine {
 	 */
 	public void add(double x, double y) {
 		points.add(new FunctionPoint(x, y));
+		xList.add(x);
+		yList.add(y);
 	}
 
 	/**
@@ -131,6 +137,29 @@ public class FoldLine {
 		});
 		g.drawPolyline(xPoints, yPoints, points.size());
 
+		int[] xs = new int[xList.size()];
+		int[] ys = new int[yList.size()];
+		xList.forEach(p -> {
+			int i = xList.indexOf(p);
+			xs[i] = LocationChanger.Xto(p + x);
+		});
+		yList.forEach(p -> {
+			int i = yList.indexOf(p);
+			ys[i] = LocationChanger.Yto(p + y);
+			System.out.println(ys[i]);
+//			if (ys[i] == 0)
+//				java.lang.System.exit(0);
+		});
+//		System.out.println(".............");
+//		for (int i : ys) {
+//			System.out.println(i);
+//		}
+//		java.lang.System.exit(0);
+		// for (int i : ys) {
+		// System.out.println(i);
+		// }
+		// g.drawPolyline(xs, ys, xList.size());
+
 		// paintBiger(gg, img);
 
 	}
@@ -154,3 +183,188 @@ public class FoldLine {
 		this.width = width;
 	}
 }
+// package rainbow.function.tools;
+//
+// import java.awt.Graphics;
+// import java.awt.Image;
+// import java.util.ArrayList;
+// import java.util.List;
+//
+// import rainbow.function.FunctionPoint;
+// import rainbow.system.System;
+//
+/// **
+// * 用于MyFunction通过一些点来描绘一些折线
+// *
+// * @author Rainbow Yang
+// *
+// */
+// public class FoldLine {
+//
+// // private List<FunctionPoint> points = new ArrayList<>();
+// private List<FunctionPoint> points = new ArrayList<>();
+//
+// private List<Double> xPoints = new ArrayList<>();
+// private List<Double> yPoints = new ArrayList<>();
+//
+// private System s = System.getSystem();
+//
+// private int width = 0;
+//
+// public FoldLine() {
+// }
+//
+// /**
+// * @param point
+// * 第一个点
+// */
+// public FoldLine(double x, double y) {
+// add(x, y);
+// }
+//
+// /**
+// * 添加一个点
+// *
+// * @param x
+// * 点的横坐标
+// * @param y
+// * 点的纵坐标
+// */
+// public void add(double x, double y) {
+// points.add(new FunctionPoint(x, y));
+// System.out.println("add");
+//// xPoints.add(x);
+//// yPoints.add(y);
+// }
+//
+// /**
+// * 清除所有点
+// */
+// public void clear() {
+// // points.clear();
+//// xPoints = new ArrayList<>();
+//// yPoints = new ArrayList<>();
+// }
+//
+// /**
+// * 以period进行左右平移画出周期函数<br>
+// * 用于周期函数 只需画出一个周期
+// *
+// * @param g
+// * 所需的Graphics画笔
+// * @param period
+// * 横向移动周期
+// */
+// public void paintToAll(Graphics g, double period) {
+// if (xPoints.size() <= 1 || yPoints.size() <= 1) {
+// System.out.println("NoPoint");
+// return;
+// }
+// double x = 0;
+//
+// for (x = (int) (s.getxMin() / period) * period - period; x < s.getxMax(); x
+// += period) {
+// paintLine(g, x, 0);
+// }
+// clear();
+//
+// }
+//
+// /**
+// * 以目前所有的点 依次连接 划线
+// *
+// * @param g
+// * 所需的Graphics画笔
+// */
+// public void paintLine(Graphics g) {
+// paintLine(g, 0, 0);
+// }
+//
+// /**
+// * 以目前所有的点 依次连接 划线<br>
+// * 同时将其平移x和y
+// *
+// * @param g
+// * 所需的Graphics画笔
+// * @param x
+// * 横坐标
+// * @param y
+// * 纵坐标
+// */
+// public void paintLine(Graphics g, double x, double y) {
+// int[] xPoints = new int[points.size()];
+// int[] yPoints = new int[points.size()];
+// points.forEach(p -> {
+// int i = points.indexOf(p);
+// xPoints[i] = p.getRealX(x);
+// yPoints[i] = p.getRealY(y);
+// });
+// g.drawPolyline(xPoints, yPoints, points.size());
+//
+//
+// int[] xs = new int[xPoints.size()];
+// int[] ys = new int[yPoints.size()];
+// xPoints.forEach(p -> {
+// int i = xPoints.indexOf(p);
+// xs[i] = LocationChanger.Xto(p+x);
+// });
+// yPoints.forEach(p -> {
+// int i = yPoints.indexOf(p);
+// ys[i] = LocationChanger.Yto(p+y);
+// });
+// g.drawPolyline(xs, ys, xPoints.size());
+// paintLine(g, new FunctionPointMover(x, y));
+// }
+//
+// /**
+// *
+// * @param g
+// * 所需的Graphics画笔
+// * @param fpm
+// */
+// public void paintLine(Graphics g, FunctionPointMover fpm) {
+// // FunctionPoint lastPoint = points.get(0);
+// // int lastX = lastPoint.getRealX(x);
+// // int lastY = lastPoint.getRealY(y);
+// //
+// // BufferedImage img = new BufferedImage(s.getWidth(), s.getHeight(),
+// // BufferedImage.TYPE_4BYTE_ABGR);
+// // Graphics gg = img.getGraphics();
+//
+// // for (int i = 1; i < points.size(); i++) {
+// // FunctionPoint point = points.get(i);
+// // g.drawLine(lastX, lastY, lastX = point.getRealX(x), lastY =
+// // point.getRealY(y));
+// // }
+//
+// // paintBiger(gg, img);
+// g.drawPolyline(fpm.getIntPoints(xPoints, FunctionPointMover.X), //
+// fpm.getIntPoints(xPoints, FunctionPointMover.Y), xPoints.size());
+// }
+//
+// // 以width(默认为1)进行上下左右的移动
+// @SuppressWarnings("unused")
+// private void paintBiger(Graphics g, Image img) {
+//
+// for (int x = -width; x <= width; x++) {
+// for (int y = -width; y <= width; y++) {
+// g.drawImage(img, 0, 0, null);
+// }
+// }
+// }
+//
+// public int getWidth() {
+// return width;
+// }
+//
+// public void setWidth(int width) {
+// this.width = width;
+// }
+// }
+//// class NoPointException extends Exception {
+//// private static final long serialVersionUID = -2231303908729590940L;
+////
+//// public NoPointException(String message) {
+//// super(message);
+//// }
+//// }

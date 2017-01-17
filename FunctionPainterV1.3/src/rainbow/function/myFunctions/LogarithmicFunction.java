@@ -36,17 +36,16 @@ public class LogarithmicFunction extends MyFunction {
 	}
 
 	@Override
-	public void paintImage(Graphics g) {
+	public void calcPoints() {
 
 		if (a == 0 || s.getyMin() > 0)
 			return;
-		g.setColor(color);
+		fold = new FoldLine();
 		double mid = 0.5;
 		double max = s.getxMax();
 		if (a > 0) {
 		} else if (a < 0) {
 		}
-		fold = new FoldLine();
 		for (double x = 0; x <= mid; x += s.getTheAdd() / 4) {
 			double y = function.apply(x);
 			if (y > s.getyMax()) {
@@ -63,7 +62,6 @@ public class LogarithmicFunction extends MyFunction {
 			fold.add(x, y);
 			System.out.println(x + "." + function.apply(x));
 		}
-		fold.paintLine(g);
 	}
 
 }

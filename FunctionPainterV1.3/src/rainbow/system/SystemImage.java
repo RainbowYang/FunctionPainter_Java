@@ -9,7 +9,7 @@ import rainbow.system.tools.LocationChanger;;
 
 /**
  * 
- * 界面图片
+ * 背景图片
  * 
  * @author Rainbow_Yang
  * @version 1.3
