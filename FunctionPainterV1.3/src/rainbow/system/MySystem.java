@@ -109,6 +109,7 @@ public class MySystem {
 
 	/**
 	 * 返回当前所处的MySystem
+	 * 
 	 * @return
 	 */
 	public static MySystem getSystem() {

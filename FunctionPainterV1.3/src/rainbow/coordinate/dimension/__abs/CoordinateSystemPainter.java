@@ -4,11 +4,11 @@ import java.awt.Image;
 
 import rainbow.system.image.MyImage;
 
-public abstract class CoordinateSystemPainter<D extends MyDimension> extends MyImage {
+public abstract class CoordinateSystemPainter extends MyImage {
 
-	protected CoordinateSystem<D> cs;
+	protected CoordinateSystem cs;
 
-	public CoordinateSystemPainter(CoordinateSystem<D> cs) {
+	public CoordinateSystemPainter(CoordinateSystem cs) {
 		this.cs = cs;
 	}
 

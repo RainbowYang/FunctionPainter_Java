@@ -3,6 +3,8 @@ package rainbow.start;
 import codeLinesReader.rainbow.CodeLinesReaderUser;
 import rainbow.GUI.frame.MainFrameController;
 import rainbow.back.BackImage;
+import rainbow.coordinate.dimension._2D.axes.AxesCoordinateSystem;
+import rainbow.coordinate.dimension.__abs.CoordinateSystem;
 import rainbow.coordinate.image.CoordinateSystemImage;
 import rainbow.functions.FunctionsImage;
 import rainbow.system.MySystem;
@@ -24,6 +26,9 @@ public class Start {
 
 	public static void init() {
 		MySystem ms = MySystem.createSystem();
+		CoordinateSystem cs = ms.getCoordinateSystem();
+		AxesCoordinateSystem acs = (AxesCoordinateSystem) cs;
+		acs.setAngle(Math.PI / 3);
 
 		MainFrameController.init();
 

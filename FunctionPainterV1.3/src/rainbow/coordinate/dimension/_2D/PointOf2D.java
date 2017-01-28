@@ -8,29 +8,15 @@ import rainbow.coordinate.dimension.__abs.MyPoint;
  * @author Rainbow Yang
  *
  */
-public class PointOf2D implements MyPoint<TwoDimension> {
+public abstract class PointOf2D implements MyPoint{
+	protected double first;
+	protected double second;
 
-	public double X;
-	public double Y;
-
-	public PointOf2D(double x, double y) {
-		this.X = x;
-		this.Y = y;
+	public PointOf2D() {
 	}
 
-	public PointOf2D(int x, int y) {
-		this.X = x;
-		this.Y = y;
+	public PointOf2D(double first, double second) {
+		this.first = first;
+		this.second = second;
 	}
-
-	public void set(double x, double y) {
-		this.X = x;
-		this.Y = y;
-	}
-
-	public void set(int x, int y) {
-		this.X = x;
-		this.Y = y;
-	}
-
 }

@@ -14,7 +14,7 @@ import rainbow.tools.ColorGetter;
  */
 public class BackImage extends MyImage {
 	
-	Color color = ColorGetter.getColor();
+	Color color = ColorGetter.getColor("323232");
 
 	@Override
 	public Image getImage() {

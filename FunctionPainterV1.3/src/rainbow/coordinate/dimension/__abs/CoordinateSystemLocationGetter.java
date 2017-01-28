@@ -1,9 +1,11 @@
 package rainbow.coordinate.dimension.__abs;
 
-public abstract class CoordinateSystemLocationGetter<D extends MyDimension> {
-	protected CoordinateSystem<D> cs;
+import rainbow.coordinate.dimension._2D.axes.PointOfAxes;
 
-	public CoordinateSystemLocationGetter(CoordinateSystem<D> cs) {
+public abstract class CoordinateSystemLocationGetter {
+	protected CoordinateSystem cs;
+
+	public CoordinateSystemLocationGetter(CoordinateSystem cs) {
 		this.cs = cs;
 	}
 
@@ -14,7 +16,7 @@ public abstract class CoordinateSystemLocationGetter<D extends MyDimension> {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public abstract MyPoint<D> toSystem(MyPoint<D> point);
+	public abstract MyPoint toSystem(PointOfAxes point);
 
 	/**
 	 * 将一个在坐标系中的点转换为相对于屏幕的点
@@ -23,5 +25,5 @@ public abstract class CoordinateSystemLocationGetter<D extends MyDimension> {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public abstract MyPoint<D> toReal(MyPoint<D> point);
+	public abstract PointOfAxes toReal(MyPoint point);
 }

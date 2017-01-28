@@ -2,22 +2,28 @@ package rainbow.coordinate.dimension.__abs;
 
 import java.awt.Image;
 
+import rainbow.coordinate.dimension._2D.axes.PointOfAxes;
+
 /**
  * 用于描述函数坐标系并规定一些方法
  * 
  * @author Rainbow Yang
  *
  */
-public abstract class CoordinateSystem<D extends MyDimension> {
+public abstract class CoordinateSystem {
 
-	protected CoordinateSystemLocationGetter<D> getter;
-	protected CoordinateSystemPainter<D> painter;
+	protected CoordinateSystemLocationGetter getter;
+	protected CoordinateSystemPainter painter;
 
 	/**
 	 * 需对CoordinateSystemLocationGetter getter和CoordinateSystemPainter painter
 	 * 进行初始化
 	 */
 	protected abstract void init();
+
+	protected CoordinateSystem() {
+		init();
+	}
 
 	/**
 	 * @return 需给出坐标轴的图片
@@ -33,7 +39,7 @@ public abstract class CoordinateSystem<D extends MyDimension> {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public MyPoint<D> toSystem(MyPoint<D> point) {
+	public MyPoint toSystem(PointOfAxes point) {
 		return getter.toSystem(point);
 	}
 
@@ -44,7 +50,7 @@ public abstract class CoordinateSystem<D extends MyDimension> {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public MyPoint<D> toReal(MyPoint<D> point) {
+	public PointOfAxes toReal(MyPoint point) {
 		return getter.toReal(point);
 	}
 
