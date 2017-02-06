@@ -24,7 +24,7 @@ public class AxesCoordinateSystemLocationGetter extends CoordinateSystemOf2DLoca
 		AxesCoordinateSystemLocationGetter lg = new AxesCoordinateSystemLocationGetter(new AxesCoordinateSystem());
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				lg.toReal(new PointOfAxes(i, i));
+				System.out.println(lg.toReal(new PointOfAxes(i, j)));
 			}
 		}
 	}
@@ -32,34 +32,31 @@ public class AxesCoordinateSystemLocationGetter extends CoordinateSystemOf2DLoca
 	@Override
 	public MyPoint toSystem(Point point) {
 		PointOfAxes newPoint = new PointOfAxes();
-		Point ap = (Point) point;
 
-		newPoint.setY((acs.getY() - ap.getY()) / acs.getBlockHeight()
-				/ (acs.getAngle() == Math.PI / 2 ? 1 : Math.sin(acs.getAngle())));
-		newPoint.setX((ap.getX() - acs.getX()
-				- newPoint.getY() * (acs.getAngle() == Math.PI / 2 ? 0 : Math.cos(acs.getAngle())))
-				/ acs.getBlockWidth());
-
-		System.out.println(point);
-		System.out.println(newPoint);
+//		newPoint.setY((acs.getY() - point.getY()) / acs.getBlockHeight()
+//				/ (acs.getAngle() == Math.PI / 2 ? 1 : Math.sin(acs.getAngle())));
+//		newPoint.setX((point.getX() - acs.getX()
+//				- newPoint.getY() * (acs.getAngle() == Math.PI / 2 ? 0 : Math.cos(acs.getAngle())))
+//				/ acs.getBlockWidth());
+//
+//		System.out.println(point);
+//		System.out.println(newPoint);
 		return (MyPoint) newPoint;
 	}
 
 	@Override
 	public Point toReal(MyPoint point) {
-		Point newPoint = new Point();
 		PointOfAxes ap = (PointOfAxes) point;
+		Point newPoint = new Point();
 
 		double x = ap.getX() * acs.getBlockWidth();
 		double y = ap.getY() * acs.getBlockHeight();
 
-		newPoint.y = (int) (acs.getY() - (y * (acs.getAngle() == Math.PI / 2 ? 1 : Math.sin(acs.getAngle()))));
-		newPoint.x = (int) (acs.getX() + x + (y * (acs.getAngle() == Math.PI / 2 ? 0 : Math.cos(acs.getAngle()))));
-		System.out.println("----------------");
-		System.out.println(point);
-		System.out.println(newPoint);
-		System.out.println("----------------");
-		
+		double dx = x * Math.cos(acs.getxAngle()) + y * Math.cos(acs.getyAngle());
+		double dy = x * Math.sin(acs.getxAngle()) + y * Math.sin(acs.getyAngle());
+
+		newPoint.x = acs.getX() + (int) dx;
+		newPoint.y = acs.getY() - (int) dy;
 
 		return newPoint;
 	}

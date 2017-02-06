@@ -28,7 +28,6 @@ public class Start {
 		MySystem ms = MySystem.createSystem();
 		CoordinateSystem cs = ms.getCoordinateSystem();
 		AxesCoordinateSystem acs = (AxesCoordinateSystem) cs;
-		acs.setAngle(Math.PI / 2);
 
 		MainFrameController.init();
 

@@ -20,15 +20,15 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 	// 表示原点在MainFrame中的坐标
 	private int x = width / 2;
 	private int y = height / 2;
-
-	// 两坐标轴的夹角
-	private double angle = Math.PI / 2;
-
-	// 是否显示网格
-	private boolean hasBlock = true;
+	// 两坐标轴与三点钟方向的夹角
+	private double xAngle = 0;
+	private double yAngle = Math.PI / 2;
 	// 初始网格长宽
 	private int blockWidth = 40;
 	private int blockHeight = 40;
+
+	// 是否显示网格
+	private boolean hasBlock = true;
 	// x轴y轴宽度
 	private int XYWidth = 4;
 
@@ -196,14 +196,6 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 		this.y = y;
 	}
 
-	public double getAngle() {
-		return angle;
-	}
-
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-
 	public int getBlockWidth() {
 		return blockWidth;
 	}
@@ -362,5 +354,21 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 
 	public int getWidth() {
 		return MainFrameController.getWidth();
+	}
+
+	public double getxAngle() {
+		return xAngle;
+	}
+
+	public void setxAngle(double xAngle) {
+		this.xAngle = xAngle;
+	}
+
+	public double getyAngle() {
+		return yAngle;
+	}
+
+	public void setyAngle(double yAngle) {
+		this.yAngle = yAngle;
 	}
 }
