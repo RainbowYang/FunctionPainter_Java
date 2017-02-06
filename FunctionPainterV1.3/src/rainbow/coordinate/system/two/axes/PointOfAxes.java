@@ -1,6 +1,6 @@
-package rainbow.coordinate.dimension._2D.axes;
+package rainbow.coordinate.system.two.axes;
 
-import rainbow.coordinate.dimension._2D.PointOf2D;
+import rainbow.coordinate.system.two._comp.PointOf2D;
 
 public class PointOfAxes extends PointOf2D {
 

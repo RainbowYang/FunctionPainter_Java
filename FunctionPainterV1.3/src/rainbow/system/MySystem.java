@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import rainbow.coordinate.dimension._2D.axes.AxesCoordinateSystem;
-import rainbow.coordinate.dimension.__abs.CoordinateSystem;
+import rainbow.coordinate.system._abs.CoordinateSystem;
+import rainbow.coordinate.system.two.axes.AxesCoordinateSystem;
 
 public class MySystem {
 

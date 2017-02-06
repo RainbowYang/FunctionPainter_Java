@@ -1,6 +1,6 @@
-package rainbow.coordinate.dimension._2D;
+package rainbow.coordinate.system.two._comp;
 
-import rainbow.coordinate.dimension.__abs.MyPoint;
+import rainbow.coordinate.system._abs.comp.MyPoint;
 
 /**
  * 二维点
@@ -8,7 +8,7 @@ import rainbow.coordinate.dimension.__abs.MyPoint;
  * @author Rainbow Yang
  *
  */
-public abstract class PointOf2D implements MyPoint{
+public abstract class PointOf2D implements MyPoint {
 	protected double first;
 	protected double second;
 

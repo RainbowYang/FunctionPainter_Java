@@ -1,4 +1,4 @@
-package rainbow.functions;
+package rainbow.function;
 
 import java.awt.Image;
 
@@ -12,7 +12,6 @@ public class FunctionsImage extends MyImage {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -1,13 +1,14 @@
-package rainbow.coordinate.dimension._2D.axes;
+package rainbow.coordinate.system.two.axes;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Polygon;
 
-import rainbow.coordinate.dimension._2D.CoordinateSystemOf2DPainter;
-import rainbow.coordinate.dimension.__abs.CoordinateSystem;
+import rainbow.coordinate.system._abs.CoordinateSystem;
+import rainbow.coordinate.system.two._comp.CoordinateSystemOf2DPainter;
 
-public class AxesCoordinateSystemPainter extends CoordinateSystemOf2DPainter{
+public class AxesCoordinateSystemPainter extends CoordinateSystemOf2DPainter {
 
 	AxesCoordinateSystem acs;
 	AxesCoordinateSystem s = acs;
@@ -25,12 +26,12 @@ public class AxesCoordinateSystemPainter extends CoordinateSystemOf2DPainter{
 	}
 
 	public void repaint() {
-		changeToNewImage();
+//		changeToNewImage();
 
 		// 判断是否画网格
-		if (s.hasBlock()) {
-			网格初始化(g);
-		}
+//		if (s.hasBlock()) {
+//			网格初始化(g);
+//		}
 		// else {
 		// 坐标格点化(g);
 		// }
@@ -68,15 +69,15 @@ public class AxesCoordinateSystemPainter extends CoordinateSystemOf2DPainter{
 		// 画网格
 		// 画与y轴平行的线
 		for (int x = s.getxIntMin() - 1; x < s.getxIntMax() + 1; x++) {
-			PointOfAxes p1 = s.toReal(new PointOfAxes(x, s.getyIntMax()));
-			PointOfAxes p2 = s.toReal(new PointOfAxes(x, s.getyIntMin()));
-			g.drawLine(p1.getIntX(), 0, p2.getIntX(), s.getHeight());
+			Point p1 = s.toReal(new PointOfAxes(x, s.getyIntMax()));
+			Point p2 = s.toReal(new PointOfAxes(x, s.getyIntMin()));
+			g.drawLine(p1.x, 0, p2.x, s.getHeight());
 		}
 
 		// 画与x轴平行的线
 		for (int y = s.getyIntMin() - 1; y < s.getyIntMax() + 1; y++) {
-			PointOfAxes p = s.toReal(new PointOfAxes(0, y));
-			g.drawLine(0, p.getIntY(), s.getWidth(), p.getIntY());
+			Point p = s.toReal(new PointOfAxes(0, y));
+			g.drawLine(0, p.y, s.getWidth(), p.y);
 		}
 	}
 
@@ -134,8 +135,9 @@ public class AxesCoordinateSystemPainter extends CoordinateSystemOf2DPainter{
 		// x轴
 		g.fillRect(0, y - widthOfXY / 2, width - cosLength / 3, widthOfXY);
 
-		PointOfAxes p = s.toReal(new PointOfAxes(0, s.getyMax()));
-		int x = p.getIntX();
+		Point p = s.toReal(new PointOfAxes(s.getX(), s.getyMax()));
+		System.out.println(p);
+		int x = p.x;
 
 		// y轴箭头
 		Polygon yp = new Polygon();

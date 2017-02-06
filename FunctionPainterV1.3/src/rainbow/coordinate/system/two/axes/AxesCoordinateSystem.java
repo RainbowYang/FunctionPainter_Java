@@ -1,11 +1,18 @@
-package rainbow.coordinate.dimension._2D.axes;
+package rainbow.coordinate.system.two.axes;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import rainbow.GUI.frame.MainFrameController;
-import rainbow.coordinate.dimension._2D.CoordinateSystemOf2D;
+import rainbow.coordinate.system.two.CoordinateSystemOf2D;
 import rainbow.tools.ColorGetter;
 
+/**
+ * 轴坐标系
+ * 
+ * @author Rainbow Yang
+ *
+ */
 public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 	private int width = MainFrameController.getWidth();
 	private int height = MainFrameController.getHeight();
@@ -48,14 +55,18 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 
 	public AxesCoordinateSystem() {
 		super();
-		
+
 		reO();
 		reXY();
 	}
 
 	@Override
-	protected void init() {
+	protected void initForLocationGetter() {
 		getter = new AxesCoordinateSystemLocationGetter(this);
+	}
+
+	@Override
+	protected void initForPainter() {
 		painter = new AxesCoordinateSystemPainter(this);
 	}
 
@@ -77,97 +88,97 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * 调整xy的最值
 	 */
 	private void reXY() {
-		xMax = ((PointOfAxes) (toSystem(new PointOfAxes(width, 0)))).getX();
-		xMin = ((PointOfAxes) (toSystem(new PointOfAxes(0, 0)))).getX();
-		yMax = ((PointOfAxes) (toSystem(new PointOfAxes(0, 0)))).getY();
-		yMin = ((PointOfAxes) (toSystem(new PointOfAxes(0, height)))).getY();
+		xMax = ((PointOfAxes) (toSystem(new Point(width, 0)))).getX();
+		xMin = ((PointOfAxes) (toSystem(new Point(0, 0)))).getX();
+		yMax = ((PointOfAxes) (toSystem(new Point(0, 0)))).getY();
+		yMin = ((PointOfAxes) (toSystem(new Point(0, height)))).getY();
 
-		xIntMax = (int) xMax+1;
-		xIntMin = (int) xMin-1;
-		yIntMax = (int) yMax+1;
-		yIntMin = (int) yMin-1;
+		xIntMax = (int) xMax + 1;
+		xIntMin = (int) xMin - 1;
+		yIntMax = (int) yMax + 1;
+		yIntMin = (int) yMin - 1;
 	}
 
-//	/**
-//	 * 移动坐标系
-//	 * 
-//	 * @param x
-//	 *            中心位于坐标系的x位置
-//	 * @param y
-//	 *            中心位于坐标系的y位置
-//	 */
-//	public void moveTo(double x, double y) {
-//		this.x = LocationChanger.Xto(-x);
-//		this.y = LocationChanger.Yto(-y);
-//	}
-//
-//	/**
-//	 * 调整System的Width和Height
-//	 */
-//	public void reWidthAndHeight() {
-//		width = MainFrame.getWidth();
-//		height = MainFrame.getHeight();
-//
-//		reO();
-//		reXY();
-//	}
-//
-//
-//
-//	/**
-//	 * 用于滚轮调整大小
-//	 * 
-//	 * @param add
-//	 *            来自滚轮
-//	 */
-//	public void reset(MouseWheelEvent e) {
-//
-//		int add = -e.getWheelRotation();
-//
-//		if (blockWidth >= 1 || add > 0) {
-//
-//			// 控制缩放中心为鼠标所在位置
-//			double x = LocationChanger.toX(e.getX());// 皮肤导致的
-//			double y = LocationChanger.toY(e.getY());// 同上
-//			moveTo(-x, -y);
-//
-//			blockWidth += add;
-//			if (blockWidth > 60) {
-//				for (int i = (blockWidth - 60) / 10; i > 0; i--) {
-//					if (add > 0)
-//						blockWidth++;
-//					else
-//						blockWidth--;
-//				}
-//			}
-//			setBlockHeight(blockWidth);
-//			theAdd = 1.0 / blockWidth;
-//
-//			moveTo(x, y);
-//
-//			reXY();
-//
-//		}
-//	}
-//
-//	/**
-//	 * 调整圆心位置
-//	 * 
-//	 * @param x
-//	 *            来自鼠标
-//	 * @param y
-//	 *            来自鼠标
-//	 */
-//	public void resetO(int x, int y) {
-//		this.x = x;
-//		this.y = y;
-//		reXY();
-//	}
+	// /**
+	// * 移动坐标系
+	// *
+	// * @param x
+	// * 中心位于坐标系的x位置
+	// * @param y
+	// * 中心位于坐标系的y位置
+	// */
+	// public void moveTo(double x, double y) {
+	// this.x = LocationChanger.Xto(-x);
+	// this.y = LocationChanger.Yto(-y);
+	// }
+	//
+	// /**
+	// * 调整System的Width和Height
+	// */
+	// public void reWidthAndHeight() {
+	// width = MainFrame.getWidth();
+	// height = MainFrame.getHeight();
+	//
+	// reO();
+	// reXY();
+	// }
+	//
+	//
+	//
+	// /**
+	// * 用于滚轮调整大小
+	// *
+	// * @param add
+	// * 来自滚轮
+	// */
+	// public void reset(MouseWheelEvent e) {
+	//
+	// int add = -e.getWheelRotation();
+	//
+	// if (blockWidth >= 1 || add > 0) {
+	//
+	// // 控制缩放中心为鼠标所在位置
+	// double x = LocationChanger.toX(e.getX());// 皮肤导致的
+	// double y = LocationChanger.toY(e.getY());// 同上
+	// moveTo(-x, -y);
+	//
+	// blockWidth += add;
+	// if (blockWidth > 60) {
+	// for (int i = (blockWidth - 60) / 10; i > 0; i--) {
+	// if (add > 0)
+	// blockWidth++;
+	// else
+	// blockWidth--;
+	// }
+	// }
+	// setBlockHeight(blockWidth);
+	// theAdd = 1.0 / blockWidth;
+	//
+	// moveTo(x, y);
+	//
+	// reXY();
+	//
+	// }
+	// }
+	//
+	// /**
+	// * 调整圆心位置
+	// *
+	// * @param x
+	// * 来自鼠标
+	// * @param y
+	// * 来自鼠标
+	// */
+	// public void resetO(int x, int y) {
+	// this.x = x;
+	// this.y = y;
+	// reXY();
+	// }
 
 	public int getX() {
 		return x;
@@ -352,5 +363,4 @@ public class AxesCoordinateSystem extends CoordinateSystemOf2D {
 	public int getWidth() {
 		return MainFrameController.getWidth();
 	}
-
 }

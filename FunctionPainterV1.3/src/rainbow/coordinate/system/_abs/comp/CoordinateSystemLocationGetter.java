@@ -1,7 +1,15 @@
-package rainbow.coordinate.dimension.__abs;
+package rainbow.coordinate.system._abs.comp;
 
-import rainbow.coordinate.dimension._2D.axes.PointOfAxes;
+import java.awt.Point;
 
+import rainbow.coordinate.system._abs.CoordinateSystem;
+
+/**
+ * 所有用于进行坐标转换的父类
+ * 
+ * @author Rainbow Yang
+ *
+ */
 public abstract class CoordinateSystemLocationGetter {
 	protected CoordinateSystem cs;
 
@@ -16,7 +24,7 @@ public abstract class CoordinateSystemLocationGetter {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public abstract MyPoint toSystem(PointOfAxes point);
+	public abstract MyPoint toSystem(Point point);
 
 	/**
 	 * 将一个在坐标系中的点转换为相对于屏幕的点
@@ -25,5 +33,5 @@ public abstract class CoordinateSystemLocationGetter {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public abstract PointOfAxes toReal(MyPoint point);
+	public abstract Point toReal(MyPoint point);
 }

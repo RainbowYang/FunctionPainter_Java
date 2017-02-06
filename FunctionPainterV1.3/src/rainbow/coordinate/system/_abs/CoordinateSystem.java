@@ -1,8 +1,11 @@
-package rainbow.coordinate.dimension.__abs;
+package rainbow.coordinate.system._abs;
 
 import java.awt.Image;
+import java.awt.Point;
 
-import rainbow.coordinate.dimension._2D.axes.PointOfAxes;
+import rainbow.coordinate.system._abs.comp.CoordinateSystemLocationGetter;
+import rainbow.coordinate.system._abs.comp.CoordinateSystemPainter;
+import rainbow.coordinate.system._abs.comp.MyPoint;
 
 /**
  * 用于描述函数坐标系并规定一些方法
@@ -14,12 +17,23 @@ public abstract class CoordinateSystem {
 
 	protected CoordinateSystemLocationGetter getter;
 	protected CoordinateSystemPainter painter;
+	// protected CoordinateSystemResetter setter;
+	// protected CoordinateSystemRanger ranger;
+	// protected CoordinateSystemColorer colorer;
+	
+	
 
 	/**
-	 * 需对CoordinateSystemLocationGetter getter和CoordinateSystemPainter painter
 	 * 进行初始化
 	 */
-	protected abstract void init();
+	protected void init() {
+		initForLocationGetter();
+		initForPainter();
+	}
+
+	protected abstract void initForLocationGetter();
+
+	protected abstract void initForPainter();
 
 	protected CoordinateSystem() {
 		init();
@@ -39,7 +53,7 @@ public abstract class CoordinateSystem {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public MyPoint toSystem(PointOfAxes point) {
+	public MyPoint toSystem(Point point) {
 		return getter.toSystem(point);
 	}
 
@@ -50,7 +64,7 @@ public abstract class CoordinateSystem {
 	 *            转换之前的点
 	 * @return 转换之后的点
 	 */
-	public PointOfAxes toReal(MyPoint point) {
+	public Point toReal(MyPoint point) {
 		return getter.toReal(point);
 	}
 
