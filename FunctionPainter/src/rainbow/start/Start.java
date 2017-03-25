@@ -1,14 +1,14 @@
 package rainbow.start;
 
-import codeLinesReader.rainbow.CodeLinesReaderUser;
-import rainbow.GUI.frame.MainFrameController;
-import rainbow.back.BackImage;
-import rainbow.coordinate.image.CoordinateSystemImage;
-import rainbow.coordinate.system._abs.CoordinateSystem;
-import rainbow.coordinate.system.two.axes.AxesCoordinateSystem;
-import rainbow.function.FunctionsImage;
-import rainbow.system.MySystem;
-import rainbow.system.image.FrameImages;
+//import codeLinesReader.rainbow.CodeLinesReaderUser;
+import rainbow.outer.frame.MainFrameController;
+import rainbow.outer.back.BackImage;
+import rainbow.inner.coordinate.image.CoordinateSystemImage;
+import rainbow.inner.coordinate.system._abs.CoordinateSystem;
+import rainbow.inner.coordinate.system.two.axes.AxesCoordinateSystem;
+import rainbow.inner.function.FunctionsImage;
+import rainbow.inner.system.MySystem;
+import rainbow.inner.system.image.FrameImages;
 
 /**
  * 启动类
@@ -40,6 +40,6 @@ public class Start {
     }
 
     public static void linesCount() {
-        new CodeLinesReaderUser(".", CodeLinesReaderUser.SIMPLE);
+//        new CodeLinesReaderUser(".", CodeLinesReaderUser.SIMPLE);
     }
 }
