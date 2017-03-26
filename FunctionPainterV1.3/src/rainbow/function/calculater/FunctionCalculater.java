@@ -21,7 +21,4 @@ public class FunctionCalculater {
 		new FunctionCalculaterThread(f,fpp,3).start();
 		new FunctionCalculaterThread(f,fpp,4).start();
 	}
-	
-	private 
-
 }
